@@ -1,3 +1,5 @@
+import { StoreInfo } from "@/widgets";
+
 export default function Page({
   params,
 }: {
@@ -5,9 +7,7 @@ export default function Page({
 }) {
   return (
     <div>
-      <h1>메뉴(메인)</h1>
-      <p>storeId: {params.storeId}</p>
-      <p>tableId: {params.tableId}</p>
+      <StoreInfo storeId={params.storeId} tableId={params.tableId} />
     </div>
   );
 }
