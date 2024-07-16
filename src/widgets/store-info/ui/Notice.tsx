@@ -9,9 +9,9 @@ export default function Notice({ notice }: { notice: string }) {
   return (
     <div
       className={`bg-[#F4F4F4] text-xs px-[16px] py-[12px] flex rounded-xl ${
-        !isViewingMore && "h-[64px]"
-      } overflow-hidden transition-all`}>
-      <div>
+        !isViewingMore && "h-[64px] w-full"
+      } overflow-hidden transition-all justify-between`}>
+      <div className="flex">
         <svg
           width="24"
           height="24"
@@ -25,16 +25,15 @@ export default function Notice({ notice }: { notice: string }) {
             fill="#262626"
           />
         </svg>
+
+        <p
+          className={`leading-5 break-words mx-4 inline-block ${
+            !isViewingMore && "overflow-hidden"
+          }`}>
+          {notice}
+        </p>
       </div>
-
-      <p
-        className={`leading-5 break-words mx-4 inline-block ${
-          !isViewingMore && "overflow-hidden"
-        }`}>
-        {notice}
-      </p>
-
-      <button type="button" onClick={handleViewMore} className="flex">
+      <button type="button" onClick={handleViewMore} className="flex ">
         <svg
           width="20"
           height="20"
