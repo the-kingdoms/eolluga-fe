@@ -1,2 +1,2 @@
 export { default as getStoreInfo } from "./store/api/getStoreInfo";
-export type { StoreT } from "./store/api/store";
+export type { StoreT, MenuT } from "./store/api/store";

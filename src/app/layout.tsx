@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="text-[#161616]">
         <QueryClientProvider>{children}</QueryClientProvider>
       </body>
     </html>

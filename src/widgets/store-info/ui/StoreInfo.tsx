@@ -29,7 +29,7 @@ export default function StoreInfo({
       </div>
       <div
         className={`bg-[#F4F4F4] h-[16px] w-full ${
-          data.notice ? "my-[20px]" : "mb-[20px]"
+          data.notice ? "mt-[20px]" : "mb-[20px]"
         }`}
       />
     </div>
