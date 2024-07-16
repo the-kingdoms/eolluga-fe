@@ -10,14 +10,17 @@ export default function Notice({ notice }: { notice: string }) {
     <div
       className={`bg-[#F4F4F4] text-xs px-[16px] py-[12px] flex rounded-xl ${
         !isViewingMore && "h-[64px] w-full"
-      } overflow-hidden transition-all justify-between`}>
+      } overflow-hidden transition-all justify-between`}
+    >
       <div className="flex">
         <svg
+          className="shrink-0"
           width="24"
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -29,7 +32,8 @@ export default function Notice({ notice }: { notice: string }) {
         <p
           className={`leading-5 break-words mx-4 inline-block ${
             !isViewingMore && "overflow-hidden"
-          }`}>
+          }`}
+        >
           {notice}
         </p>
       </div>
@@ -42,7 +46,8 @@ export default function Notice({ notice }: { notice: string }) {
           xmlns="http://www.w3.org/2000/svg"
           className={`transform transition-transform duration-300 ${
             isViewingMore ? "rotate-180" : ""
-          }`}>
+          }`}
+        >
           <path
             fillRule="evenodd"
             clipRule="evenodd"

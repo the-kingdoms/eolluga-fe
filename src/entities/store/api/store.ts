@@ -1,3 +1,11 @@
+export interface MenuT {
+  category: string;
+  name: string;
+  content: string;
+  price: number;
+  imageUrl: string;
+}
+
 export interface StoreT {
   name: string;
   content: string;
@@ -12,4 +20,5 @@ export interface StoreT {
   createdDate: string;
   modifiedDate: string;
   notice: string;
+  menuList: MenuT[];
 }
