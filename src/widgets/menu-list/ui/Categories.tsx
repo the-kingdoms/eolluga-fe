@@ -1,3 +1,5 @@
+import ScrollContainer from "react-indiana-drag-scroll";
+
 export default function Categories({
   categories,
   activatedCategory,
@@ -7,8 +9,9 @@ export default function Categories({
   activatedCategory: string;
   setActivatedCategory: (category: string) => void;
 }) {
+  // const dragScrollRef = useRef<HTMLUListElement>(null);
   return (
-    <ul className="flex space-x-[7px]">
+    <ScrollContainer className="scroll-container flex space-x-[7px] list-none	">
       {categories.map((category) => (
         <li
           key={category}
@@ -19,6 +22,6 @@ export default function Categories({
           {category}
         </li>
       ))}
-    </ul>
+    </ScrollContainer>
   );
 }
