@@ -14,11 +14,13 @@ export default function MenuItems({
       <ul>
         {menu.map((data, idx) => (
           <li key={category.concat(data.name)} className="">
-            <div className="flex justify-between">
+            <div className="flex justify-between space-x-[24px] items-center">
               <div className="space-y-[12px]">
                 <div className="space-y-[4px]">
                   <h3 className="text-[20px] font-bold">{data.name}</h3>
-                  <p className="text-sm text-[#6F6F6F]">{data.content}</p>
+                  <p className="text-sm text-[#6F6F6F] h-[40px] line-clamp-2	">
+                    {data.content}
+                  </p>
                 </div>
                 <div>
                   <p className="font-bold text-[20px]">
@@ -26,7 +28,7 @@ export default function MenuItems({
                   </p>
                 </div>
               </div>
-              <div className="relative w-[100px] h-[100px] rounded-lg overflow-hidden">
+              <div className="relative w-[100px] h-[100px] rounded-lg overflow-hidden shrink-0 ">
                 <Image
                   src={data.imageUrl}
                   alt={data.name}
