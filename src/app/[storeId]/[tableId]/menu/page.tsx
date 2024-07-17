@@ -1,5 +1,5 @@
-import { StoreInfo } from "@/widgets";
-import MenuList from "@/widgets/menu-list/ui/MenuList";
+import { TopBar } from "@/shared";
+import { MenuList, StoreInfo, ViewCartButton } from "@/widgets";
 
 export default function Page({
   params,
@@ -8,8 +8,13 @@ export default function Page({
 }) {
   return (
     <div>
+      <TopBar
+        storeId={params.storeId as number}
+        tableId={params.tableId as number}
+      />
       <StoreInfo storeId={params.storeId} tableId={params.tableId} />
       <MenuList storeId={params.storeId} />
+      <ViewCartButton />
     </div>
   );
 }

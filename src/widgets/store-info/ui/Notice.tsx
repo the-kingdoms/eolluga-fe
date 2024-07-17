@@ -47,7 +47,7 @@ export default function Notice({ notice }: { notice: string }) {
       className="bg-[#F4F4F4] text-xs px-[16px] py-[12px] flex rounded-xl overflow-hidden justify-between transition-[height] duration-300"
       style={{ height }}>
       <div className={`flex ${!isOverflow && "items-center"}`}>
-        <div className="flex items-start">
+        <div className="flex items-start ">
           <svg
             className="shrink-0"
             width="24"

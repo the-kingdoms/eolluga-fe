@@ -3,7 +3,6 @@
 import useStoreInfo from "../model/useStoreInfo";
 import Notice from "./Notice";
 import StoreImage from "./StoreImage";
-import TopBar from "./TopBar";
 import ViewOriginInfoButton from "./ViewOriginInfoButton";
 
 export default function StoreInfo({
@@ -19,7 +18,6 @@ export default function StoreInfo({
   return (
     <div>
       <StoreImage imageSrc={data?.image as string} />
-      <TopBar />
       <div className="mx-[16px]">
         <div className="my-[24px] flex justify-between">
           <h1 className="text-[32px] font-bold">{data?.name}</h1>
