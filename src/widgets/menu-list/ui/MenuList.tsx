@@ -90,8 +90,10 @@ export default function MenuList({ storeId }: { storeId: number }) {
             category={category}
             menu={getMenuListByCategory(category, menuList as MenuT[])}
           />
-          {idx !== categories.length - 1 && (
+          {idx !== categories.length - 1 ? (
             <div className="bg-[#f4f4f4] h-[16px] mt-[24px] " />
+          ) : (
+            <div className="h-[16px]" />
           )}
         </div>
       ))}
