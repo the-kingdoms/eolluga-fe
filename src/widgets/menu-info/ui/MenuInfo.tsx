@@ -10,6 +10,8 @@ import test from "../../../../public/image/menu-detail/image1.png";
 import { Menu } from "@/shared/types/menu-detail-types";
 
 export default function MenuInfo() {
+  const [count, setCount] = useState(1);
+
   const menu: Menu = {
     id: 1,
     name: "토마토 파스타",
@@ -71,7 +73,7 @@ export default function MenuInfo() {
             </div>
             <div className="flex w-full justify-between items-center">
               <div className="font-Pretendard text-base font-bold">수량</div>
-              <CountBtn />
+              <CountBtn count={count} setCount={setCount} />
             </div>
           </div>
         </div>
