@@ -12,7 +12,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="text-[#161616]">{children}</body>
+      <body>
+        <div className="text-[#161616] w-screen h-full max-w-[360px] m-auto">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
