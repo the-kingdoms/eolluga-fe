@@ -8,6 +8,7 @@ import CountBtn from "./CountBtn";
 import Options from "./Options";
 import test from "../../../../public/image/menu-detail/image1.png";
 import { Menu } from "@/shared/types/menu-detail-types";
+import ButtonBar from "./ButtonBar";
 
 export default function MenuInfo() {
   const [count, setCount] = useState(1);
@@ -78,12 +79,13 @@ export default function MenuInfo() {
           </div>
         </div>
         <Options optionList={menu.options} />
-        <div className="flex flex-col w-full p-4 items-center">
+        <div className="flex flex-col w-full pb-4 items-center">
           <span className="font-Pretendard text-xs text-[#6F6F6F]">
             모든 메뉴의 이미지는 실물과 상이할 수 있습니다.
           </span>
         </div>
       </div>
+      <ButtonBar />
     </>
   );
 }
