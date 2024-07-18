@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function TopBar() {
   const router = useRouter();
   return (
-    <div className="fixed left-0 flex w-full h-[32px] pl-[14px] pr-[12px] py-1 justify-center items-center gap-[290px]">
+    <div className="absolute left-0 flex w-full h-[32px] pl-[14px] pr-[12px] py-1 justify-center items-center gap-[290px]">
       <button className="w-[20px] h-[20px]" onClick={router.back}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
