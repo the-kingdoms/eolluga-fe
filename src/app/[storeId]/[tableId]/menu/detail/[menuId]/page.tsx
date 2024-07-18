@@ -1,8 +1,12 @@
+import { MenuInfo } from "@/widgets";
+
 export default function Page({ params }: { params: { menuId: number } }) {
   return (
-    <div>
-      <h1>메뉴 상세 페이지</h1>
-      <p>menuId: {params.menuId}</p>
-    </div>
+    <>
+      {/* 상단바 */}
+      <MenuInfo />
+      {/* 직원 호출 버튼 */}
+      {/* 하단 버튼 바 */}
+    </>
   );
 }
