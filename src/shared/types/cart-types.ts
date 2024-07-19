@@ -1,14 +1,14 @@
-export interface Option {
+export interface OptionT {
   name: string;
   additionalPrice: number;
 }
 
-export interface Menu {
+export interface MenuT {
   id: string;
   name: string;
   price: number;
   count: number;
-  options: Option[];
+  options: OptionT[];
 }
 
-export type CartData = Menu[];
+export type CartDataT = MenuT[];
