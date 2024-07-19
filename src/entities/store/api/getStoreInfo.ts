@@ -8,7 +8,7 @@ const getStoreInfo = async (storeId: number): Promise<StoreT> => {
       `/stores/${storeId}`,
       "get"
     );
-    const data: StoreT = await response.data;
+    const data: StoreT = response.data;
     return data;
   } catch (error) {
     if (error instanceof Error) {
