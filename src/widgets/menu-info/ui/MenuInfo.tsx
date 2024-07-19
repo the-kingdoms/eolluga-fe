@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import formatNumber from "@/widgets/menu-info/utils/formatNumber";
+import formatNumber from "@/shared/utils/formatNumber";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
 import ButtonBar from "./ButtonBar";

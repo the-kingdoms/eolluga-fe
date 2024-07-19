@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import formatNumber from "@/widgets/menu-info/utils/formatNumber";
+import formatNumber from "@/shared/utils/formatNumber";
 import { Option } from "@/shared/types/menu-detail-types";
 
 interface OptionsProps {
