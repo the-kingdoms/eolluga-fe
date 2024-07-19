@@ -1,80 +1,75 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-
-import formatNumber from "@/widgets/menu-info//utils/formatNumber";
+import formatNumber from "@/widgets/menu-info/utils/formatNumber";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
-import test from "../../../../public/image/menu-detail/image1.png";
-import { Menu } from "@/shared/types/menu-detail-types";
 import ButtonBar from "./ButtonBar";
+import { Menu } from "@/shared/types/menu-detail-types";
+import { calculateTotalPrice } from "@/widgets/menu-info/utils/calculateTotalPrice";
 
-export default function MenuInfo() {
+const MenuInfo: React.FC = () => {
   const [count, setCount] = useState(1);
   const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
     useState(false);
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: string]: string[];
+  }>({});
+  const [menu, setMenu] = useState<Menu | null>(null);
 
-  const menu: Menu = {
-    id: 1,
-    name: "토마토 파스타",
-    description: "기본기 충실한 토마토 파스타와 생 모짜렐라 바질잎 가니쉬",
-    price: 18000,
-    options: [
-      {
-        title: "면 변경1",
-        type: "radio",
-        optional: "required",
-        options: { 스파게티: 0, 링귀니: 0, 펜네: 0 },
-      },
-      {
-        title: "면 변경2",
-        type: "radio",
-        optional: "optional",
-        options: { 스파게티: 0, 링귀니: 0, 펜네: 0 },
-      },
-      {
-        title: "토핑 추가1",
-        description: "2개 선택 필수",
-        type: "checkbox",
-        optional: "required",
-        options: { "치즈 추가": 3000, "토마토 추가": 3000, "바질 추가": 3000 },
-      },
-      {
-        title: "토핑 추가2",
-        description: "최대 1개 선택 가능",
-        type: "checkbox",
-        optional: "optional",
-        options: { "치즈 추가": 3000, "토마토 추가": 3000, "바질 추가": 3000 },
-      },
-    ],
-  };
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const response = await fetch("/menu.json");
+        const data: Menu = await response.json();
+        setMenu(data);
+      } catch (error) {
+        console.error("Failed to fetch menu data:", error);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
+  useEffect(() => {
+    if (menu) {
+      const requiredOptions = menu.options.filter(
+        (option) => option.optional === "required"
+      );
+      const allRequiredSelected = requiredOptions.every(
+        (option) => selectedOptions[option.title]?.length > 0
+      );
+      setAllRequiredOptionsSelected(allRequiredSelected);
+    }
+  }, [selectedOptions, menu]);
+
+  if (!menu) return <div>Loading...</div>;
 
   return (
     <>
-      <Image src={test} alt="image" width={360} height={240} />
+      <Image
+        src="/image/menu-detail/image1.png"
+        alt="image"
+        width={360}
+        height={240}
+      />
       <div className="flex flex-col gap-4 items-center bg-[#F4F4F4]">
         <div className="inline-flex flex-col w-full py-6 items-start gap-10 bg-white">
-          <div className="flex flex-col gap-2">
-            <div className="flex px-4 items-center">
-              <span className="font-Pretendard text-xl font-bold ">
-                {menu.name}
-              </span>
-            </div>
-            <div className="flex px-4 items-center">
-              <span className="font-Pretendard text-[#6F6F6F] text-base font-regular">
-                {menu.description}
-              </span>
+          <div className="flex flex-col gap-2 px-4">
+            <div className="font-Pretendard text-xl font-bold">{menu.name}</div>
+            <div className="font-Pretendard text-[#6F6F6F] text-base font-regular">
+              {menu.description}
             </div>
           </div>
-          <div className="flex flex-col w-full px-4 items-start gap-6">
-            <div className="flex w-full justify-between items-start">
+          <div className="flex flex-col w-full px-4 gap-6">
+            <div className="flex justify-between items-start">
               <div className="font-Pretendard text-base font-bold">가격</div>
               <div className="font-Pretendard text-base font-bold">
                 {formatNumber(menu.price)}원
               </div>
             </div>
-            <div className="flex w-full justify-between items-center">
+            <div className="flex justify-between items-center">
               <div className="font-Pretendard text-base font-bold">수량</div>
               <CountBtn count={count} setCount={setCount} />
             </div>
@@ -82,7 +77,8 @@ export default function MenuInfo() {
         </div>
         <Options
           optionList={menu.options}
-          setAllRequiredOptionsSelected={setAllRequiredOptionsSelected}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
         />
         <div className="flex flex-col w-full pb-4 items-center">
           <span className="font-Pretendard text-xs text-[#6F6F6F]">
@@ -90,7 +86,12 @@ export default function MenuInfo() {
           </span>
         </div>
       </div>
-      <ButtonBar isEnabled={allRequiredOptionsSelected} />
+      <ButtonBar
+        isEnabled={allRequiredOptionsSelected}
+        totalPrice={calculateTotalPrice(menu, selectedOptions, count)}
+      />
     </>
   );
-}
+};
+
+export default MenuInfo;

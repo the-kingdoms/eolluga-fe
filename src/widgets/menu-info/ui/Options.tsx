@@ -1,31 +1,18 @@
-// components/Options.tsx
-import React, { useState, useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import formatNumber from "@/widgets/menu-info/utils/formatNumber";
 import { Option } from "@/shared/types/menu-detail-types";
 
 interface OptionsProps {
   optionList: Option[];
-  setAllRequiredOptionsSelected: (isSelected: boolean) => void;
+  selectedOptions: { [key: string]: string[] };
+  setSelectedOptions: Dispatch<SetStateAction<{ [key: string]: string[] }>>;
 }
 
 const Options: React.FC<OptionsProps> = ({
   optionList,
-  setAllRequiredOptionsSelected,
+  selectedOptions,
+  setSelectedOptions,
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState<{
-    [key: string]: string[];
-  }>({});
-
-  useEffect(() => {
-    const requiredOptions = optionList.filter(
-      (option) => option.optional === "required"
-    );
-    const allRequiredSelected = requiredOptions.every(
-      (option) => selectedOptions[option.title]?.length > 0
-    );
-    setAllRequiredOptionsSelected(allRequiredSelected);
-  }, [selectedOptions, optionList, setAllRequiredOptionsSelected]);
-
   const handleOptionChange = (
     optionTitle: string,
     optionType: string,
@@ -92,6 +79,9 @@ const Options: React.FC<OptionsProps> = ({
                         type={option.type === "radio" ? "radio" : "checkbox"}
                         name={option.title}
                         value={key}
+                        checked={
+                          selectedOptions[option.title]?.includes(key) || false
+                        }
                         onChange={(e) =>
                           handleOptionChange(
                             option.title,

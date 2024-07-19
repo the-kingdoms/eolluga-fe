@@ -3,7 +3,7 @@ export interface Option {
   description?: string;
   type: "radio" | "checkbox";
   optional: "required" | "optional";
-  options: Record<string, number>;
+  options: { [key: string]: number };
 }
 
 export interface Menu {

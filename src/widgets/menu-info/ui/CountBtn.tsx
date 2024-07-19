@@ -1,4 +1,3 @@
-// components/CountBtn.tsx
 import React from "react";
 
 interface CountBtnProps {
