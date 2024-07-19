@@ -12,6 +12,8 @@ import ButtonBar from "./ButtonBar";
 
 export default function MenuInfo() {
   const [count, setCount] = useState(1);
+  const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
+    useState(false);
 
   const menu: Menu = {
     id: 1,
@@ -78,14 +80,17 @@ export default function MenuInfo() {
             </div>
           </div>
         </div>
-        <Options optionList={menu.options} />
+        <Options
+          optionList={menu.options}
+          setAllRequiredOptionsSelected={setAllRequiredOptionsSelected}
+        />
         <div className="flex flex-col w-full pb-4 items-center">
           <span className="font-Pretendard text-xs text-[#6F6F6F]">
             모든 메뉴의 이미지는 실물과 상이할 수 있습니다.
           </span>
         </div>
       </div>
-      <ButtonBar />
+      <ButtonBar isEnabled={allRequiredOptionsSelected} />
     </>
   );
 }

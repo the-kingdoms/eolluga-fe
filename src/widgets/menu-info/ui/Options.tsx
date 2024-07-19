@@ -1,13 +1,56 @@
 // components/Options.tsx
-import React from "react";
-import formatNumber from "@/widgets/menu-info//utils/formatNumber";
+import React, { useState, useEffect } from "react";
+import formatNumber from "@/widgets/menu-info/utils/formatNumber";
 import { Option } from "@/shared/types/menu-detail-types";
 
 interface OptionsProps {
   optionList: Option[];
+  setAllRequiredOptionsSelected: (isSelected: boolean) => void;
 }
 
-const Options: React.FC<OptionsProps> = ({ optionList }) => {
+const Options: React.FC<OptionsProps> = ({
+  optionList,
+  setAllRequiredOptionsSelected,
+}) => {
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: string]: string[];
+  }>({});
+
+  useEffect(() => {
+    const requiredOptions = optionList.filter(
+      (option) => option.optional === "required"
+    );
+    const allRequiredSelected = requiredOptions.every(
+      (option) => selectedOptions[option.title]?.length > 0
+    );
+    setAllRequiredOptionsSelected(allRequiredSelected);
+  }, [selectedOptions, optionList, setAllRequiredOptionsSelected]);
+
+  const handleOptionChange = (
+    optionTitle: string,
+    optionType: string,
+    optionValue: string,
+    isChecked: boolean
+  ) => {
+    setSelectedOptions((prev) => {
+      const newSelections = { ...prev };
+      if (isChecked) {
+        if (optionType === "radio") {
+          newSelections[optionTitle] = [optionValue];
+        } else {
+          newSelections[optionTitle] = newSelections[optionTitle]
+            ? [...newSelections[optionTitle], optionValue]
+            : [optionValue];
+        }
+      } else {
+        newSelections[optionTitle] = newSelections[optionTitle].filter(
+          (value) => value !== optionValue
+        );
+      }
+      return newSelections;
+    });
+  };
+
   return (
     <>
       {optionList.map((option, index) => (
@@ -36,7 +79,6 @@ const Options: React.FC<OptionsProps> = ({ optionList }) => {
               </div>
             )}
           </div>
-
           <div className="flex flex-col w-full items-start gap-4">
             {Object.keys(option.options).map((key, idx) => (
               <div
@@ -50,6 +92,14 @@ const Options: React.FC<OptionsProps> = ({ optionList }) => {
                         type={option.type === "radio" ? "radio" : "checkbox"}
                         name={option.title}
                         value={key}
+                        onChange={(e) =>
+                          handleOptionChange(
+                            option.title,
+                            option.type,
+                            key,
+                            e.target.checked
+                          )
+                        }
                       />
                       <div className="font-Pretendard text-base font-regular">
                         {key}
