@@ -71,7 +71,7 @@ export default function MenuList({ storeId }: { storeId: number }) {
 
   return (
     <div>
-      <div className="sticky top-0 pl-[16px] bg-white pt-[16px] z-30">
+      <div className="sticky top-[48px] pl-[16px] bg-white pt-[16px] z-30">
         <Categories
           categories={categories}
           activatedCategory={activatedCategory}
@@ -85,7 +85,8 @@ export default function MenuList({ storeId }: { storeId: number }) {
           key={category}
           ref={(el) => {
             sectionRefs.current[category] = el;
-          }}>
+          }}
+        >
           <MenuItems
             category={category}
             menu={getMenuListByCategory(category, menuList as MenuT[])}

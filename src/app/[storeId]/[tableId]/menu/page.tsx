@@ -9,8 +9,10 @@ export default function Page({
   return (
     <div>
       <TopBar
+        showBackButton={false}
         storeId={params.storeId as number}
         tableId={params.tableId as number}
+        storeName="문화식당"
       />
       <StoreInfo storeId={params.storeId} tableId={params.tableId} />
       <MenuList storeId={params.storeId} />

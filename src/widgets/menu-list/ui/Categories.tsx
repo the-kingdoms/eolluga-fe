@@ -9,7 +9,6 @@ export default function Categories({
   activatedCategory: string;
   setActivatedCategory: (category: string) => void;
 }) {
-  // const dragScrollRef = useRef<HTMLUListElement>(null);
   return (
     <ScrollContainer className="scroll-container flex space-x-[7px] list-none	pr-[16px]">
       {categories.map((category, idx) => (
@@ -18,7 +17,8 @@ export default function Categories({
           className={`cursor-pointer	 border rounded-full border-[#131313] py-[8px] px-[12px] shrink-0	 ${
             activatedCategory === category && "bg-[#131313] text-white "
           }`}
-          onClick={() => setActivatedCategory(category)}>
+          onClick={() => setActivatedCategory(category)}
+        >
           {category}
         </li>
       ))}
