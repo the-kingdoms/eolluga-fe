@@ -1,8 +1,12 @@
+import { MenuInfo } from "@/widgets";
+import TopBar from "@/shared/ui/TopBar";
+
 export default function Page({ params }: { params: { menuId: number } }) {
   return (
-    <div>
-      <h1>메뉴 상세 페이지</h1>
-      <p>menuId: {params.menuId}</p>
-    </div>
+    <>
+      <TopBar storeId={1} tableId={1} showBackButton />
+      <MenuInfo />
+      {/* 직원 호출 버튼 */}
+    </>
   );
 }
