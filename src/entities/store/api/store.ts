@@ -1,4 +1,5 @@
 export interface MenuT {
+  id: number;
   category: string;
   name: string;
   content: string;

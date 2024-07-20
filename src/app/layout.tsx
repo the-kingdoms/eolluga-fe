@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="text-[#161616] h-dvh w-screen max-w-[360px] m-auto">
+      <body className="text-[#161616] h-dvh w-screen">
         <QueryClientProvider>{children}</QueryClientProvider>
       </body>
     </html>
