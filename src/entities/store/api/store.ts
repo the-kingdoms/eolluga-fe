@@ -1,13 +1,4 @@
-export interface MenuT {
-  id: number;
-  category: string;
-  name: string;
-  content: string;
-  price: number;
-  imageUrl: string;
-}
-
-export interface StoreT {
+export interface StoreInfoT {
   name: string;
   content: string;
   image: string;
@@ -21,5 +12,18 @@ export interface StoreT {
   createdDate: string;
   modifiedDate: string;
   notice: string;
-  menuList: MenuT[];
+}
+
+export interface MenuItemT {
+  category: string;
+  name: string;
+  content: string;
+  price: number;
+  imageUrl: string;
+}
+
+export interface StoreDataT {
+  storeInfo: StoreInfoT;
+  menu: MenuItemT[];
+  categories: string[];
 }
