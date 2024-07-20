@@ -10,15 +10,14 @@ export default function Categories({
   setActivatedCategory: (category: string) => void;
 }) {
   return (
-    <ScrollContainer className="scroll-container flex space-x-[7px] list-none	pr-[16px]">
+    <ScrollContainer className="scroll-container flex space-x-[7px] list-none	px-[16px]">
       {categories.map((category, idx) => (
         <li
           key={category}
           className={`cursor-pointer	 border rounded-full border-[#131313] py-[8px] px-[12px] shrink-0	 ${
             activatedCategory === category && "bg-[#131313] text-white "
           }`}
-          onClick={() => setActivatedCategory(category)}
-        >
+          onClick={() => setActivatedCategory(category)}>
           {category}
         </li>
       ))}
