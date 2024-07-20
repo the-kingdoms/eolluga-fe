@@ -71,14 +71,14 @@ export default function MenuList({ storeId }: { storeId: number }) {
 
   return (
     <div>
-      <div className="sticky top-[48px] bg-white pt-[16px] z-30">
+      <div className="sticky top-[48px] bg-white pt-[16px] z-30 h-[74px]">
         <Categories
           categories={categories}
           activatedCategory={activatedCategory}
           setActivatedCategory={handleCategorySelect}
         />
+        <div className=" absolute bottom-0 h-[1px] bg-[#c6c6c6] w-full" />
       </div>
-      <div className="h-[1px] bg-[#c6c6c6] w-full mt-[16px]" />
       {categories.map((category, idx) => (
         <div
           key={category}
