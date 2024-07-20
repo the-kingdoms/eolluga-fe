@@ -47,7 +47,7 @@ export default function TopBar({
 
   return (
     <nav
-      className="fixed top-0 items-center py-[16px] z-50 flex justify-between w-full px-[24px] h-[48px] justify-items-end	"
+      className="fixed top-0 items-center py-[16px] z-50 flex justify-between w-full px-[16px] h-[48px] justify-items-end	"
       ref={navRef}>
       <div className="">
         {showBackButton && (
