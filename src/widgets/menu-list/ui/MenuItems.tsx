@@ -1,4 +1,4 @@
-import { MenuT } from "@/entities";
+import { MenuItemT } from "@/entities";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ export default function MenuItems({
   tableId,
 }: {
   category: string;
-  menu: MenuT[];
+  menu: MenuItemT[];
   storeId: number;
   tableId: number;
 }) {
@@ -20,7 +20,7 @@ export default function MenuItems({
         {menu.map((data, idx) => (
           <li key={category.concat(data.name)}>
             <Link
-              href={`/${storeId}/${tableId}/menu/${data.id}/detail`}
+              href={`/${storeId}/${tableId}/menu/detail/${data.id}`}
               className="flex justify-between space-x-[24px] items-center">
               <div className="space-y-[12px]">
                 <div className="space-y-[4px]">

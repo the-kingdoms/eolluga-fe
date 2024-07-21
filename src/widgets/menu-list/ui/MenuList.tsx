@@ -1,15 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import useMenuList from "../model/useMenuList";
 import Categories from "./Categories";
 import MenuItems from "./MenuItems";
-import { MenuT } from "@/entities";
+import { MenuItemT } from "@/entities";
 import getMenuListByCategory from "../utils/getMenuListByCategory";
 
-export default function MenuList({ storeId }: { storeId: number }) {
+export default function MenuList({
+  tableId,
+  storeId,
+  categories,
+  menu,
+}: {
+  tableId: number;
+  storeId: number;
+  categories: string[];
+  menu: MenuItemT[];
+}) {
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-  const { menuList, categories, isPending, isSuccess } = useMenuList(storeId);
   const [activatedCategory, setActivatedCategory] = useState<string>(
     categories[0]
   );
@@ -87,7 +95,9 @@ export default function MenuList({ storeId }: { storeId: number }) {
           }}>
           <MenuItems
             category={category}
-            menu={getMenuListByCategory(category, menuList as MenuT[])}
+            menu={getMenuListByCategory(category, menu)}
+            storeId={storeId}
+            tableId={tableId}
           />
           {idx !== categories.length - 1 ? (
             <div className="bg-[#f4f4f4] h-[16px] mt-[24px] " />

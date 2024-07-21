@@ -15,6 +15,7 @@ export interface StoreInfoT {
 }
 
 export interface MenuItemT {
+  id: number;
   category: string;
   name: string;
   content: string;
