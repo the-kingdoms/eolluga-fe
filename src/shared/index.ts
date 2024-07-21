@@ -1,4 +1,3 @@
-export { default as fetcher } from "./utils/fetcher";
 export { MOCK_SERVER_URL, BASE_URL } from "./consts/mock";
 export { default as TopBar } from "./ui/TopBar";
 export { CART_KEY } from "./consts/localStorage";
