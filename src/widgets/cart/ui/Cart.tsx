@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { CallStaff } from "@/features";
+import { CallStaff, OrderMenu } from "@/features";
 import {
   CartDataT,
   OrderCartItem,
@@ -51,12 +51,15 @@ export default function Cart() {
           </li>
         ))}
       </ul>
-      <div className="mt-[24px]">
+      <div className="mt-[24px] pb-[148px]">
         <h2 className="mb-[12px] text-lg font-bold">주문 금액 확인</h2>
         <OrderTotalAmount />
       </div>
-      <div className="fixed bottom-[16px] right-[16px]">
+      <div className="fixed bottom-[96px] right-[16px]">
         <CallStaff />
+      </div>
+      <div className="fixed bottom-0 left-0 h-[80px] w-full border-t border-[#C6C6C6] bg-white px-[16px] pt-[12px]">
+        <OrderMenu />
       </div>
     </div>
   );
