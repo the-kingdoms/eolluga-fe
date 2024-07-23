@@ -1,6 +1,6 @@
-import { MenuT } from "@/entities";
+import { MenuItemT } from "@/entities";
 
-const getMenuListByCategory = (category: string, menuList: MenuT[]) => {
-  return menuList.filter((menu) => menu.category === category);
+const getMenuListByCategory = (category: string, menuList: MenuItemT[]) => {
+  return menuList.filter(menu => menu.category === category);
 };
 export default getMenuListByCategory;

@@ -1,5 +1,7 @@
 import ScrollContainer from "react-indiana-drag-scroll";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 export default function Categories({
   categories,
   activatedCategory,
@@ -9,16 +11,16 @@ export default function Categories({
   activatedCategory: string;
   setActivatedCategory: (category: string) => void;
 }) {
-  // const dragScrollRef = useRef<HTMLUListElement>(null);
   return (
-    <ScrollContainer className="scroll-container flex space-x-[7px] list-none	pr-[16px]">
+    <ScrollContainer className="scroll-container flex list-none space-x-[7px] px-[16px]">
       {categories.map((category, idx) => (
         <li
           key={category}
-          className={`cursor-pointer	 border rounded-full border-[#131313] py-[8px] px-[12px] shrink-0	 ${
-            activatedCategory === category && "bg-[#131313] text-white "
+          className={`shrink-0 cursor-pointer rounded-full border border-[#131313] px-[12px] py-[8px] ${
+            activatedCategory === category && "bg-[#131313] text-white"
           }`}
-          onClick={() => setActivatedCategory(category)}>
+          onClick={() => setActivatedCategory(category)}
+        >
           {category}
         </li>
       ))}

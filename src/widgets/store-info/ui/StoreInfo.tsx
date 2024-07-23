@@ -1,33 +1,35 @@
 "use client";
 
-import useStoreInfo from "../model/useStoreInfo";
+/* eslint-disable consistent-return */
+import { StoreInfoT } from "@/entities";
+
 import Notice from "./Notice";
 import StoreImage from "./StoreImage";
 import ViewOriginInfoButton from "./ViewOriginInfoButton";
 
 export default function StoreInfo({
+  storeInfo,
   storeId,
   tableId,
 }: {
+  storeInfo: StoreInfoT;
   storeId: number;
   tableId: number;
 }) {
-  const { data, isError, isPending } = useStoreInfo(storeId);
-  console.log(data);
-  if (!data) return;
+  if (!storeInfo) return;
   return (
     <div>
-      <StoreImage imageSrc={data?.image as string} />
+      <StoreImage imageSrc={storeInfo?.image as string} />
       <div className="mx-[16px]">
         <div className="my-[24px] flex justify-between">
-          <h1 className="text-[32px] font-bold">{data?.name}</h1>
+          <h1 className="text-[32px] font-bold">{storeInfo?.name}</h1>
           <ViewOriginInfoButton storeId={storeId} tableId={tableId} />
         </div>
-        <Notice notice={data.notice} />
+        <Notice notice={storeInfo.notice} />
       </div>
       <div
-        className={`bg-[#F4F4F4] h-[16px] w-full ${
-          data.notice ? "mt-[20px]" : "mb-[20px]"
+        className={`h-[16px] w-full bg-[#F4F4F4] ${
+          storeInfo.notice ? "mt-[20px]" : "mb-[20px]"
         }`}
       />
     </div>

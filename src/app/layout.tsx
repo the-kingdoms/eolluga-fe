@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+
 import QueryClientProvider from "./QueryClientProvider";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Eolluga",
@@ -13,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="text-[#161616] h-dvh w-screen max-w-[360px] m-auto">
+      <body className="h-dvh w-screen text-[#161616]">
         <QueryClientProvider>{children}</QueryClientProvider>
       </body>
     </html>

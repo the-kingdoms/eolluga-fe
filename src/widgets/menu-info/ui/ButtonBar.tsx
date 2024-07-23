@@ -1,5 +1,7 @@
 import React from "react";
 
+/* eslint-disable react/function-component-definition */
+
 interface ButtonBarProps {
   isEnabled: boolean;
   totalPrice: number;
@@ -7,29 +9,29 @@ interface ButtonBarProps {
 
 const ButtonBar: React.FC<ButtonBarProps> = ({ isEnabled, totalPrice }) => {
   return (
-    <div className="flex flex-col items-start gap-2 sticky bottom-0 pt-3 pb-5 px-4 border-t-[1px] border-t-solid border-t-[#C6C6C6] bg-white">
+    <div className="border-t-solid sticky bottom-0 flex flex-col items-start gap-2 border-t-[1px] border-t-[#C6C6C6] bg-white px-4 pb-5 pt-3">
       <div
-        className={`flex flex-col w-full h-[64px] justify-center items-center rounded-[8px] ${
+        className={`flex h-[64px] w-full flex-col items-center justify-center rounded-[8px] ${
           isEnabled ? "bg-[#131313]" : "bg-[#C6C6C6]"
         }`}
       >
-        <div className="flex h-[64px] px-7 py-5 justify-center items-center gap-4">
+        <div className="flex h-[64px] items-center justify-center gap-4 px-7 py-5">
           <div
             className={`${
               isEnabled ? "text-white" : "text-[#8D8D8D]"
-            } text-right font-Pretendard text-base font-bold leading-5 tracking-[-0.5px]`}
+            } font-Pretendard text-right text-base font-bold leading-5 tracking-[-0.5px]`}
           >
             {totalPrice.toLocaleString()}원
           </div>
           <div
-            className={`w-[1px] h-[16px] ${
+            className={`h-[16px] w-[1px] ${
               isEnabled ? "bg-white" : "bg-[#8D8D8D]"
             }`}
-          ></div>
+          />
           <div
             className={`${
               isEnabled ? "text-white" : "text-[#8D8D8D]"
-            } text-right font-Pretendard text-base font-bold leading-5 tracking-[-0.5px]`}
+            } font-Pretendard text-right text-base font-bold leading-5 tracking-[-0.5px]`}
           >
             장바구니에 담기
           </div>
