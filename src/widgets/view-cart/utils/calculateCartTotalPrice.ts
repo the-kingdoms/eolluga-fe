@@ -1,11 +1,11 @@
 "use client";
 
-import { MenuT, getCartData } from "@/shared";
+import { ItemT, getCartData } from "@/shared";
 
 const calculateCartTotalPrice = (): number => {
   const cartData = getCartData();
   if (cartData) {
-    return cartData.reduce((total: number, menu: MenuT) => {
+    return cartData.reduce((total: number, menu: ItemT) => {
       const menuTotal = menu.price * menu.count;
       const optionsTotal = menu.options.reduce(
         (optionTotal, option) => optionTotal + option.additionalPrice,

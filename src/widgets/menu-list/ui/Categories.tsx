@@ -13,8 +13,9 @@ export default function Categories({
 }) {
   return (
     <ScrollContainer className="scroll-container flex list-none space-x-[7px] px-[16px]">
-      {categories.map((category, idx) => (
-        <li
+      {categories.map(category => (
+        <button
+          type="button"
           key={category}
           className={`shrink-0 cursor-pointer rounded-full border border-[#131313] px-[12px] py-[8px] ${
             activatedCategory === category && "bg-[#131313] text-white"
@@ -22,7 +23,7 @@ export default function Categories({
           onClick={() => setActivatedCategory(category)}
         >
           {category}
-        </li>
+        </button>
       ))}
     </ScrollContainer>
   );

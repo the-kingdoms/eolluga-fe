@@ -6,37 +6,14 @@ export default function Notice({ notice }: { notice: string }) {
   const [isViewingMore, setIsViewingMore] = useState<boolean>(false);
   const [height, setHeight] = useState<string>("64px");
   const noticeRef = useRef<HTMLParagraphElement>(null);
-  const [isOverflow, setIsOverflow] = useState<boolean>(false);
-
-  const checkOverflow = () => {
-    if (noticeRef.current) {
-      if (noticeRef.current.scrollHeight <= 40) {
-        setIsOverflow(false);
-      } else {
-        setIsOverflow(true);
-      }
-    }
-  };
 
   useEffect(() => {
     if (noticeRef.current) {
       setHeight(
         isViewingMore ? `${noticeRef.current.scrollHeight + 24}px` : "64px",
       );
-      checkOverflow();
     }
   }, [isViewingMore, notice]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      checkOverflow();
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   if (!notice) return null;
 
@@ -75,7 +52,12 @@ export default function Notice({ notice }: { notice: string }) {
         </p>
       </div>
 
-      <button type="button" onClick={handleViewMore} className="flex">
+      <button
+        type="button"
+        onClick={handleViewMore}
+        className="flex"
+        aria-label="더보기"
+      >
         <svg
           width="20"
           height="20"
