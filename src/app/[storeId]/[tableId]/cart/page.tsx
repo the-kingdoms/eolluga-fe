@@ -2,6 +2,7 @@ import { BackButtonWithTitle } from "@/shared";
 import { Cart } from "@/widgets";
 
 export default function Page({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   params,
 }: {
   params: { storeId: number; tableId: number };

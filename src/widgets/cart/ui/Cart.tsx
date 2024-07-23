@@ -2,13 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { CallStaff, OrderMenu } from "@/features";
-import {
-  CartDataT,
-  OrderCartItem,
-  getCartData,
-  removeAllItemFormCart,
-} from "@/shared";
+import { CallStaff, DeleteAllCartItems, OrderMenu } from "@/features";
+import { CartDataT, OrderCartItem, getCartData } from "@/shared";
 import OrderTotalAmount from "@/shared/ui/OrderTotalAmount";
 
 import EmptyCart from "./EmptyCart";
@@ -30,16 +25,7 @@ export default function Cart() {
     <div>
       <div className="mb-[11px] flex justify-between">
         <p className="block text-lg font-bold">총 {data.length}개</p>
-        <button
-          type="button"
-          onClick={() => {
-            setData([]);
-            removeAllItemFormCart();
-          }}
-          className="text-sm font-bold"
-        >
-          전체 삭제
-        </button>
+        <DeleteAllCartItems onClearCart={() => setData([])} />
       </div>
       <ul className="w-full rounded-xl border border-[#8D8D8D]">
         {data.map((item, idx) => (

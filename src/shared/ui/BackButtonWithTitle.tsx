@@ -27,7 +27,7 @@ export default function BackButtonWithTitle({ title }: { title: string }) {
           />
         </svg>
       </button>
-      <h1 className="absolute text-lg font-medium">{title}</h1>
+      <h1 className="absolute font-bold">{title}</h1>
     </div>
   );
 }
