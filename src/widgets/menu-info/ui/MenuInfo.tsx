@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Menu } from "@/shared/types/menu-detail-types";
 import formatNumber from "@/shared/utils/formatNumber";
 
+import { calculateTotalPrice } from "../utils/calculateTotalPrice";
 import ButtonBar from "./ButtonBar";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
