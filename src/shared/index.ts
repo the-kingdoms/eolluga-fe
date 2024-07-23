@@ -15,3 +15,4 @@ export { parseJSON } from "./utils/fetch";
 export { default as fetchWithFallback } from "./api/fetchWithFallback";
 export { default as BackButtonWithTitle } from "./ui/BackButtonWithTitle";
 export { default as OrderCartItem } from "./ui/OrderCartItem";
+export { removeAllItemFormCart, calculateCartTotalPrice } from "./utils/cart";

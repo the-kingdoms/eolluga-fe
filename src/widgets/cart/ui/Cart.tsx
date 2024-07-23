@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 
-import { CartDataT, OrderCartItem, getCartData } from "@/shared";
+import {
+  CartDataT,
+  OrderCartItem,
+  calculateCartTotalPrice,
+  getCartData,
+  removeAllItemFormCart,
+} from "@/shared";
+import OrderTotalAmount from "@/shared/ui/OrderTotalAmount";
 
 import EmptyCart from "./EmptyCart";
 
@@ -21,8 +28,18 @@ export default function Cart() {
 
   return (
     <div>
-      <div className="mb-[11px]">
+      <div className="mb-[11px] flex justify-between">
         <p className="block text-lg font-bold">총 {data.length}개</p>
+        <button
+          type="button"
+          onClick={() => {
+            setData([]);
+            removeAllItemFormCart();
+          }}
+          className="text-sm font-bold"
+        >
+          전체 삭제
+        </button>
       </div>
       <ul className="w-full rounded-xl border border-[#8D8D8D]">
         {data.map((item, idx) => (
@@ -34,6 +51,10 @@ export default function Cart() {
           </li>
         ))}
       </ul>
+      <div className="mt-[24px]">
+        <h2 className="mb-[12px] text-lg font-bold">주문 금액 확인</h2>
+        <OrderTotalAmount />
+      </div>
     </div>
   );
 }

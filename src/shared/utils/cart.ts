@@ -1,5 +1,5 @@
 import { CART_KEY } from "../consts/localStorage";
-import { CartDataT, CartItemT } from "../types/order-cart-types";
+import { CartDataT, CartItemT, ItemT } from "../types/order-cart-types";
 
 export const getCartData = (): CartDataT => {
   if (typeof window !== "undefined") {
@@ -11,19 +11,23 @@ export const getCartData = (): CartDataT => {
   return [];
 };
 
-export const saveCartItems = (items: CartDataT): void => {
+export const saveCartItems = (items: CartDataT) => {
   if (typeof window !== "undefined") {
     localStorage.setItem(CART_KEY, JSON.stringify(items));
   }
 };
 
-export const removeItemFromCart = (id: string): void => {
+export const removeAllItemFormCart = () => {
+  localStorage.setItem(CART_KEY, JSON.stringify([]));
+};
+
+export const removeItemFromCart = (id: string) => {
   const items = getCartData();
   const filteredItems = items.filter(item => item.id !== id);
   saveCartItems(filteredItems);
 };
 
-export const updateItemCount = (id: string, count: number): void => {
+export const updateItemCount = (id: string, count: number) => {
   const items = getCartData();
   const updatedItems = items.map(item =>
     item.id === id ? { ...item, count } : item,
@@ -31,7 +35,7 @@ export const updateItemCount = (id: string, count: number): void => {
   saveCartItems(updatedItems);
 };
 
-export const addItemToCart = (newItem: CartItemT): void => {
+export const addItemToCart = (newItem: CartItemT) => {
   const items = getCartData();
   const itemIndex = items.findIndex(item => item.id === newItem.id);
 
@@ -42,4 +46,19 @@ export const addItemToCart = (newItem: CartItemT): void => {
   }
 
   saveCartItems(items);
+};
+
+export const calculateCartTotalPrice = (): number => {
+  const cartData = getCartData();
+  if (cartData) {
+    return cartData.reduce((total: number, menu: ItemT) => {
+      const menuTotal = menu.price * menu.count;
+      const optionsTotal = menu.options.reduce(
+        (optionTotal, option) => optionTotal + option.additionalPrice,
+        0,
+      );
+      return total + menuTotal + optionsTotal;
+    }, 0);
+  }
+  return 0;
 };
