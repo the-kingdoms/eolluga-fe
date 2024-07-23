@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 
+import { CallStaff } from "@/features";
 import {
   CartDataT,
   OrderCartItem,
-  calculateCartTotalPrice,
   getCartData,
   removeAllItemFormCart,
 } from "@/shared";
@@ -54,6 +54,9 @@ export default function Cart() {
       <div className="mt-[24px]">
         <h2 className="mb-[12px] text-lg font-bold">주문 금액 확인</h2>
         <OrderTotalAmount />
+      </div>
+      <div className="fixed bottom-[16px] right-[16px]">
+        <CallStaff />
       </div>
     </div>
   );
