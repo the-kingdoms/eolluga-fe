@@ -1,6 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
-import formatNumber from "@/shared/utils/formatNumber";
+
+/* eslint-disable react/function-component-definition */
+
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Option } from "@/shared/types/menu-detail-types";
+import formatNumber from "@/shared/utils/formatNumber";
 
 interface OptionsProps {
   optionList: Option[];
@@ -17,9 +21,9 @@ const Options: React.FC<OptionsProps> = ({
     optionTitle: string,
     optionType: string,
     optionValue: string,
-    isChecked: boolean
+    isChecked: boolean,
   ) => {
-    setSelectedOptions((prev) => {
+    setSelectedOptions(prev => {
       const newSelections = { ...prev };
       if (isChecked) {
         if (optionType === "radio") {
@@ -31,7 +35,7 @@ const Options: React.FC<OptionsProps> = ({
         }
       } else {
         newSelections[optionTitle] = newSelections[optionTitle].filter(
-          (value) => value !== optionValue
+          value => value !== optionValue,
         );
       }
       return newSelections;
@@ -42,11 +46,11 @@ const Options: React.FC<OptionsProps> = ({
     <>
       {optionList.map((option, index) => (
         <div
-          className="flex flex-col w-full items-start px-4 py-5 gap-5 bg-white"
+          className="flex w-full flex-col items-start gap-5 bg-white px-4 py-5"
           key={index}
         >
-          <div className="flex flex-col w-full items-start gap-1">
-            <div className="flex justify-between w-full items-center">
+          <div className="flex w-full flex-col items-start gap-1">
+            <div className="flex w-full items-center justify-between">
               <div className="font-Pretendard text-base font-bold">
                 {option.title}
               </div>
@@ -61,20 +65,20 @@ const Options: React.FC<OptionsProps> = ({
               )}
             </div>
             {option.description && (
-              <div className="font-Pretendard text-xs font-regular text-[#6F6F6F]">
+              <div className="font-Pretendard font-regular text-xs text-[#6F6F6F]">
                 {option.description}
               </div>
             )}
           </div>
-          <div className="flex flex-col w-full items-start gap-4">
+          <div className="flex w-full flex-col items-start gap-4">
             {Object.keys(option.options).map((key, idx) => (
               <div
-                className="flex justify-between w-full items-start"
+                className="flex w-full items-start justify-between"
                 key={idx}
               >
                 <div className="flex w-full flex-col items-start gap-2">
-                  <div className="flex w-full justify-between items-start">
-                    <label className="flex h-[24px] items-center gap-2 cursor-pointer">
+                  <div className="flex w-full items-start justify-between">
+                    <label className="flex h-[24px] cursor-pointer items-center gap-2">
                       <input
                         type={option.type === "radio" ? "radio" : "checkbox"}
                         name={option.title}
@@ -82,16 +86,16 @@ const Options: React.FC<OptionsProps> = ({
                         checked={
                           selectedOptions[option.title]?.includes(key) || false
                         }
-                        onChange={(e) =>
+                        onChange={e =>
                           handleOptionChange(
                             option.title,
                             option.type,
                             key,
-                            e.target.checked
+                            e.target.checked,
                           )
                         }
                       />
-                      <div className="font-Pretendard text-base font-regular">
+                      <div className="font-Pretendard font-regular text-base">
                         {key}
                       </div>
                     </label>

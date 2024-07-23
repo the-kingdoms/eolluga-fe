@@ -1,8 +1,12 @@
 "use client";
 
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
+/* eslint-disable react/button-has-type */
+import { useEffect, useRef, useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
 
 export default function TopBar({
   showBackButton = true,
@@ -63,8 +67,9 @@ export default function TopBar({
 
   return (
     <nav
-      className="fixed top-0 items-center py-[16px] z-50 flex justify-between w-full px-[16px] h-[48px] justify-items-end	"
-      ref={navRef}>
+      className="fixed top-0 z-50 flex h-[48px] w-full items-center justify-between justify-items-end px-[16px] py-[16px]"
+      ref={navRef}
+    >
       <div className="">
         {showBackButton && (
           <button onClick={router.back} className="flex items-center">
@@ -73,7 +78,8 @@ export default function TopBar({
               height="20"
               viewBox="0 0 20 20"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -84,7 +90,7 @@ export default function TopBar({
           </button>
         )}
         {storeName && isStoreNameVisible && (
-          <div className="font-bold text-xl">{storeName}</div>
+          <div className="text-xl font-bold">{storeName}</div>
         )}
       </div>
       <div className="flex space-x-[20px]">
@@ -96,7 +102,8 @@ export default function TopBar({
                 height="20"
                 viewBox="0 0 20 20"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -115,7 +122,8 @@ export default function TopBar({
                 height="20"
                 viewBox="0 0 20 20"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"

@@ -1,5 +1,6 @@
-import { MenuInfo } from "@/widgets";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import TopBar from "@/shared/ui/TopBar";
+import { MenuInfo } from "@/widgets";
 
 export default function Page({ params }: { params: { menuId: number } }) {
   return (

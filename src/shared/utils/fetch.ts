@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 export const parseJSON = async (response: Response) => {
   const text = await response.text();
   try {
@@ -7,7 +9,7 @@ export const parseJSON = async (response: Response) => {
       "JSON 파싱 에러:",
       error instanceof Error ? error : new Error("Unknown error"),
       "텍스트:",
-      text
+      text,
     );
     throw new Error("JSON 파싱에 실패했습니다.");
   }

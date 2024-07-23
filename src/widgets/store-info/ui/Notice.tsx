@@ -1,5 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 export default function Notice({ notice }: { notice: string }) {
   const [isViewingMore, setIsViewingMore] = useState<boolean>(false);
   const [height, setHeight] = useState<string>("64px");
@@ -19,7 +21,7 @@ export default function Notice({ notice }: { notice: string }) {
   useEffect(() => {
     if (noticeRef.current) {
       setHeight(
-        isViewingMore ? `${noticeRef.current.scrollHeight + 24}px` : "64px"
+        isViewingMore ? `${noticeRef.current.scrollHeight + 24}px` : "64px",
       );
       checkOverflow();
     }
@@ -44,17 +46,19 @@ export default function Notice({ notice }: { notice: string }) {
 
   return (
     <div
-      className="bg-[#F4F4F4] text-xs px-[16px] py-[12px] flex rounded-xl overflow-hidden justify-between transition-[height] duration-300"
-      style={{ height }}>
+      className="flex justify-between overflow-hidden rounded-xl bg-[#F4F4F4] px-[16px] py-[12px] text-xs transition-[height] duration-300"
+      style={{ height }}
+    >
       <div className="flex">
-        <div className="flex items-start ">
+        <div className="flex items-start">
           <svg
             className="shrink-0"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -64,8 +68,9 @@ export default function Notice({ notice }: { notice: string }) {
           </svg>
         </div>
         <p
-          className="leading-5 mx-4 inline-block overflow-hidden"
-          ref={noticeRef}>
+          className="mx-4 inline-block overflow-hidden leading-5"
+          ref={noticeRef}
+        >
           {notice}
         </p>
       </div>
@@ -79,7 +84,8 @@ export default function Notice({ notice }: { notice: string }) {
           xmlns="http://www.w3.org/2000/svg"
           className={`transform transition-transform duration-300 ${
             isViewingMore ? "rotate-180" : ""
-          }`}>
+          }`}
+        >
           <path
             fillRule="evenodd"
             clipRule="evenodd"

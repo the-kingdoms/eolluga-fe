@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+
+import { MenuItemT } from "@/entities";
+
+import getMenuListByCategory from "../utils/getMenuListByCategory";
 import Categories from "./Categories";
 import MenuItems from "./MenuItems";
-import { MenuItemT } from "@/entities";
-import getMenuListByCategory from "../utils/getMenuListByCategory";
 
 export default function MenuList({
   tableId,
@@ -19,7 +21,7 @@ export default function MenuList({
 }) {
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const [activatedCategory, setActivatedCategory] = useState<string>(
-    categories[0]
+    categories[0],
   );
   const isScrolling = useRef(false);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -31,7 +33,7 @@ export default function MenuList({
       const scrollPosition = window.scrollY + window.innerHeight / 2;
       let currentCategory = categories[0];
 
-      categories.forEach((category) => {
+      categories.forEach(category => {
         const sectionElement = sectionRefs.current[category];
         if (
           sectionElement &&
@@ -79,20 +81,21 @@ export default function MenuList({
 
   return (
     <div>
-      <div className="sticky top-[48px] bg-white pt-[16px] z-30 h-[74px]">
+      <div className="sticky top-[48px] z-30 h-[74px] bg-white pt-[16px]">
         <Categories
           categories={categories}
           activatedCategory={activatedCategory}
           setActivatedCategory={handleCategorySelect}
         />
-        <div className=" absolute bottom-0 h-[1px] bg-[#c6c6c6] w-full" />
+        <div className="absolute bottom-0 h-[1px] w-full bg-[#c6c6c6]" />
       </div>
       {categories.map((category, idx) => (
         <div
           key={category}
-          ref={(el) => {
+          ref={el => {
             sectionRefs.current[category] = el;
-          }}>
+          }}
+        >
           <MenuItems
             category={category}
             menu={getMenuListByCategory(category, menu)}
@@ -100,7 +103,7 @@ export default function MenuList({
             tableId={tableId}
           />
           {idx !== categories.length - 1 ? (
-            <div className="bg-[#f4f4f4] h-[16px] mt-[24px] " />
+            <div className="mt-[24px] h-[16px] bg-[#f4f4f4]" />
           ) : (
             <div className="h-[16px]" />
           )}

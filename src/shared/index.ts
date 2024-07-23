@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+
 export { MOCK_SERVER_URL, BASE_URL } from "./consts/mock";
 export { default as TopBar } from "./ui/TopBar";
 export { CART_KEY } from "./consts/localStorage";

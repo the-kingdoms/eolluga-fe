@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function ViewOriginInfoButton({
@@ -11,17 +10,20 @@ export default function ViewOriginInfoButton({
   return (
     <button
       type="button"
-      className="text-sm border py-[9px] px-[16px] rounded-full border-[#A8A8A8] font-bold text-[#6f6f6f]">
+      className="rounded-full border border-[#A8A8A8] px-[16px] py-[9px] text-sm font-bold text-[#6f6f6f]"
+    >
       <Link
         href={`/${storeId}/${tableId}/menu/origin-info`}
-        className="flex items-center space-x-[4px]">
+        className="flex items-center space-x-[4px]"
+      >
         <span aria-label="원산지 정보">원산지 정보</span>
         <svg
           width="16"
           height="16"
           viewBox="0 0 16 16"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             fillRule="evenodd"
             clipRule="evenodd"

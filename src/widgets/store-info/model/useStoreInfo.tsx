@@ -1,7 +1,8 @@
 "use client";
 
-import { getStoreInfo } from "@/entities";
 import { useQuery } from "@tanstack/react-query";
+
+import { getStoreInfo } from "@/entities";
 
 const useStoreInfo = (storeId: number) => {
   const storeQuery = useQuery({

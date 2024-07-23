@@ -1,6 +1,8 @@
 "use client";
 
+/* eslint-disable consistent-return */
 import { StoreInfoT } from "@/entities";
+
 import Notice from "./Notice";
 import StoreImage from "./StoreImage";
 import ViewOriginInfoButton from "./ViewOriginInfoButton";
@@ -26,7 +28,7 @@ export default function StoreInfo({
         <Notice notice={storeInfo.notice} />
       </div>
       <div
-        className={`bg-[#F4F4F4] h-[16px] w-full ${
+        className={`h-[16px] w-full bg-[#F4F4F4] ${
           storeInfo.notice ? "mt-[20px]" : "mb-[20px]"
         }`}
       />

@@ -1,10 +1,13 @@
-import { fetchWithFallback, MOCK_SERVER_URL, parseJSON } from "@/shared";
+/* eslint-disable no-restricted-globals */
+
+/* eslint-disable no-console */
+import { MOCK_SERVER_URL, fetchWithFallback, parseJSON } from "@/shared";
 
 const fetchStoreInfo = async (storeId: number) => {
   try {
     const storeRes = await fetchWithFallback(
       `${MOCK_SERVER_URL}/stores/${storeId}`,
-      "force-cache"
+      "force-cache",
     );
     const storeData = await parseJSON(storeRes);
     return storeData;
@@ -19,7 +22,7 @@ const fetchMenu = async (storeId: number) => {
   try {
     const menuRes = await fetchWithFallback(
       `${MOCK_SERVER_URL}/menu/${storeId}`,
-      "force-cache"
+      "force-cache",
     );
     const menuData = await parseJSON(menuRes);
     return menuData;
@@ -34,7 +37,7 @@ const fetchCategories = async (storeId: number) => {
   try {
     const categoriesRes = await fetchWithFallback(
       `${MOCK_SERVER_URL}/categories/${storeId}`,
-      "force-cache"
+      "force-cache",
     );
     const categoriesData = await parseJSON(categoriesRes);
     return categoriesData;
