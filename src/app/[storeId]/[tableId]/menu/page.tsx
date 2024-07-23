@@ -7,7 +7,7 @@ export default async function Page({
 }: {
   params: { storeId: number; tableId: number };
 }) {
-  const [storeInfo, categories, menu] = await getStore(params.storeId);
+  const { storeInfo, categories, menu } = await getStore(params.storeId);
   return (
     <div>
       <TopBar
