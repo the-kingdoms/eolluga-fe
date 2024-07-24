@@ -6,7 +6,6 @@ export default function Page() {
     <>
       <TopBar storeId={1} tableId={1} showBackButton showCartLink />
       <MenuInfo />
-      {/* 직원 호출 버튼 */}
     </>
   );
 }

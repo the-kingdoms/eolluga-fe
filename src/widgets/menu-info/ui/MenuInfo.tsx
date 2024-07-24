@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
+import { CallStaff } from "@/features";
 import { Menu } from "@/shared/types/menu-detail-types";
 import formatNumber from "@/shared/utils/formatNumber";
 
@@ -84,11 +85,14 @@ export default function MenuInfo() {
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
         />
-        <div className="flex w-full flex-col items-center pb-4">
+        <div className="mb-[60px] flex w-full flex-col items-center pb-4">
           <span className="font-Pretendard text-xs text-[#6F6F6F]">
             모든 메뉴의 이미지는 실물과 상이할 수 있습니다.
           </span>
         </div>
+      </div>
+      <div className="fixed bottom-[112px] right-2 max-w-[360px]">
+        <CallStaff />
       </div>
       <ButtonBar
         isEnabled={allRequiredOptionsSelected}
