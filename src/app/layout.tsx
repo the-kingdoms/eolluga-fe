@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="h-dvh w-screen text-[#161616]">
+      <body className="mx-auto h-dvh w-screen text-[#161616]">
         <QueryClientProvider>{children}</QueryClientProvider>
       </body>
     </html>
