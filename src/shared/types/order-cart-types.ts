@@ -16,8 +16,11 @@ export interface ItemT {
 
 export type CartItemT = ItemT;
 
-export interface OrderItemT extends ItemT {
+export interface OrderItemT {
+  orderId: string;
   orderedAt: string;
+  orderTotal: number;
+  items: ItemT[];
 }
 
 export type CartDataT = CartItemT[];
