@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable react/function-component-definition */
-
 /* eslint-disable no-console */
 import { useEffect, useState } from "react";
 
@@ -15,7 +13,7 @@ import ButtonBar from "./ButtonBar";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
 
-const MenuInfo: React.FC = () => {
+export default function MenuInfo() {
   const [count, setCount] = useState(1);
   const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
     useState(false);
@@ -98,6 +96,4 @@ const MenuInfo: React.FC = () => {
       />
     </>
   );
-};
-
-export default MenuInfo;
+}
