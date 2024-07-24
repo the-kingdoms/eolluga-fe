@@ -53,7 +53,7 @@ export default function MenuInfo() {
 
   return (
     <>
-      <div className="relative w-full" style={{ height: "240px" }}>
+      <div className="relative h-[240px] w-full">
         <Image
           src="/image/menu-detail/image1.png"
           alt="image"
