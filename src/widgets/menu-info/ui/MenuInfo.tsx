@@ -53,12 +53,14 @@ export default function MenuInfo() {
 
   return (
     <>
-      <Image
-        src="/image/menu-detail/image1.png"
-        alt="image"
-        width={360}
-        height={240}
-      />
+      <div className="relative w-full" style={{ height: "240px" }}>
+        <Image
+          src="/image/menu-detail/image1.png"
+          alt="image"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
       <div className="flex flex-col items-center gap-4 bg-[#F4F4F4]">
         <div className="inline-flex w-full flex-col items-start gap-10 bg-white py-6">
           <div className="flex flex-col gap-2 px-4">
