@@ -54,16 +54,12 @@ export default function OrderList({ data }: { data: OrderDataT }) {
               <button
                 type="button"
                 className="font-border relative flex h-[40px] w-full items-center justify-center space-x-[4px] rounded-lg border border-[#A8A8A8] text-sm font-bold text-[#6F6F6F]"
-                aria-label={
-                  showMore[order.orderId] ? "간단히 보기" : "자세히 보기"
-                }
+                aria-label={showMore[order.orderId] ? "접기" : "자세히 보기"}
                 onClick={() => {
                   toggleShowMore(order.orderId);
                 }}
               >
-                <span>
-                  {showMore[order.orderId] ? "간단히 보기" : "자세히 보기"}
-                </span>
+                <span>{showMore[order.orderId] ? "접기" : "자세히 보기"}</span>
                 <svg
                   width="17"
                   height="16"
