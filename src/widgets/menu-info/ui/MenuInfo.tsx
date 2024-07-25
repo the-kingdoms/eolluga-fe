@@ -55,7 +55,7 @@ export default function MenuInfo() {
     <>
       <div className="relative h-[240px] w-full">
         <Image
-          src="/image/menu-detail/image1.png"
+          src="/image/menu-test.png"
           alt="image"
           layout="fill"
           objectFit="cover"
