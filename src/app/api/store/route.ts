@@ -1,6 +1,3 @@
-/* eslint-disable no-restricted-globals */
-
-/* eslint-disable no-console */
 import { MOCK_SERVER_URL, fetchWithFallback, parseJSON } from "@/shared";
 
 const fetchStoreInfo = async (storeId: number) => {
@@ -52,7 +49,7 @@ export async function GET(request: Request) {
   try {
     const url = new URL(request.url, `http://${request.headers.get("host")}`);
     const storeId = Number(url.searchParams.get("storeId"));
-    if (isNaN(storeId)) {
+    if (Number.isNaN(storeId)) {
       return new Response(JSON.stringify({ error: "Invalid storeId" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },

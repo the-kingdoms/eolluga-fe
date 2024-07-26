@@ -1,8 +1,5 @@
 "use client";
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
-
-/* eslint-disable react/button-has-type */
 import { useEffect, useRef, useState } from "react";
 
 import Link from "next/link";
@@ -72,7 +69,12 @@ export default function TopBar({
     >
       <div className="">
         {showBackButton && (
-          <button onClick={router.back} className="flex items-center">
+          <button
+            aria-label="뒤로가기"
+            type="button"
+            onClick={router.back}
+            className="flex items-center"
+          >
             <svg
               width="20"
               height="20"
