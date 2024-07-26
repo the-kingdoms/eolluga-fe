@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import calculateCartTotalPrice from "../utils/calculateCartTotalPrice";
+import { calculateCartTotalPrice } from "@/shared";
 
 export default function ViewCartButton() {
   const [total, setTotal] = useState(0);

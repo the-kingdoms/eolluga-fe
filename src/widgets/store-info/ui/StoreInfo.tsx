@@ -16,7 +16,7 @@ export default function StoreInfo({
   storeId: number;
   tableId: number;
 }) {
-  if (!storeInfo) return;
+  if (!storeInfo) return null;
   return (
     <div>
       <StoreImage imageSrc={storeInfo?.image as string} />
