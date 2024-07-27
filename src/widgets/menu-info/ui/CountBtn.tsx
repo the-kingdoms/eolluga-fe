@@ -1,14 +1,11 @@
 import React from "react";
 
-/* eslint-disable react/function-component-definition */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable react/button-has-type */
 interface CountBtnProps {
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CountBtn: React.FC<CountBtnProps> = ({ count, setCount }) => {
+export default function CountBtn({ count, setCount }: CountBtnProps) {
   const handleIncrement = () => {
     setCount(prevCount => prevCount + 1);
   };
@@ -21,7 +18,12 @@ const CountBtn: React.FC<CountBtnProps> = ({ count, setCount }) => {
 
   return (
     <div className="flex w-[95px] items-center gap-2 rounded-md border-[1px] border-solid border-[#C6C6C6] p-2">
-      <button className="h-[20px] w-[20px]" onClick={handleDecrement}>
+      <button
+        type="button"
+        className="h-[20px] w-[20px]"
+        onClick={handleDecrement}
+        aria-label="minus-button"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -38,7 +40,12 @@ const CountBtn: React.FC<CountBtnProps> = ({ count, setCount }) => {
       <div className="font-Pretendard font-regular flex-1 text-center text-sm">
         {count}
       </div>
-      <button className="h-[20px] w-[20px]" onClick={handleIncrement}>
+      <button
+        type="button"
+        className="h-[20px] w-[20px]"
+        onClick={handleIncrement}
+        aria-label="plus-button"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -56,6 +63,4 @@ const CountBtn: React.FC<CountBtnProps> = ({ count, setCount }) => {
       </button>
     </div>
   );
-};
-
-export default CountBtn;
+}

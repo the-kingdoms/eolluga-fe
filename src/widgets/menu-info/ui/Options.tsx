@@ -1,8 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
 
-/* eslint-disable react/function-component-definition */
-
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Option } from "@/shared/types/menu-detail-types";
 import formatNumber from "@/shared/utils/formatNumber";
 
@@ -12,11 +9,11 @@ interface OptionsProps {
   setSelectedOptions: Dispatch<SetStateAction<{ [key: string]: string[] }>>;
 }
 
-const Options: React.FC<OptionsProps> = ({
+export default function Options({
   optionList,
   selectedOptions,
   setSelectedOptions,
-}) => {
+}: OptionsProps) {
   const handleOptionChange = (
     optionTitle: string,
     optionType: string,
@@ -78,7 +75,7 @@ const Options: React.FC<OptionsProps> = ({
               >
                 <div className="flex w-full flex-col items-start gap-2">
                   <div className="flex w-full items-start justify-between">
-                    <label className="flex h-[24px] cursor-pointer items-center gap-2">
+                    <div className="flex h-[24px] cursor-pointer items-center gap-2">
                       <input
                         type={option.type === "radio" ? "radio" : "checkbox"}
                         name={option.title}
@@ -98,7 +95,7 @@ const Options: React.FC<OptionsProps> = ({
                       <div className="font-Pretendard font-regular text-base">
                         {key}
                       </div>
-                    </label>
+                    </div>
                     <div className="font-Pretendard text-base font-bold">
                       +{formatNumber(option.options[key])}원
                     </div>
@@ -111,6 +108,4 @@ const Options: React.FC<OptionsProps> = ({
       ))}
     </>
   );
-};
-
-export default Options;
+}
