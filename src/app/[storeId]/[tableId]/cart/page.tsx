@@ -1,4 +1,4 @@
-import { BackButtonWithTitle } from "@/shared";
+import { TopBar } from "@/shared";
 import { Cart } from "@/widgets";
 
 export default function Page({
@@ -8,11 +8,14 @@ export default function Page({
   params: { storeId: number; tableId: number };
 }) {
   return (
-    <div className="relative h-svh space-y-[24px]">
-      <BackButtonWithTitle title="장바구니" />
-      <div className="mx-[16px] h-full">
-        <Cart />
+    <>
+      <TopBar title="장바구니" showCartLink={false} />
+
+      <div className="relative h-svh space-y-[24px]">
+        <div className="mx-[16px] h-full">
+          <Cart />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
