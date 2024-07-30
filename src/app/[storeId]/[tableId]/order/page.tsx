@@ -1,5 +1,5 @@
 import getOrder from "@/entities/order/api/getOrder";
-import { BackButtonWithTitle } from "@/shared";
+import { TopBar } from "@/shared";
 import { OrderList } from "@/widgets";
 
 export default async function Page({
@@ -9,11 +9,13 @@ export default async function Page({
 }) {
   const data = await getOrder(params.storeId, params.tableId);
   return (
-    <div className="relative h-svh space-y-[24px]">
-      <BackButtonWithTitle title="주문내역" />
-      <div className="mx-[16px] h-full">
-        <OrderList data={data} />
+    <>
+      <TopBar title="주문내역" showOrderLink={false} />
+      <div className="relative mt-[70px] h-svh space-y-[24px]">
+        <div className="mx-[16px] h-full">
+          <OrderList data={data} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
