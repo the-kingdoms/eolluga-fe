@@ -13,6 +13,23 @@ export interface StoreInfoT {
   modifiedDate: string;
   notice: string;
 }
+/*
+export interface StoreInfoT {
+  store_id: UUID;
+  owner_id: UUID;
+  name: string;
+  introduction: string;
+  image: string;
+  phone: string;
+  adress: string;
+  created_at: Date;
+  updated_at: Date;
+  opening_hour: string;
+  original_info: string | null;
+  external_notice: string | null;
+  internal_notice: string | null;
+}
+*/
 
 export interface MenuItemT {
   id: number;
