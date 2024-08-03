@@ -1,15 +1,25 @@
-export interface Option {
-  title: string;
-  description?: string;
-  type: "radio" | "checkbox";
-  optional: "required" | "optional";
-  options: { [key: string]: number };
+interface Content {
+  name: string;
+  price: number;
 }
 
-export interface Menu {
-  id: number;
+export interface OptionT {
+  menuOptionId: string;
+  menuId: string;
+  title: string;
+  content: Content[];
+  required: boolean;
+  isMulti: boolean;
+  min: number | null;
+  max: number | null;
+}
+
+export interface MenuT {
+  menuId: string;
+  storeId: string;
+  category: string;
   name: string;
-  description: string;
+  content: string;
   price: number;
-  options: Option[];
+  image: string;
 }
