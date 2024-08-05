@@ -3,9 +3,9 @@ import { BASE_URL } from "@/shared";
 import { MenuItemT, StoreDataT, StoreInfoT } from "./store";
 
 interface GetStoreResultT {
-  storeInfo: StoreInfoT;
-  categories: string[];
-  menu: MenuItemT[];
+  storeInfo: StoreInfoT | null;
+  categories: string[] | null;
+  menu: MenuItemT[] | null;
 }
 
 const getStore = async (storeId: number): Promise<GetStoreResultT> => {
@@ -18,8 +18,11 @@ const getStore = async (storeId: number): Promise<GetStoreResultT> => {
       menu: data.menu,
     };
   }
-  const errorData = await res.json();
-  throw new Error(errorData.message || "알 수 없는 오류 발생");
+  return {
+    storeInfo: null,
+    categories: null,
+    menu: null,
+  };
 };
 
 export default getStore;

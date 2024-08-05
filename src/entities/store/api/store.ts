@@ -1,4 +1,4 @@
-export interface StoreInfoT {
+/* export interface StoreInfoT {
   name: string;
   content: string;
   image: string;
@@ -12,24 +12,20 @@ export interface StoreInfoT {
   createdDate: string;
   modifiedDate: string;
   notice: string;
-}
-/*
+} */
+
 export interface StoreInfoT {
-  store_id: UUID;
-  owner_id: UUID;
+  store_id: string;
   name: string;
   introduction: string;
   image: string;
   phone: string;
-  adress: string;
-  created_at: Date;
-  updated_at: Date;
-  opening_hour: string;
-  original_info: string | null;
-  external_notice: string | null;
-  internal_notice: string | null;
+  address: string;
+  openingHour: string;
+  originalInfo: string | null;
+  externalNotice: string | null;
+  internalNotice: string | null;
 }
-*/
 
 export interface MenuItemT {
   id: number;

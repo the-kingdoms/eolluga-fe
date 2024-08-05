@@ -14,18 +14,18 @@ export default async function Page({
         showBackButton={false}
         storeId={params.storeId as number}
         tableId={params.tableId as number}
-        storeName={storeInfo.name || "Unknown Store"}
+        storeName={storeInfo?.name || "매장 이름"}
       />
       <StoreInfo
-        storeInfo={storeInfo}
+        storeInfo={storeInfo || {}}
         storeId={params.storeId}
         tableId={params.tableId}
       />
       <MenuList
         tableId={params.tableId}
         storeId={params.storeId}
-        categories={categories}
-        menu={menu}
+        categories={categories || []}
+        menu={menu || []}
       />
       <ViewCartButton />
     </div>

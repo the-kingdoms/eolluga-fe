@@ -7,29 +7,36 @@ import Notice from "./Notice";
 import StoreImage from "./StoreImage";
 import ViewOriginInfoButton from "./ViewOriginInfoButton";
 
-export default function StoreInfo({
-  storeInfo,
-  storeId,
-  tableId,
-}: {
-  storeInfo: StoreInfoT;
+type StoreInfoProps = {
+  storeInfo: StoreInfoT | Record<string, never>;
   storeId: number;
   tableId: number;
-}) {
-  if (!storeInfo) return null;
+};
+
+export default function StoreInfo({
+  storeInfo = {},
+  storeId,
+  tableId,
+}: StoreInfoProps) {
+  const {
+    image = "",
+    name = "",
+    externalNotice = "",
+  } = storeInfo as StoreInfoT;
+
   return (
     <div>
-      <StoreImage imageSrc={storeInfo?.image as string} />
+      <StoreImage imageSrc={image} />
       <div className="mx-[16px]">
         <div className="my-[24px] flex justify-between">
-          <h1 className="text-[32px] font-bold">{storeInfo?.name}</h1>
+          <h1 className="text-[32px] font-bold">{name || "매장 이름"}</h1>
           <ViewOriginInfoButton storeId={storeId} tableId={tableId} />
         </div>
-        <Notice notice={storeInfo.notice} />
+        <Notice notice={externalNotice || ""} />
       </div>
       <div
         className={`h-[16px] w-full bg-[#F4F4F4] ${
-          storeInfo.notice ? "mt-[20px]" : "mb-[20px]"
+          externalNotice ? "my-[20px]" : "mb-[20px]"
         }`}
       />
     </div>
