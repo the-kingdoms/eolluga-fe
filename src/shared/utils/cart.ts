@@ -1,4 +1,4 @@
-import { CART_KEY } from "../consts/localStorage";
+import { CART_KEY } from "../constants/localStorage";
 import { CartDataT, CartItemT, ItemT } from "../types/order-cart-types";
 
 export const getCartData = (): CartDataT => {

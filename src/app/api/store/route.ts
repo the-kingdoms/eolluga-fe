@@ -1,24 +1,32 @@
-import { MOCK_SERVER_URL, fetchWithFallback, parseJSON } from "@/shared";
+import {
+  MOCK_SERVER_URL,
+  SERVICE_URL,
+  fetchWithFallback,
+  parseJSON,
+} from "@/shared";
 
-const fetchStoreInfo = async (storeId: number) => {
+const fetchStoreInfo = async (storeId: string) => {
   try {
     const storeRes = await fetchWithFallback(
-      `${MOCK_SERVER_URL}/stores/${storeId}`,
-      "force-cache",
+      `${SERVICE_URL}/stores/${storeId}`,
+      "no-store",
     );
     const storeData = await parseJSON(storeRes);
     return storeData;
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    throw new Error(`getStoreInfo: ${message}`);
+    // throw new Error(`getStoreInfo: ${message}`);
+    console.error(`getStoreInfo: ${message}`);
+    return {};
   }
 };
 
-const fetchMenu = async (storeId: number) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const fetchMenu = async (storeId: string) => {
   try {
     const menuRes = await fetchWithFallback(
-      `${MOCK_SERVER_URL}/menu/${storeId}`,
+      `${MOCK_SERVER_URL}/menu/1`,
       "force-cache",
     );
     const menuData = await parseJSON(menuRes);
@@ -26,14 +34,17 @@ const fetchMenu = async (storeId: number) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    throw new Error(`getMenu: ${message}`);
+    // throw new Error(`getMenu: ${message}`);
+    console.error(`getMenu: ${message}`);
+    return {};
   }
 };
 
-const fetchCategories = async (storeId: number) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const fetchCategories = async (storeId: string) => {
   try {
     const categoriesRes = await fetchWithFallback(
-      `${MOCK_SERVER_URL}/categories/${storeId}`,
+      `${MOCK_SERVER_URL}/categories/1`,
       "force-cache",
     );
     const categoriesData = await parseJSON(categoriesRes);
@@ -41,14 +52,16 @@ const fetchCategories = async (storeId: number) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    throw new Error(`getCategories: ${message}`);
+    // throw new Error(`getCategories: ${message}`);
+    console.error(`getCategories: ${message}`);
+    return {};
   }
 };
 
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url, `http://${request.headers.get("host")}`);
-    const storeId = Number(url.searchParams.get("storeId"));
+    const storeId = url.searchParams.get("storeId") as string;
     if (Number.isNaN(storeId)) {
       return new Response(JSON.stringify({ error: "Invalid storeId" }), {
         status: 400,
@@ -66,7 +79,6 @@ export async function GET(request: Request) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error(error);
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
     return new Response(JSON.stringify({ error: message }), {

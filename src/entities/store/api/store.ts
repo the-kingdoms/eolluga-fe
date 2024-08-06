@@ -1,4 +1,4 @@
-export interface StoreInfoT {
+/* export interface StoreInfoT {
   name: string;
   content: string;
   image: string;
@@ -12,6 +12,19 @@ export interface StoreInfoT {
   createdDate: string;
   modifiedDate: string;
   notice: string;
+} */
+
+export interface StoreInfoT {
+  store_id: string;
+  name: string;
+  introduction: string;
+  image: string;
+  phone: string;
+  address: string;
+  openingHour: string;
+  originalInfo: string | null;
+  externalNotice: string | null;
+  internalNotice: string | null;
 }
 
 export interface MenuItemT {
