@@ -16,6 +16,7 @@ const fetchWithThrottle = async (
     return response;
   } catch (error) {
     if (retries > 1) {
+      // eslint-disable-next-line no-console
       console.warn(
         `${url} 패치를 재시도하고 있습니다. (${retries - 1}회 남음)`,
       );

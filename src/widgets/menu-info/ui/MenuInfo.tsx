@@ -15,6 +15,7 @@ import ButtonBar from "./ButtonBar";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MenuInfo({ data }: { data: MenuOptionT[] }) {
   const [count, setCount] = useState(1);
   const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
