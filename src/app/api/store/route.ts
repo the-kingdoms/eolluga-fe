@@ -1,13 +1,16 @@
+import { StoreInfoT } from "@/entities";
 import {
   MOCK_SERVER_URL,
   SERVICE_URL,
-  fetchWithFallback,
+  fetchWithThrottle,
   parseJSON,
 } from "@/shared";
 
-const fetchStoreInfo = async (storeId: string) => {
+const fetchStoreInfo = async (
+  storeId: string,
+): Promise<StoreInfoT | Record<string, unknown>> => {
   try {
-    const storeRes = await fetchWithFallback(
+    const storeRes = await fetchWithThrottle(
       `${SERVICE_URL}/stores/${storeId}`,
       "no-store",
     );
@@ -16,15 +19,17 @@ const fetchStoreInfo = async (storeId: string) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    console.error(`getStoreInfo: ${message}`);
+    console.error(`getStoreInfo: (storeId: ${storeId}): ${message}`);
     return {};
   }
 };
 
-const fetchMenu = async (storeId: string) => {
+const fetchMenu = async (
+  storeId: string,
+): Promise<StoreInfoT | Record<string, unknown>> => {
   try {
-    const menuRes = await fetchWithFallback(
-      `${SERVICE_URL}//stores/${storeId}/menus`,
+    const menuRes = await fetchWithThrottle(
+      `${SERVICE_URL}/stores/${storeId}/menus`,
       "force-cache",
     );
     const menuData = await parseJSON(menuRes);
@@ -38,9 +43,11 @@ const fetchMenu = async (storeId: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const fetchCategories = async (storeId: string) => {
+const fetchCategories = async (
+  storeId: string,
+): Promise<StoreInfoT | Record<string, unknown>> => {
   try {
-    const categoriesRes = await fetchWithFallback(
+    const categoriesRes = await fetchWithThrottle(
       `${MOCK_SERVER_URL}/categories/1`,
       "force-cache",
     );
@@ -59,11 +66,14 @@ export async function GET(request: Request) {
   try {
     const url = new URL(request.url, `http://${request.headers.get("host")}`);
     const storeId = url.searchParams.get("storeId") as string;
-    if (Number.isNaN(storeId)) {
-      return new Response(JSON.stringify({ error: "Invalid storeId" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+    if (!storeId) {
+      return new Response(
+        JSON.stringify({ error: "StoreId가 존재하지 않습니다." }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     const [storeInfo, menu, categories] = await Promise.all([
