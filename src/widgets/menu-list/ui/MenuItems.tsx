@@ -14,6 +14,7 @@ export default function MenuItems({
   storeId: number;
   tableId: number;
 }) {
+  console.log(menus);
   return (
     <div className="px-[16px]" id="category">
       <h2 className="my-[24px] text-[28px] font-bold">{category}</h2>

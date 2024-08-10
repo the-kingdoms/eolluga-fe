@@ -1,4 +1,4 @@
-import { StoreInfoT } from "@/entities";
+import { MenuItemT, StoreInfoT } from "@/entities";
 import {
   MOCK_SERVER_URL,
   SERVICE_URL,
@@ -24,9 +24,7 @@ const fetchStoreInfo = async (
   }
 };
 
-const fetchMenu = async (
-  storeId: string,
-): Promise<StoreInfoT | Record<string, unknown>> => {
+const fetchMenus = async (storeId: string): Promise<MenuItemT[] | []> => {
   try {
     const menuRes = await fetchWithThrottle(
       `${SERVICE_URL}/stores/${storeId}/menus`,
@@ -38,14 +36,14 @@ const fetchMenu = async (
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
     console.error(`getMenu: ${message}`);
-    return {};
+    return [];
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetchCategories = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   storeId: string,
-): Promise<StoreInfoT | Record<string, unknown>> => {
+): Promise<string[]> => {
   try {
     const categoriesRes = await fetchWithThrottle(
       `${MOCK_SERVER_URL}/categories/1`,
@@ -58,7 +56,7 @@ const fetchCategories = async (
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
     // throw new Error(`getCategories: ${message}`);
     console.error(`getCategories: ${message}`);
-    return {};
+    return [];
   }
 };
 
@@ -76,12 +74,12 @@ export async function GET(request: Request) {
       );
     }
 
-    const [storeInfo, menu, categories] = await Promise.all([
+    const [storeInfo, menus, categories] = await Promise.all([
       fetchStoreInfo(storeId),
-      fetchMenu(storeId),
+      fetchMenus(storeId),
       fetchCategories(storeId),
     ]);
-    return new Response(JSON.stringify({ storeInfo, menu, categories }), {
+    return new Response(JSON.stringify({ storeInfo, menus, categories }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
