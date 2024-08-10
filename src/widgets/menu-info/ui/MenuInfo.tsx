@@ -7,7 +7,7 @@ import Image from "next/image";
 
 import { MenuOptionT } from "@/entities";
 import { CallStaff } from "@/features";
-import { Menu } from "@/shared/types/menu-detail-types";
+import { OptionT } from "@/shared/types/menu-detail-types";
 import formatNumber from "@/shared/utils/formatNumber";
 
 import { calculateTotalPrice } from "../utils/calculateTotalPrice";
@@ -22,52 +22,80 @@ export default function MenuInfo({ data }: { data: MenuOptionT[] }) {
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string[];
   }>({});
-  const [menu, setMenu] = useState<Menu | null>(null);
-
-  useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const response = await fetch("/menu.json");
-        const data: Menu = await response.json();
-        setMenu(data);
-      } catch (error) {
-        console.error("Failed to fetch menu data:", error);
-      }
-    };
-
-    fetchMenu();
-  }, []);
+  const menu = {
+    menuId: "1",
+    storeId: "1",
+    category: "대표 메뉴",
+    name: "까르보나라",
+    content: "크림 소스가 듬뿍 들어간 까르보나라입니다.",
+    price: 13000,
+    image: "/image/menu-test.png",
+  };
+  const option: OptionT[] = [
+    {
+      menuOptionId: "1",
+      menuId: "1",
+      title: "면 추가",
+      content: [
+        { name: "조금", price: 1000 },
+        { name: "많이", price: 1500 },
+      ],
+      required: false,
+      isMulti: false,
+      min: null,
+      max: null,
+    },
+    {
+      menuOptionId: "2",
+      menuId: "1",
+      title: "매운맛",
+      content: [
+        { name: "안 매움", price: 0 },
+        { name: "매움", price: 0 },
+      ],
+      required: true,
+      isMulti: false,
+      min: null,
+      max: null,
+    },
+    {
+      menuOptionId: "3",
+      menuId: "1",
+      title: "토핑",
+      content: [
+        { name: "어니언 후레이크", price: 0 },
+        { name: "파슬리", price: 0 },
+        { name: "후추", price: 0 },
+      ],
+      required: false,
+      isMulti: true,
+      min: null,
+      max: 2,
+    },
+  ];
 
   useEffect(() => {
     if (menu) {
-      const requiredOptions = menu.options.filter(
-        option => option.optional === "required",
-      );
+      const requiredOptions = option.filter(c => c.required);
       const allRequiredSelected = requiredOptions.every(
-        option => selectedOptions[option.title]?.length > 0,
+        c => selectedOptions[c.title]?.length > 0,
       );
       setAllRequiredOptionsSelected(allRequiredSelected);
     }
   }, [selectedOptions, menu]);
-
-  if (!menu) return <div>Loading...</div>;
+  const totalPrice = calculateTotalPrice(menu, selectedOptions, option, count);
 
   return (
     <>
       <div className="relative h-[240px] w-full">
-        <Image
-          src="/image/menu-test.png"
-          alt="image"
-          layout="fill"
-          objectFit="cover"
-        />
+        <Image src={menu.image} alt="image" layout="fill" objectFit="cover" />
       </div>
       <div className="flex flex-col items-center gap-4 bg-[#F4F4F4]">
         <div className="inline-flex w-full flex-col items-start gap-10 bg-white py-6">
           <div className="flex flex-col gap-2 px-4">
             <div className="font-Pretendard text-xl font-bold">{menu.name}</div>
             <div className="font-Pretendard font-regular text-base text-[#6F6F6F]">
-              {menu.description}
+              {menu.content}
             </div>
           </div>
           <div className="flex w-full flex-col gap-6 px-4">
@@ -84,7 +112,7 @@ export default function MenuInfo({ data }: { data: MenuOptionT[] }) {
           </div>
         </div>
         <Options
-          optionList={menu.options}
+          optionList={option}
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
         />
@@ -99,7 +127,7 @@ export default function MenuInfo({ data }: { data: MenuOptionT[] }) {
       </div>
       <ButtonBar
         isEnabled={allRequiredOptionsSelected}
-        totalPrice={calculateTotalPrice(menu, selectedOptions, count)}
+        totalPrice={totalPrice}
       />
     </>
   );

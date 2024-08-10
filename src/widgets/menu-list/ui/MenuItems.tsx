@@ -21,7 +21,7 @@ export default function MenuItems({
         {menu.map((data, idx) => (
           <li key={category.concat(data.name)}>
             <Link
-              href={`/${storeId}/${tableId}/menu/detail/${data.id}`}
+              href={`/${storeId}/${tableId}/menu/detail/${data.menuId}`}
               className="flex items-center justify-between space-x-[24px]"
             >
               <div className="space-y-[12px]">
@@ -39,7 +39,7 @@ export default function MenuItems({
               </div>
               <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg">
                 <Image
-                  src={data.imageUrl}
+                  src={data.image}
                   alt={data.name}
                   style={{ objectFit: "cover" }}
                   fill

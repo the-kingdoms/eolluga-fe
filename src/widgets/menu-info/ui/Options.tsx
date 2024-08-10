@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
 
-import { Option } from "@/shared/types/menu-detail-types";
+import { OptionT } from "@/shared/types/menu-detail-types";
 import formatNumber from "@/shared/utils/formatNumber";
 
 interface OptionsProps {
-  optionList: Option[];
+  optionList: OptionT[];
   selectedOptions: { [key: string]: string[] };
   setSelectedOptions: Dispatch<SetStateAction<{ [key: string]: string[] }>>;
 }
@@ -16,14 +16,14 @@ export default function Options({
 }: OptionsProps) {
   const handleOptionChange = (
     optionTitle: string,
-    optionType: string,
+    isMulti: boolean,
     optionValue: string,
     isChecked: boolean,
   ) => {
     setSelectedOptions(prev => {
       const newSelections = { ...prev };
       if (isChecked) {
-        if (optionType === "radio") {
+        if (!isMulti) {
           newSelections[optionTitle] = [optionValue];
         } else {
           newSelections[optionTitle] = newSelections[optionTitle]
@@ -51,7 +51,7 @@ export default function Options({
               <div className="font-Pretendard text-base font-bold">
                 {option.title}
               </div>
-              {option.optional === "required" ? (
+              {option.required ? (
                 <div className="font-Pretendard text-sm font-bold text-[#0043CE]">
                   필수
                 </div>
@@ -61,14 +61,19 @@ export default function Options({
                 </div>
               )}
             </div>
-            {option.description && (
+            {option.max && (
               <div className="font-Pretendard font-regular text-xs text-[#6F6F6F]">
-                {option.description}
+                최대 {option.max}개 선택 가능
+              </div>
+            )}
+            {option.min && (
+              <div className="font-Pretendard font-regular text-xs text-[#6F6F6F]">
+                {option.min}개 선택 필수
               </div>
             )}
           </div>
           <div className="flex w-full flex-col items-start gap-4">
-            {Object.keys(option.options).map((key, idx) => (
+            {option.content.map((key, idx) => (
               <div
                 className="flex w-full items-start justify-between"
                 key={idx}
@@ -77,27 +82,28 @@ export default function Options({
                   <div className="flex w-full items-start justify-between">
                     <div className="flex h-[24px] cursor-pointer items-center gap-2">
                       <input
-                        type={option.type === "radio" ? "radio" : "checkbox"}
+                        type={option.isMulti ? "checkbox" : "radio"}
                         name={option.title}
-                        value={key}
+                        value={key.name}
                         checked={
-                          selectedOptions[option.title]?.includes(key) || false
+                          selectedOptions[option.title]?.includes(key.name) ||
+                          false
                         }
                         onChange={e =>
                           handleOptionChange(
                             option.title,
-                            option.type,
-                            key,
+                            option.isMulti,
+                            key.name,
                             e.target.checked,
                           )
                         }
                       />
                       <div className="font-Pretendard font-regular text-base">
-                        {key}
+                        {key.name}
                       </div>
                     </div>
                     <div className="font-Pretendard text-base font-bold">
-                      +{formatNumber(option.options[key])}원
+                      +{formatNumber(key.price)}원
                     </div>
                   </div>
                 </div>

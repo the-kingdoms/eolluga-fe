@@ -28,12 +28,13 @@ export interface StoreInfoT {
 }
 
 export interface MenuItemT {
-  id: number;
+  menuId: string;
+  storeId: string;
   category: string;
   name: string;
   content: string;
   price: number;
-  imageUrl: string;
+  image: string;
 }
 
 export interface StoreDataT {

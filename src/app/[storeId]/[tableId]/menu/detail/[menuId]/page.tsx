@@ -11,7 +11,13 @@ export default async function Page({
   console.log(menuOptions);
   return (
     <>
-      <TopBar storeId={1} tableId={1} showBackButton showCartLink />
+      <TopBar
+        storeId={1}
+        tableId={1}
+        showBackButton
+        showCartLink
+        storeName="store"
+      />
       <MenuInfo data={menuOptions} />
     </>
   );
