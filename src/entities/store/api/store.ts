@@ -39,6 +39,6 @@ export interface MenuItemT {
 
 export interface StoreDataT {
   storeInfo: StoreInfoT;
-  menu: MenuItemT[];
+  menus: MenuItemT[];
   categories: string[];
 }

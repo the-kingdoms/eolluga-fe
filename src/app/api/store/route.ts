@@ -16,17 +16,15 @@ const fetchStoreInfo = async (storeId: string) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    // throw new Error(`getStoreInfo: ${message}`);
     console.error(`getStoreInfo: ${message}`);
     return {};
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetchMenu = async (storeId: string) => {
   try {
     const menuRes = await fetchWithFallback(
-      `${MOCK_SERVER_URL}/menu/1`,
+      `${SERVICE_URL}//stores/${storeId}/menus`,
       "force-cache",
     );
     const menuData = await parseJSON(menuRes);
@@ -34,7 +32,6 @@ const fetchMenu = async (storeId: string) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    // throw new Error(`getMenu: ${message}`);
     console.error(`getMenu: ${message}`);
     return {};
   }

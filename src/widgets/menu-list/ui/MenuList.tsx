@@ -12,12 +12,12 @@ export default function MenuList({
   tableId,
   storeId,
   categories,
-  menu,
+  menus,
 }: {
   tableId: number;
   storeId: number;
   categories: string[];
-  menu: MenuItemT[];
+  menus: MenuItemT[];
 }) {
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const [activatedCategory, setActivatedCategory] = useState<string>(
@@ -98,7 +98,7 @@ export default function MenuList({
         >
           <MenuItems
             category={category}
-            menu={getMenuListByCategory(category, menu)}
+            menus={getMenuListByCategory(category, menus)}
             storeId={storeId}
             tableId={tableId}
           />

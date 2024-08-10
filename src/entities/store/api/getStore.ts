@@ -5,7 +5,7 @@ import { MenuItemT, StoreDataT, StoreInfoT } from "./store";
 interface GetStoreResultT {
   storeInfo: StoreInfoT | null;
   categories: string[] | null;
-  menu: MenuItemT[] | null;
+  menus: MenuItemT[] | null;
 }
 
 const getStore = async (storeId: number): Promise<GetStoreResultT> => {
@@ -15,13 +15,13 @@ const getStore = async (storeId: number): Promise<GetStoreResultT> => {
     return {
       storeInfo: data.storeInfo,
       categories: data.categories,
-      menu: data.menu,
+      menus: data.menus,
     };
   }
   return {
     storeInfo: null,
     categories: null,
-    menu: null,
+    menus: null,
   };
 };
 
