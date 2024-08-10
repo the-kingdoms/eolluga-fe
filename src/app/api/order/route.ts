@@ -22,6 +22,7 @@ export async function GET(request: Request) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";

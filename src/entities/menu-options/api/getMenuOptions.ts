@@ -15,10 +15,9 @@ const getMenuOptions = async (
     return data;
   }
   const errorData = await res.json();
-
+  // eslint-disable-next-line no-console
   console.error(errorData || "알 수 없는 오류 발생");
   return [];
-  // throw new Error(errorData.message || "알 수 없는 오류 발생");
 };
 
 export default getMenuOptions;

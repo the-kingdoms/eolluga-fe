@@ -19,6 +19,7 @@ const fetchStoreInfo = async (
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
+    // eslint-disable-next-line no-console
     console.error(`getStoreInfo: (storeId: ${storeId}): ${message}`);
     return {};
   }
@@ -35,6 +36,7 @@ const fetchMenus = async (storeId: string): Promise<MenuItemT[] | []> => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
+    // eslint-disable-next-line no-console
     console.error(`getMenu: ${message}`);
     return [];
   }
@@ -54,7 +56,7 @@ const fetchCategories = async (
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    // throw new Error(`getCategories: ${message}`);
+    // eslint-disable-next-line no-console
     console.error(`getCategories: ${message}`);
     return [];
   }

@@ -8,7 +8,7 @@ export default async function Page({
   params: { menuId: string; storeId: string };
 }) {
   const menuOptions = await getMenuOptions(params.storeId, params.menuId);
-  console.log(menuOptions);
+
   return (
     <>
       <TopBar
