@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
+import { MenuOptionT } from "@/entities";
 import { CallStaff } from "@/features";
 import { OptionT } from "@/shared/types/menu-detail-types";
 import formatNumber from "@/shared/utils/formatNumber";
@@ -14,7 +15,7 @@ import ButtonBar from "./ButtonBar";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
 
-export default function MenuInfo() {
+export default function MenuInfo({ data }: { data: MenuOptionT[] }) {
   const [count, setCount] = useState(1);
   const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
     useState(false);
