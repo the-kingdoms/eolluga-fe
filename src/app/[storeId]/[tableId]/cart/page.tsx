@@ -10,7 +10,7 @@ export default function Page({
     <>
       <TopBar title="장바구니" showCartLink={false} />
 
-      <div className="relative h-svh space-y-[24px]">
+      <div className="relative mt-[48px] h-svh space-y-[24px]">
         <div className="mx-[16px] h-full">
           <Cart storeId={params.storeId} tableId={params.tableId} />
         </div>
