@@ -2,15 +2,26 @@
 
 import { useEffect, useState } from "react";
 
-import { CallStaff, DeleteAllCartItems, OrderMenu } from "@/features";
-import { CartDataT, OrderCartItem, getCartData } from "@/shared";
+import { CallStaff, DeleteAllCartItems, Order } from "@/features";
+import {
+  CartItemsT,
+  OrderCartItem,
+  generateUniqueCartItemKey,
+  getCartData,
+} from "@/shared";
 import OrderTotalAmount from "@/shared/ui/OrderTotalAmount";
 
 import EmptyCart from "./EmptyCart";
 
-export default function Cart() {
+export default function Cart({
+  storeId,
+  tableId,
+}: {
+  storeId: string;
+  tableId: string;
+}) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<CartDataT>([]);
+  const [data, setData] = useState<CartItemsT>([]);
 
   useEffect(() => {
     const cartData = getCartData();
@@ -29,7 +40,10 @@ export default function Cart() {
       </div>
       <ul className="w-full rounded-xl border border-[#8D8D8D]">
         {data.map((item, idx) => (
-          <li className="relative px-[16px] py-[20px]" key={item.id}>
+          <li
+            className="relative px-[16px] py-[20px]"
+            key={generateUniqueCartItemKey(item)}
+          >
             <OrderCartItem setCartData={setData} data={item} />
             {idx !== data.length - 1 && (
               <div className="absolute bottom-0 left-0 w-full border" />
@@ -45,7 +59,7 @@ export default function Cart() {
         <CallStaff />
       </div>
       <div className="fixed bottom-0 left-0 h-[80px] w-full border-t border-[#C6C6C6] bg-white px-[16px] pt-[12px]">
-        <OrderMenu />
+        <Order storeId={storeId} tableId={tableId} />
       </div>
     </div>
   );

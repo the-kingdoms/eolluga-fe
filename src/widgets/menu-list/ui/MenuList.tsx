@@ -78,7 +78,8 @@ export default function MenuList({
       }, 500);
     }
   };
-
+  console.log(menus, categories);
+  if (!menus || !categories) return null;
   return (
     <div>
       <div className="sticky top-[48px] z-30 h-[74px] bg-white pt-[16px]">
