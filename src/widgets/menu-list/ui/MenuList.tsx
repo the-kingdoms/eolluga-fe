@@ -78,7 +78,6 @@ export default function MenuList({
       }, 500);
     }
   };
-  console.log(menus, categories);
   if (!menus || !categories) return null;
   return (
     <div>

@@ -32,6 +32,9 @@ const fetchMenus = async (storeId: string): Promise<MenuItemT[] | []> => {
       "force-cache",
     );
     const menuData = await parseJSON(menuRes);
+    if (!menuRes.ok) {
+      throw new Error(`${menuRes.status} ${menuData.error}`);
+    }
     return menuData;
   } catch (error) {
     const message =

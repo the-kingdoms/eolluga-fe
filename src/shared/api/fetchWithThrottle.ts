@@ -23,7 +23,7 @@ const fetchWithThrottle = async (
       await delay(delayMs);
       return fetchWithThrottle(url, cache, retries - 1, delayMs);
     }
-    throw error;
+    throw new Error(`${url} fetch에 실패했습니다.`);
   }
 };
 
