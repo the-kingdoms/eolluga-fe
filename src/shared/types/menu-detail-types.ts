@@ -1,20 +1,20 @@
-interface Content {
+interface MenuOptionContentT {
   name: string;
   price: number;
 }
 
-export interface OptionT {
+interface MenuOptionT {
   menuOptionId: string;
   menuId: string;
   title: string;
-  content: Content[];
-  required: boolean;
-  isMulti: boolean;
-  min: number | null;
-  max: number | null;
+  content: MenuOptionContentT[];
+  required: "REQUIRED" | "NOT_REQUIRED";
+  choice: "SINGLE" | "MULTIPLE";
+  min?: number | null;
+  max?: number | null;
 }
 
-export interface MenuT {
+interface MenuT {
   menuId: string;
   storeId: string;
   category: string;
@@ -23,3 +23,5 @@ export interface MenuT {
   price: number;
   image: string;
 }
+
+export type { MenuT, MenuOptionT };

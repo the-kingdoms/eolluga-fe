@@ -1,9 +1,9 @@
-import { MenuT, OptionT } from "@/shared/types/menu-detail-types";
+import { MenuOptionT, MenuT } from "@/shared";
 
 export const calculateTotalPrice = (
   menu: MenuT,
   selectedOptions: { [key: string]: string[] },
-  options: OptionT[],
+  options: MenuOptionT[],
   count: number,
 ): number => {
   const basePrice = menu.price;
