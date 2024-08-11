@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
-import { MenuOptionT } from "@/entities";
 import { CallStaff } from "@/features";
-import { OptionT } from "@/shared/types/menu-detail-types";
+import { MenuOptionT, MenuT } from "@/shared";
 import formatNumber from "@/shared/utils/formatNumber";
 
 import { calculateTotalPrice } from "../utils/calculateTotalPrice";
@@ -15,75 +14,37 @@ import ButtonBar from "./ButtonBar";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
 
-export default function MenuInfo({ data }: { data: MenuOptionT[] }) {
+export default function MenuInfo({
+  menu,
+  menuOptions,
+}: {
+  menu: MenuT;
+  menuOptions: MenuOptionT[];
+}) {
   const [count, setCount] = useState(1);
   const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
     useState(false);
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string[];
   }>({});
-  const menu = {
-    menuId: "1",
-    storeId: "1",
-    category: "대표 메뉴",
-    name: "까르보나라",
-    content: "크림 소스가 듬뿍 들어간 까르보나라입니다.",
-    price: 13000,
-    image: "/image/menu-test.png",
-  };
-  const option: OptionT[] = [
-    {
-      menuOptionId: "1",
-      menuId: "1",
-      title: "면 추가",
-      content: [
-        { name: "조금", price: 1000 },
-        { name: "많이", price: 1500 },
-      ],
-      required: false,
-      isMulti: false,
-      min: null,
-      max: null,
-    },
-    {
-      menuOptionId: "2",
-      menuId: "1",
-      title: "매운맛",
-      content: [
-        { name: "안 매움", price: 0 },
-        { name: "매움", price: 0 },
-      ],
-      required: true,
-      isMulti: false,
-      min: null,
-      max: null,
-    },
-    {
-      menuOptionId: "3",
-      menuId: "1",
-      title: "토핑",
-      content: [
-        { name: "어니언 후레이크", price: 0 },
-        { name: "파슬리", price: 0 },
-        { name: "후추", price: 0 },
-      ],
-      required: false,
-      isMulti: true,
-      min: null,
-      max: 2,
-    },
-  ];
+  console.log(menu);
+  console.log(menuOptions);
 
   useEffect(() => {
     if (menu) {
-      const requiredOptions = option.filter(c => c.required);
+      const requiredOptions = menuOptions.filter(c => c.required);
       const allRequiredSelected = requiredOptions.every(
         c => selectedOptions[c.title]?.length > 0,
       );
       setAllRequiredOptionsSelected(allRequiredSelected);
     }
   }, [selectedOptions, menu]);
-  const totalPrice = calculateTotalPrice(menu, selectedOptions, option, count);
+  const totalPrice = calculateTotalPrice(
+    menu,
+    selectedOptions,
+    menuOptions,
+    count,
+  );
 
   return (
     <>
@@ -112,7 +73,7 @@ export default function MenuInfo({ data }: { data: MenuOptionT[] }) {
           </div>
         </div>
         <Options
-          optionList={option}
+          optionList={menuOptions}
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
         />
