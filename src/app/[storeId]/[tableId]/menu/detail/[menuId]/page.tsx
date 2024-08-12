@@ -1,5 +1,5 @@
 import { getMenuOptions } from "@/entities";
-import getMenu from "@/entities/menu-options/api/getMenu";
+import getMenu from "@/entities/menu/api/getMenu";
 import TopBar from "@/shared/ui/TopBar";
 import { MenuInfo } from "@/widgets";
 
