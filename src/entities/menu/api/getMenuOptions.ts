@@ -1,4 +1,6 @@
-import { BASE_URL, MenuOptionT } from "@/shared";
+import { BASE_URL } from "@/shared";
+
+import { MenuOptionT } from "./menu-options";
 
 type ResponseData = MenuOptionT[] | [];
 const getMenuOptions = async (
