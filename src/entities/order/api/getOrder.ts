@@ -1,22 +1,36 @@
-import { BASE_URL, OrderDataT } from "@/shared";
+import { BASE_URL, OrderHistoryT } from "@/shared";
 
-type ResponseData = OrderDataT | [];
+import { isOrderHistoryT } from "../utils/orderTypeGuards";
+
+type ResponseData = OrderHistoryT | [];
+
 const getOrder = async (
   storeId: number,
   tableId: number,
 ): Promise<ResponseData> => {
-  const res = await fetch(
-    `${BASE_URL}/api/order?storeId=${storeId}&tableId=${tableId}`,
-  );
-  if (res.ok) {
-    const data: OrderDataT = await res.json();
+  try {
+    const res = await fetch(
+      `${BASE_URL}/api/order?storeId=${storeId}&tableId=${tableId}`,
+    );
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data);
+    }
+    if (!isOrderHistoryT(data)) {
+      throw new Error("OrderHistory 타입이 아닙니다.");
+    }
     return data;
-  }
-  const errorData = await res.json();
+  } catch (error) {
+    if (error instanceof Error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    } else {
+      // eslint-disable-next-line no-console
+      console.error("알 수 없는 오류 발생");
+    }
 
-  console.error(errorData || "알 수 없는 오류 발생");
-  return [];
-  // throw new Error(errorData.message || "알 수 없는 오류 발생");
+    return [];
+  }
 };
 
 export default getOrder;

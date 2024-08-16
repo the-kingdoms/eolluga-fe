@@ -5,12 +5,12 @@ import { MenuItemT } from "@/entities";
 
 export default function MenuItems({
   category,
-  menu,
+  menus,
   storeId,
   tableId,
 }: {
   category: string;
-  menu: MenuItemT[];
+  menus: MenuItemT[];
   storeId: number;
   tableId: number;
 }) {
@@ -18,10 +18,10 @@ export default function MenuItems({
     <div className="px-[16px]" id="category">
       <h2 className="my-[24px] text-[28px] font-bold">{category}</h2>
       <ul>
-        {menu.map((data, idx) => (
+        {menus.map((data, idx) => (
           <li key={category.concat(data.name)}>
             <Link
-              href={`/${storeId}/${tableId}/menu/detail/${data.menuId}`}
+              href={`/${storeId}/${tableId}/menus/detail/${data.menuId}`}
               className="flex items-center justify-between space-x-[24px]"
             >
               <div className="space-y-[12px]">
@@ -46,7 +46,7 @@ export default function MenuItems({
                 />
               </div>
             </Link>
-            {idx !== menu.length - 1 && (
+            {idx !== menus.length - 1 && (
               <div className="my-[16px] h-[1px] w-full bg-[#c6c6c6]" />
             )}
           </li>

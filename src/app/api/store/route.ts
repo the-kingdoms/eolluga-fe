@@ -1,13 +1,16 @@
+import { MenuItemT, StoreInfoT } from "@/entities";
 import {
   MOCK_SERVER_URL,
   SERVICE_URL,
-  fetchWithFallback,
+  fetchWithThrottle,
   parseJSON,
 } from "@/shared";
 
-const fetchStoreInfo = async (storeId: string) => {
+const fetchStoreInfo = async (
+  storeId: string,
+): Promise<StoreInfoT | Record<string, unknown>> => {
   try {
-    const storeRes = await fetchWithFallback(
+    const storeRes = await fetchWithThrottle(
       `${SERVICE_URL}/stores/${storeId}`,
       "no-store",
     );
@@ -16,34 +19,38 @@ const fetchStoreInfo = async (storeId: string) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    // throw new Error(`getStoreInfo: ${message}`);
-    console.error(`getStoreInfo: ${message}`);
+    // eslint-disable-next-line no-console
+    console.error(`getStoreInfo: (storeId: ${storeId}): ${message}`);
     return {};
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const fetchMenu = async (storeId: string) => {
+const fetchMenus = async (storeId: string): Promise<MenuItemT[] | []> => {
   try {
-    const menuRes = await fetchWithFallback(
-      `${MOCK_SERVER_URL}/menu/1`,
+    const menuRes = await fetchWithThrottle(
+      `${SERVICE_URL}/stores/${storeId}/menus`,
       "force-cache",
     );
     const menuData = await parseJSON(menuRes);
+    if (!menuRes.ok) {
+      throw new Error(`${menuRes.status} ${menuData.error}`);
+    }
     return menuData;
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    // throw new Error(`getMenu: ${message}`);
+    // eslint-disable-next-line no-console
     console.error(`getMenu: ${message}`);
-    return {};
+    return [];
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const fetchCategories = async (storeId: string) => {
+const fetchCategories = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  storeId: string,
+): Promise<string[]> => {
   try {
-    const categoriesRes = await fetchWithFallback(
+    const categoriesRes = await fetchWithThrottle(
       `${MOCK_SERVER_URL}/categories/1`,
       "force-cache",
     );
@@ -52,9 +59,9 @@ const fetchCategories = async (storeId: string) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";
-    // throw new Error(`getCategories: ${message}`);
+    // eslint-disable-next-line no-console
     console.error(`getCategories: ${message}`);
-    return {};
+    return [];
   }
 };
 
@@ -62,19 +69,22 @@ export async function GET(request: Request) {
   try {
     const url = new URL(request.url, `http://${request.headers.get("host")}`);
     const storeId = url.searchParams.get("storeId") as string;
-    if (Number.isNaN(storeId)) {
-      return new Response(JSON.stringify({ error: "Invalid storeId" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+    if (!storeId) {
+      return new Response(
+        JSON.stringify({ error: "StoreId가 존재하지 않습니다." }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
-    const [storeInfo, menu, categories] = await Promise.all([
+    const [storeInfo, menus, categories] = await Promise.all([
       fetchStoreInfo(storeId),
-      fetchMenu(storeId),
+      fetchMenus(storeId),
       fetchCategories(storeId),
     ]);
-    return new Response(JSON.stringify({ storeInfo, menu, categories }), {
+    return new Response(JSON.stringify({ storeInfo, menus, categories }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

@@ -4,8 +4,10 @@ import React, { useState } from "react";
 
 import Image from "next/image";
 
-import { CartDataT, ItemT } from "../types/order-cart-types";
+import { CartItemT, CartItemsT } from "../types/order-cart-types";
 import { removeItemFromCart, updateItemCount } from "../utils/cart";
+import compareCartItemsKey from "../utils/compareCartItemsKey";
+import generateUniqueCartItemKey from "../utils/generateUniqueCartKey";
 import QuantityController from "./QuantityController";
 
 export default function OrderCartItem({
@@ -13,8 +15,8 @@ export default function OrderCartItem({
   setCartData,
   orderedAt,
 }: {
-  data: ItemT;
-  setCartData?: React.Dispatch<React.SetStateAction<CartDataT>>;
+  data: CartItemT;
+  setCartData?: React.Dispatch<React.SetStateAction<CartItemsT>>;
   orderedAt?: string;
 }) {
   const [itemCount, setItemCount] = useState(data.count);
@@ -23,28 +25,32 @@ export default function OrderCartItem({
     const newCount = itemCount - 1;
     if (newCount > 0) {
       setItemCount(newCount);
-      updateItemCount(data.id, newCount);
+      updateItemCount(generateUniqueCartItemKey(data), newCount);
       setCartData &&
         setCartData(prevData =>
           prevData.map(item =>
-            item.id === data.id ? { ...item, count: newCount } : item,
+            compareCartItemsKey(item, data)
+              ? { ...item, count: newCount }
+              : item,
           ),
         );
     } else {
-      removeItemFromCart(data.id);
+      removeItemFromCart(generateUniqueCartItemKey(data));
       setCartData &&
-        setCartData(prevData => prevData.filter(item => item.id !== data.id));
+        setCartData(prevData =>
+          prevData.filter(item => !compareCartItemsKey(item, data)),
+        );
     }
   };
 
   const handleIncrease = () => {
     const newCount = itemCount + 1;
     setItemCount(newCount);
-    updateItemCount(data.id, newCount);
+    updateItemCount(generateUniqueCartItemKey(data), newCount);
     setCartData &&
       setCartData(prevData =>
         prevData.map(item =>
-          item.id === data.id ? { ...item, count: newCount } : item,
+          compareCartItemsKey(item, data) ? { ...item, count: newCount } : item,
         ),
       );
   };
@@ -64,9 +70,9 @@ export default function OrderCartItem({
               <ul className="mb-[12px] text-sm text-[#6F6F6F]">
                 {data?.options?.map((option, index) => (
                   <li key={index} className="space-y-[4px]">
-                    {option.category} - {option.name}{" "}
-                    {option.additionalPrice !== 0 &&
-                      `( +${option.additionalPrice.toLocaleString()}원)`}
+                    {option.categoryName} - {option.name}{" "}
+                    {option.price !== 0 &&
+                      `( +${option.price.toLocaleString()}원)`}
                   </li>
                 ))}
               </ul>
@@ -79,7 +85,7 @@ export default function OrderCartItem({
 
         <div className="relative h-[64px] w-[64px] overflow-hidden rounded-lg">
           <Image
-            src={data.imageUrl}
+            src={data.image}
             alt={data.name}
             fill
             style={{ objectFit: "fill" }}

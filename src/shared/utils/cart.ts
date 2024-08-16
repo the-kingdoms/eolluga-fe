@@ -1,43 +1,49 @@
 import { CART_KEY } from "../constants/localStorage";
-import { CartDataT, CartItemT, ItemT } from "../types/order-cart-types";
+import { CartItemT, CartItemsT } from "../types/order-cart-types";
+import generateUniqueCartItemKey from "./generateUniqueCartKey";
 
-export const getCartData = (): CartDataT => {
+export const getCartData = (): CartItemsT => {
   if (typeof window !== "undefined") {
     const data = localStorage.getItem(CART_KEY);
     if (data) {
-      return JSON.parse(data) as CartDataT;
+      return JSON.parse(data) as CartItemsT;
     }
   }
   return [];
 };
 
-export const saveCartItems = (items: CartDataT) => {
+export const saveCartItems = (items: CartItemsT) => {
   if (typeof window !== "undefined") {
     localStorage.setItem(CART_KEY, JSON.stringify(items));
   }
 };
 
-export const removeAllItemFormCart = () => {
-  localStorage.setItem(CART_KEY, JSON.stringify([]));
+export const removeAllItemsFromCart = () => {
+  saveCartItems([]);
 };
 
-export const removeItemFromCart = (id: string) => {
+export const removeItemFromCart = (uniqueKey: string) => {
   const items = getCartData();
-  const filteredItems = items.filter(item => item.id !== id);
+  const filteredItems = items.filter(
+    item => generateUniqueCartItemKey(item) !== uniqueKey,
+  );
   saveCartItems(filteredItems);
 };
 
-export const updateItemCount = (id: string, count: number) => {
+export const updateItemCount = (uniqueKey: string, count: number) => {
   const items = getCartData();
   const updatedItems = items.map(item =>
-    item.id === id ? { ...item, count } : item,
+    generateUniqueCartItemKey(item) === uniqueKey ? { ...item, count } : item,
   );
   saveCartItems(updatedItems);
 };
 
 export const addItemToCart = (newItem: CartItemT) => {
   const items = getCartData();
-  const itemIndex = items.findIndex(item => item.id === newItem.id);
+  const uniqueKey = generateUniqueCartItemKey(newItem);
+  const itemIndex = items.findIndex(
+    item => generateUniqueCartItemKey(item) === uniqueKey,
+  );
 
   if (itemIndex > -1) {
     items[itemIndex].count += newItem.count;
@@ -51,10 +57,10 @@ export const addItemToCart = (newItem: CartItemT) => {
 export const calculateCartTotalPrice = (): number => {
   const cartData = getCartData();
   if (cartData) {
-    return cartData.reduce((total: number, menu: ItemT) => {
+    return cartData.reduce((total: number, menu: CartItemT) => {
       const menuTotal = menu.price * menu.count;
       const optionsTotal = menu.options.reduce(
-        (optionTotal, option) => optionTotal + option.additionalPrice,
+        (optionTotal, option) => optionTotal + option.price,
         0,
       );
       return total + menuTotal + optionsTotal;
