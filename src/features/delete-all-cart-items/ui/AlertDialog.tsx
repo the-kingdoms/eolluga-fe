@@ -1,4 +1,4 @@
-import { removeAllItemFormCart } from "@/shared";
+import { removeAllItemsFromCart } from "@/shared";
 
 export default function AlertDialog({
   onCancel,
@@ -25,7 +25,7 @@ export default function AlertDialog({
             type="button"
             className="w-1/2 rounded-xl bg-[#131313] py-[12px] font-bold text-white"
             onClick={() => {
-              removeAllItemFormCart();
+              removeAllItemsFromCart();
               onDelete();
               onCancel();
             }}

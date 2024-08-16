@@ -7,7 +7,7 @@ export default async function Page({
 }: {
   params: { storeId: number; tableId: number };
 }) {
-  const { storeInfo, categories, menu } = await getStore(params.storeId);
+  const { storeInfo, categories, menus } = await getStore(params.storeId);
   return (
     <div>
       <TopBar
@@ -25,7 +25,7 @@ export default async function Page({
         tableId={params.tableId}
         storeId={params.storeId}
         categories={categories || []}
-        menu={menu || []}
+        menus={menus || []}
       />
       <ViewCartButton />
     </div>

@@ -1,27 +1,33 @@
-export interface OptionT {
-  category: string;
+interface CartMenuOptionT {
+  categoryName: string;
   name: string;
-  additionalPrice: number;
+  price: number;
 }
 
-export interface ItemT {
-  id: string;
-  menuId: string;
+interface CartItemT {
   name: string;
   price: number;
   count: number;
-  imageUrl: string;
-  options: OptionT[];
+  image: string;
+  options: CartMenuOptionT[];
 }
 
-export type CartItemT = ItemT;
+type CartItemsT = CartItemT[];
 
-export interface OrderItemT {
-  orderId: string;
+interface OrderHistoryItemT {
+  orderHistoryId: string;
   orderedAt: string;
-  orderTotal: number;
-  items: ItemT[];
+  totalPrice: number;
+  status: "pending" | "approved" | "disapproved";
+  orderDetail: CartItemsT;
 }
 
-export type CartDataT = CartItemT[];
-export type OrderDataT = OrderItemT[];
+type OrderHistoryT = OrderHistoryItemT[];
+
+export type {
+  CartMenuOptionT,
+  CartItemT,
+  CartItemsT,
+  OrderHistoryItemT,
+  OrderHistoryT,
+};

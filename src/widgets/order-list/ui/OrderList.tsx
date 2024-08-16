@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 
 import { CallStaff } from "@/features";
-import { OrderDataT } from "@/shared";
+import { OrderHistoryT } from "@/shared";
 import OrderTotalAmount from "@/shared/ui/OrderTotalAmount";
 
 import OrderItems from "./OrderItems";
 
-export default function OrderList({ data }: { data: OrderDataT }) {
+export default function OrderList({ data }: { data: OrderHistoryT }) {
   const router = useRouter();
 
   return (
@@ -18,14 +18,14 @@ export default function OrderList({ data }: { data: OrderDataT }) {
       </div>
       <div className="space-y-[24px]">
         {data.map(order => (
-          <OrderItems order={order} key={order.orderId} />
+          <OrderItems order={order} key={order.orderHistoryId} />
         ))}
       </div>
 
       <div className="mt-[24px] pb-[148px]">
         <h2 className="mb-[12px] text-lg font-bold">주문 금액 확인</h2>
         <OrderTotalAmount
-          orderTotal={data.reduce((acc, cur) => cur.orderTotal + acc, 0)}
+          orderTotal={data.reduce((acc, cur) => cur.totalPrice + acc, 0)}
         />
       </div>
       <div className="fixed bottom-[96px] right-[16px]">

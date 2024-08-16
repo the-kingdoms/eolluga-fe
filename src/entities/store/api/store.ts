@@ -30,7 +30,7 @@ export interface StoreInfoT {
 export interface MenuItemT {
   menuId: string;
   storeId: string;
-  category: string;
+  categories: string[];
   name: string;
   content: string;
   price: number;
@@ -39,6 +39,6 @@ export interface MenuItemT {
 
 export interface StoreDataT {
   storeInfo: StoreInfoT;
-  menu: MenuItemT[];
+  menus: MenuItemT[];
   categories: string[];
 }

@@ -13,7 +13,7 @@ export default async function Page({
       <TopBar title="주문내역" showOrderLink={false} />
       <div className="relative mt-[70px] h-svh space-y-[24px]">
         <div className="mx-[16px] h-full">
-          <OrderList data={data} />
+          {!data ? null : <OrderList data={data} />}
         </div>
       </div>
     </>

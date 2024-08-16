@@ -19,12 +19,12 @@ export async function GET(request: Request) {
     );
 
     const data = await res.json();
-    console.log(data);
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     const message =
       error instanceof Error ? error.message : "알 수 없는 에러 발생";

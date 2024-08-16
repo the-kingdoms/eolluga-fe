@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-import { OrderItemT } from "@/shared";
+import { OrderHistoryItemT } from "@/shared";
 
 export default function OrderSummary({
   data,
   toggleShowMore,
   showMore,
 }: {
-  data: OrderItemT;
+  data: OrderHistoryItemT;
   toggleShowMore: (orderId: string) => void;
   showMore: {
     [key: string]: boolean;
@@ -20,20 +20,20 @@ export default function OrderSummary({
         <div>
           <div className="space-y-[4px]">
             <p className="block font-bold">
-              {data.items.length > 1
-                ? `${data.items[0].name} 외 ${data.items.length - 1}개`
-                : data.items[0].name}
+              {data.orderDetail.length > 1
+                ? `${data.orderDetail[0].name} 외 ${data.orderDetail.length - 1}개`
+                : data.orderDetail[0].name}
             </p>
 
             <p className="block text-sm font-bold">
-              {data.orderTotal.toLocaleString()}원
+              {data.totalPrice.toLocaleString()}원
             </p>
           </div>
         </div>
         <div className="relative h-[64px] w-[64px] overflow-hidden rounded-lg">
           <Image
-            src={data.items[0].imageUrl}
-            alt={data.items[0].name}
+            src={data.orderDetail[0].image}
+            alt={data.orderDetail[0].name}
             fill
             style={{ objectFit: "fill" }}
             priority
@@ -44,19 +44,19 @@ export default function OrderSummary({
         <button
           type="button"
           className="font-border relative flex h-[40px] w-full items-center justify-center space-x-[4px] rounded-lg border border-[#A8A8A8] text-sm font-bold text-[#6F6F6F]"
-          aria-label={showMore[data.orderId] ? "접기" : "자세히 보기"}
+          aria-label={showMore[data.orderHistoryId] ? "접기" : "자세히 보기"}
           onClick={() => {
-            toggleShowMore(data.orderId);
+            toggleShowMore(data.orderHistoryId);
           }}
         >
-          <span>{showMore[data.orderId] ? "접기" : "자세히 보기"}</span>
+          <span>{showMore[data.orderHistoryId] ? "접기" : "자세히 보기"}</span>
           <svg
             width="17"
             height="16"
             viewBox="0 0 17 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={`transform transition-transform duration-300 ${showMore[data.orderId] ? "rotate-180" : "rotate-0"}`}
+            className={`transform transition-transform duration-300 ${showMore[data.orderHistoryId] ? "rotate-180" : "rotate-0"}`}
           >
             <path
               fillRule="evenodd"

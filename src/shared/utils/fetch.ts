@@ -5,6 +5,7 @@ export const parseJSON = async (response: Response) => {
   try {
     return JSON.parse(text);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(
       "JSON 파싱 에러:",
       error instanceof Error ? error : new Error("Unknown error"),
