@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
 
-import { OptionT } from "@/shared/types/menu-detail-types";
+import { MenuOptionT } from "@/shared";
 import formatNumber from "@/shared/utils/formatNumber";
 
 interface OptionsProps {
-  optionList: OptionT[];
+  optionList: MenuOptionT[];
   selectedOptions: { [key: string]: string[] };
   setSelectedOptions: Dispatch<SetStateAction<{ [key: string]: string[] }>>;
 }
@@ -16,14 +16,14 @@ export default function Options({
 }: OptionsProps) {
   const handleOptionChange = (
     optionTitle: string,
-    isMulti: boolean,
+    choice: "SINGLE" | "MULTIPLE",
     optionValue: string,
     isChecked: boolean,
   ) => {
     setSelectedOptions(prev => {
       const newSelections = { ...prev };
       if (isChecked) {
-        if (!isMulti) {
+        if (choice === "SINGLE") {
           newSelections[optionTitle] = [optionValue];
         } else {
           newSelections[optionTitle] = newSelections[optionTitle]
@@ -82,7 +82,9 @@ export default function Options({
                   <div className="flex w-full items-start justify-between">
                     <div className="flex h-[24px] cursor-pointer items-center gap-2">
                       <input
-                        type={option.isMulti ? "checkbox" : "radio"}
+                        type={
+                          option.choice === "MULTIPLE" ? "checkbox" : "radio"
+                        }
                         name={option.title}
                         value={key.name}
                         checked={
@@ -92,7 +94,7 @@ export default function Options({
                         onChange={e =>
                           handleOptionChange(
                             option.title,
-                            option.isMulti,
+                            option.choice,
                             key.name,
                             e.target.checked,
                           )

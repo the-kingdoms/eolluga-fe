@@ -14,4 +14,14 @@ interface MenuOptionT {
   max?: number | null;
 }
 
-export type { MenuOptionT, MenuOptionContentT };
+interface MenuT {
+  menuId: string;
+  storeId: string;
+  category: string;
+  name: string;
+  content: string;
+  price: number;
+  image: string;
+}
+
+export type { MenuT, MenuOptionT };

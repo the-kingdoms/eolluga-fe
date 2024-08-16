@@ -10,6 +10,7 @@ export type {
   OrderHistoryItemT,
   OrderHistoryT,
 } from "./types/order-cart-types";
+export type { MenuT, MenuOptionT } from "./types/menu-detail-types";
 export { parseJSON } from "./utils/fetch";
 export { default as fetchWithFallback } from "./api/fetchWithFallback";
 export { default as BackButtonWithTitle } from "./ui/BackButtonWithTitle";
