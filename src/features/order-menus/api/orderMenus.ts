@@ -8,6 +8,20 @@ const orderMenus = async (
   tableId: string,
 ) => {
   try {
+    const filteredCartItems = cartItems.map(
+      ({ name, count, price, options }) => ({
+        name,
+        count,
+        price,
+        options: options.map(
+          ({ categoryName, name: optionName, price: optionPrice }) => ({
+            categoryName,
+            name: optionName,
+            price: optionPrice,
+          }),
+        ),
+      }),
+    );
     const response = await fetch(
       `${SERVICE_URL}/stores/${storeId}/order-histories/table/${tableId}`,
       {
@@ -15,7 +29,7 @@ const orderMenus = async (
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cartItems),
+        body: JSON.stringify(filteredCartItems),
       },
     );
 
