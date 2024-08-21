@@ -1,3 +1,7 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 import { getCartData, removeAllItemsFromCart } from "@/shared";
 
 import orderMenus from "../api/orderMenus";
@@ -9,6 +13,8 @@ export default function Order({
   storeId: string;
   tableId: string;
 }) {
+  const router = useRouter();
+
   return (
     <button
       type="button"
@@ -16,6 +22,7 @@ export default function Order({
       onClick={() => {
         orderMenus(getCartData(), storeId, tableId);
         removeAllItemsFromCart();
+        router.push(`/${storeId}/${tableId}/order/order-status`);
       }}
     >
       주문하기
