@@ -7,18 +7,17 @@ function isOrderHistoryItemT(item: unknown): item is OrderHistoryItemT {
 
   return (
     typeof orderItem.orderHistoryId === "string" &&
-    typeof orderItem.orderedAt === "string" &&
+    typeof orderItem.paymentHistoryId === "string" &&
     typeof orderItem.totalPrice === "number" &&
-    (orderItem.status === "pending" ||
-      orderItem.status === "approved" ||
-      orderItem.status === "disapproved") &&
+    (orderItem.status === "PENDING" ||
+      orderItem.status === "APPROVED" ||
+      orderItem.status === "DISAPPROVED") &&
     Array.isArray(orderItem.orderDetail) &&
     orderItem.orderDetail.every(
       detail =>
         typeof detail.name === "string" &&
         typeof detail.price === "number" &&
         typeof detail.count === "number" &&
-        typeof detail.image === "string" &&
         Array.isArray(detail.options) &&
         detail.options.every(
           option =>

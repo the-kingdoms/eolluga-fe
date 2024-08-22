@@ -1,10 +1,11 @@
-import { MOCK_SERVER_URL, fetchWithFallback } from "@/shared";
+import { SERVICE_URL, fetchWithFallback } from "@/shared";
 
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url, `http://${request.headers.get("host")}`);
-    const storeId = Number(url.searchParams.get("storeId"));
-    const tableId = Number(url.searchParams.get("tableId"));
+    const storeId = url.searchParams.get("storeId") as string;
+    const tableId = url.searchParams.get("tableId") as string;
+
     if (Number.isNaN(storeId) || Number.isNaN(tableId)) {
       return new Response(JSON.stringify({ error: "Invalid storeId" }), {
         status: 400,
@@ -13,11 +14,10 @@ export async function GET(request: Request) {
     }
 
     const res = await fetchWithFallback(
-      `${MOCK_SERVER_URL}/order/${storeId}/${tableId}`,
+      `${SERVICE_URL}/stores/${storeId}/order-histories/table/${tableId}`,
       "force-cache",
     );
     const data = await res.json();
-
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },

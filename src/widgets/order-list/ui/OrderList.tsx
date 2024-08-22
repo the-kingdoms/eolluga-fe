@@ -10,6 +10,7 @@ import OrderItems from "./OrderItems";
 
 export default function OrderList({ data }: { data: OrderHistoryT }) {
   const router = useRouter();
+  console.log(data);
 
   return (
     <div>

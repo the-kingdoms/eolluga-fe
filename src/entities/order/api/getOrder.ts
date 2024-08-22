@@ -1,6 +1,6 @@
 import { BASE_URL, OrderHistoryT } from "@/shared";
 
-import { isOrderHistoryT } from "../utils/orderTypeGuards";
+// import { isOrderHistoryT } from "../utils/orderTypeGuards";
 
 type ResponseData = OrderHistoryT | [];
 
@@ -13,12 +13,13 @@ const getOrder = async (
       `${BASE_URL}/api/order?storeId=${storeId}&tableId=${tableId}`,
     );
     const data = await res.json();
+
     if (!res.ok) {
       throw new Error(data);
     }
-    if (!isOrderHistoryT(data)) {
-      throw new Error("OrderHistory 타입이 아닙니다.");
-    }
+    // if (!isOrderHistoryT(data)) {
+    //   throw new Error("OrderHistory 타입이 아닙니다.");
+    // }
     return data;
   } catch (error) {
     if (error instanceof Error) {
