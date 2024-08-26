@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 
-import Image from "next/image";
-
+// import Image from "next/image";
 import { CartItemT, CartItemsT } from "../types/order-cart-types";
 import { removeItemFromCart, updateItemCount } from "../utils/cart";
 import compareCartItemsKey from "../utils/compareCartItemsKey";
@@ -84,13 +83,13 @@ export default function OrderCartItem({
         </div>
 
         <div className="relative h-[64px] w-[64px] overflow-hidden rounded-lg">
-          <Image
+          {/* <Image
             src={data.image}
             alt={data.name}
             fill
             style={{ objectFit: "fill" }}
             priority
-          />
+          /> */}
         </div>
       </div>
 

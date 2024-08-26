@@ -1,6 +1,5 @@
-import Image from "next/image";
-
-import { OrderHistoryItemT } from "@/shared";
+// import Image from "next/image";
+import { CartItemsT, OrderHistoryItemT } from "@/shared";
 
 export default function OrderSummary({
   data,
@@ -13,16 +12,19 @@ export default function OrderSummary({
     [key: string]: boolean;
   };
 }) {
+  const parsedOrderDetail = JSON.parse(
+    data.orderDetail as unknown as string,
+  ) as CartItemsT;
   return (
     <div>
-      <p className="mb-[16px] block text-sm text-[#6F6F6F]">{data.orderedAt}</p>
+      {/* <p className="mb-[16px] block text-sm text-[#6F6F6F]">{data.orderedAt}</p> */}
       <div className="flex justify-between">
         <div>
           <div className="space-y-[4px]">
             <p className="block font-bold">
-              {data.orderDetail.length > 1
-                ? `${data.orderDetail[0].name} 외 ${data.orderDetail.length - 1}개`
-                : data.orderDetail[0].name}
+              {parsedOrderDetail.length > 1
+                ? `${parsedOrderDetail[0].name} 외 ${parsedOrderDetail.length - 1}개`
+                : parsedOrderDetail[0].name}
             </p>
 
             <p className="block text-sm font-bold">
@@ -31,13 +33,13 @@ export default function OrderSummary({
           </div>
         </div>
         <div className="relative h-[64px] w-[64px] overflow-hidden rounded-lg">
-          <Image
-            src={data.orderDetail[0].image}
-            alt={data.orderDetail[0].name}
+          {/* <Image
+            src={parsedOrderDetail[0].image}
+            alt={parsedOrderDetail[0].name}
             fill
             style={{ objectFit: "fill" }}
             priority
-          />
+          /> */}
         </div>
       </div>
       <div className="mb-[20px] mt-[16px] px-[16px]">

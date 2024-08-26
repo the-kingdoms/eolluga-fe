@@ -8,7 +8,6 @@ interface CartItemT {
   name: string;
   price: number;
   count: number;
-  image: string;
   options: CartMenuOptionT[];
 }
 
@@ -16,9 +15,9 @@ type CartItemsT = CartItemT[];
 
 interface OrderHistoryItemT {
   orderHistoryId: string;
-  orderedAt: string;
+  paymentHistoryId: string;
   totalPrice: number;
-  status: "pending" | "approved" | "disapproved";
+  status: "PENDING" | "APPROVED" | "DISAPPROVED";
   orderDetail: CartItemsT;
 }
 
