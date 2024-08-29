@@ -51,7 +51,7 @@ export default function MenuInfo({
       <div className="relative h-[240px] w-full">
         <Image src={menu.image} alt="image" layout="fill" objectFit="cover" />
       </div>
-      <div className="flex flex-col items-center gap-4 bg-[#F4F4F4]">
+      <div className="flex min-h-[calc(100%-340px)] flex-col items-center gap-4 bg-[#F4F4F4]">
         <div className="inline-flex w-full flex-col items-start gap-10 bg-white py-6">
           <div className="flex flex-col gap-2 px-4">
             <div className="font-Pretendard text-xl font-bold">{menu.name}</div>
