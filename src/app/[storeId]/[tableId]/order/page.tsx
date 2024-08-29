@@ -10,7 +10,12 @@ export default async function Page({
   const data = await getOrder(params.storeId, params.tableId);
   return (
     <>
-      <TopBar title="주문내역" showOrderLink={false} />
+      <TopBar
+        title="주문내역"
+        showOrderLink={false}
+        storeId={params.storeId}
+        tableId={params.tableId}
+      />
       <div className="relative mt-[70px] h-svh space-y-[24px]">
         <div className="mx-[16px] h-full">
           {!data ? null : <OrderList data={data} />}
