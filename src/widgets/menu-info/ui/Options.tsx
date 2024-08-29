@@ -79,9 +79,13 @@ export default function Options({
                 key={idx}
               >
                 <div className="flex w-full flex-col items-start gap-2">
-                  <div className="flex w-full items-start justify-between">
+                  <label
+                    htmlFor={key.name}
+                    className="flex w-full items-start justify-between"
+                  >
                     <div className="flex h-[24px] cursor-pointer items-center gap-2">
                       <input
+                        id={key.name}
                         type={
                           option.choice === "MULTIPLE" ? "checkbox" : "radio"
                         }
@@ -107,7 +111,7 @@ export default function Options({
                     <div className="font-Pretendard text-base font-bold">
                       +{formatNumber(key.price)}원
                     </div>
-                  </div>
+                  </label>
                 </div>
               </div>
             ))}
