@@ -1,14 +1,31 @@
 import React from "react";
 
+import { useRouter } from "next/navigation";
+
 interface ButtonBarProps {
   isEnabled: boolean;
   totalPrice: number;
+  onClick: () => void;
 }
 
-export default function ButtonBar({ isEnabled, totalPrice }: ButtonBarProps) {
+export default function ButtonBar({
+  isEnabled,
+  totalPrice,
+  onClick,
+}: ButtonBarProps) {
+  const { push } = useRouter();
   return (
     <div className="border-t-solid sticky bottom-0 flex flex-col items-start gap-2 border-t-[1px] border-t-[#C6C6C6] bg-white px-4 pb-5 pt-3">
-      <div
+      <button
+        type="button"
+        onClick={
+          isEnabled
+            ? () => {
+                onClick();
+                push(`../../cart`);
+              }
+            : undefined
+        }
         className={`flex h-[64px] w-full flex-col items-center justify-center rounded-[8px] ${
           isEnabled ? "bg-[#131313]" : "bg-[#C6C6C6]"
         }`}
@@ -34,7 +51,7 @@ export default function ButtonBar({ isEnabled, totalPrice }: ButtonBarProps) {
             장바구니에 담기
           </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 }

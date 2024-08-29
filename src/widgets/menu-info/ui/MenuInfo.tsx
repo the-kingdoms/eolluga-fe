@@ -7,9 +7,11 @@ import Image from "next/image";
 
 import { CallStaff } from "@/features";
 import { MenuOptionT, MenuT } from "@/shared";
+import { addItemToCart } from "@/shared/utils/cart";
 import formatNumber from "@/shared/utils/formatNumber";
 
 import { calculateTotalPrice } from "../utils/calculateTotalPrice";
+import { getCartOptionsByMenuOptions } from "../utils/getCartOptionsByMenuOptions";
 import ButtonBar from "./ButtonBar";
 import CountBtn from "./CountBtn";
 import Options from "./Options";
@@ -27,8 +29,6 @@ export default function MenuInfo({
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string[];
   }>({});
-  console.log(menu);
-  console.log(menuOptions);
 
   useEffect(() => {
     if (menu) {
@@ -45,6 +45,15 @@ export default function MenuInfo({
     menuOptions,
     count,
   );
+  const handleClickAddCart = () => {
+    console.log(selectedOptions);
+    addItemToCart({
+      name: menu.name,
+      price: menu.price,
+      count,
+      options: getCartOptionsByMenuOptions(menuOptions, selectedOptions),
+    });
+  };
 
   return (
     <>
@@ -89,6 +98,7 @@ export default function MenuInfo({
       <ButtonBar
         isEnabled={allRequiredOptionsSelected}
         totalPrice={totalPrice}
+        onClick={handleClickAddCart}
       />
     </>
   );

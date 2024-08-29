@@ -1,10 +1,9 @@
 import { MenuOptionT, MenuT } from "@/shared";
 
-export const calculateTotalPrice = (
+export const calculateMenuPrice = (
   menu: MenuT,
   selectedOptions: { [key: string]: string[] },
   options: MenuOptionT[],
-  count: number,
 ): number => {
   const basePrice = menu.price;
   const toppingPrice = options.reduce((total, option) => {
@@ -15,5 +14,15 @@ export const calculateTotalPrice = (
     }, 0);
     return total + optionTotal;
   }, 0);
-  return (basePrice + toppingPrice) * count;
+  return basePrice + toppingPrice;
+};
+
+export const calculateTotalPrice = (
+  menu: MenuT,
+  selectedOptions: { [key: string]: string[] },
+  options: MenuOptionT[],
+  count: number,
+): number => {
+  const menuPrice = calculateMenuPrice(menu, selectedOptions, options);
+  return menuPrice * count;
 };
