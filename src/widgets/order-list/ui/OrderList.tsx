@@ -36,7 +36,7 @@ export default function OrderList({ data }: { data: OrderHistoryT }) {
         <button
           type="button"
           className="text-large h-[48px] w-full rounded-lg bg-[#131313] text-white"
-          onClick={router.back}
+          onClick={() => router.push("./menu")}
         >
           추가 주문하기
         </button>
