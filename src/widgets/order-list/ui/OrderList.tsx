@@ -1,24 +1,36 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { useRouter } from "next/navigation";
 
+import getOrder from "@/entities/order/api/getOrder";
 import { CallStaff } from "@/features";
 import { OrderHistoryT } from "@/shared";
 import OrderTotalAmount from "@/shared/ui/OrderTotalAmount";
 
 import OrderItems from "./OrderItems";
 
-export default function OrderList({ data }: { data: OrderHistoryT }) {
+export default function OrderList({
+  storeId,
+  tableId,
+}: {
+  storeId: string;
+  tableId: number;
+}) {
   const router = useRouter();
-  console.log(data);
+  const [orderData, setOrderData] = useState<OrderHistoryT>([]);
+  useEffect(() => {
+    getOrder(storeId, tableId).then(setOrderData);
+  }, [storeId, tableId]);
 
   return (
     <div>
       <div className="mb-[11px] flex justify-between">
-        <p className="block text-lg font-bold">총 {data.length}개</p>
+        <p className="block text-lg font-bold">총 {orderData.length}개</p>
       </div>
       <div className="space-y-[24px]">
-        {data.map(order => (
+        {orderData.map(order => (
           <OrderItems order={order} key={order.orderHistoryId} />
         ))}
       </div>
@@ -26,7 +38,7 @@ export default function OrderList({ data }: { data: OrderHistoryT }) {
       <div className="mt-[24px] pb-[148px]">
         <h2 className="mb-[12px] text-lg font-bold">주문 금액 확인</h2>
         <OrderTotalAmount
-          orderTotal={data.reduce((acc, cur) => cur.totalPrice + acc, 0)}
+          orderTotal={orderData.reduce((acc, cur) => cur.totalPrice + acc, 0)}
         />
       </div>
       <div className="fixed bottom-[96px] right-[16px]">

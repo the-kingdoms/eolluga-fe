@@ -1,13 +1,11 @@
-import getOrder from "@/entities/order/api/getOrder";
 import { TopBar } from "@/shared";
 import { OrderList } from "@/widgets";
 
-export default async function Page({
+export default function Page({
   params,
 }: {
   params: { storeId: string; tableId: number };
 }) {
-  const data = await getOrder(params.storeId, params.tableId);
   return (
     <>
       <TopBar
@@ -18,7 +16,7 @@ export default async function Page({
       />
       <div className="relative mt-[70px] h-svh space-y-[24px]">
         <div className="mx-[16px] h-full">
-          {!data ? null : <OrderList data={data} />}
+          <OrderList storeId={params.storeId} tableId={params.tableId} />
         </div>
       </div>
     </>
