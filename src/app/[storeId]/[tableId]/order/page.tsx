@@ -5,7 +5,7 @@ import { OrderList } from "@/widgets";
 export default async function Page({
   params,
 }: {
-  params: { storeId: number; tableId: number };
+  params: { storeId: string; tableId: number };
 }) {
   const data = await getOrder(params.storeId, params.tableId);
   return (

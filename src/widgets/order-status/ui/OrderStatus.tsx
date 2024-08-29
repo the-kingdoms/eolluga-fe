@@ -1,15 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { OrderStatusProps } from "@/shared/types/order-status";
 
+import { getOrderStatusByFiveSeconds } from "../utils/getOrderStatusByFiveSeconds";
 import OrderStatusComponent from "./OrderStatusComponent";
 
 type Status = "pending" | "approved" | "rejected";
 
-export default function OrderStatus() {
+export default function OrderStatus({
+  storeId,
+  tableId,
+}: {
+  storeId: string;
+  tableId: number;
+}) {
   const [orderStatus, setOrderStatus] = useState<Status>("pending");
+
+  useEffect(() => {
+    const intervalInstance = getOrderStatusByFiveSeconds(
+      storeId,
+      tableId,
+      setOrderStatus,
+    );
+    return () => clearInterval(intervalInstance);
+  }, []);
 
   const getOrderStatusProps = (): OrderStatusProps => {
     switch (orderStatus) {
@@ -52,21 +68,5 @@ export default function OrderStatus() {
     }
   };
 
-  return (
-    <>
-      {/* 추후 삭제 */}
-      <nav>
-        <button type="button" onClick={() => setOrderStatus("pending")}>
-          주문할 경우
-        </button>
-        <button type="button" onClick={() => setOrderStatus("approved")}>
-          주문 승인할 경우
-        </button>
-        <button type="button" onClick={() => setOrderStatus("rejected")}>
-          주문 거절할 경우
-        </button>
-      </nav>
-      <OrderStatusComponent {...getOrderStatusProps()} />
-    </>
-  );
+  return <OrderStatusComponent {...getOrderStatusProps()} />;
 }
