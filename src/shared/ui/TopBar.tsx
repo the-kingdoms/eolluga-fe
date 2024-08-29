@@ -17,7 +17,7 @@ export default function TopBar({
   showBackButton?: boolean;
   showOrderLink?: boolean;
   showCartLink?: boolean;
-  storeId?: number;
+  storeId?: string;
   tableId?: number;
   storeName?: string;
   title?: string;

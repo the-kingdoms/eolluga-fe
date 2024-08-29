@@ -4,7 +4,7 @@ export default function ViewOriginInfoButton({
   storeId,
   tableId,
 }: {
-  storeId: number;
+  storeId: string;
   tableId: number;
 }) {
   return (

@@ -18,7 +18,7 @@ export default function Cart({
   tableId,
 }: {
   storeId: string;
-  tableId: string;
+  tableId: number;
 }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<CartItemsT>([]);

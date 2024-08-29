@@ -5,15 +5,15 @@ import { MenuList, StoreInfo, ViewCartButton } from "@/widgets";
 export default async function Page({
   params,
 }: {
-  params: { storeId: number; tableId: number };
+  params: { storeId: string; tableId: number };
 }) {
   const { storeInfo, categories, menus } = await getStore(params.storeId);
   return (
     <div>
       <TopBar
         showBackButton={false}
-        storeId={params.storeId as number}
-        tableId={params.tableId as number}
+        storeId={params.storeId}
+        tableId={params.tableId}
         storeName={storeInfo?.name || "매장 이름"}
       />
       <StoreInfo

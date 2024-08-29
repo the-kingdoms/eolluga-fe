@@ -15,7 +15,7 @@ export default function MenuList({
   menus,
 }: {
   tableId: number;
-  storeId: number;
+  storeId: string;
   categories: string[];
   menus: MenuItemT[];
 }) {

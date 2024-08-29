@@ -11,7 +11,7 @@ export default function MenuItems({
 }: {
   category: string;
   menus: MenuItemT[];
-  storeId: number;
+  storeId: string;
   tableId: number;
 }) {
   return (

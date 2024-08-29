@@ -11,7 +11,7 @@ export default function Order({
   tableId,
 }: {
   storeId: string;
-  tableId: string;
+  tableId: number;
 }) {
   const router = useRouter();
 
