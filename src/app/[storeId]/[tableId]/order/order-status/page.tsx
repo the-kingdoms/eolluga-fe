@@ -4,7 +4,7 @@ import OrderStatus from "@/widgets/order-status/ui/OrderStatus";
 export default function Page({
   params,
 }: {
-  params: { storeId: string; tableId: string };
+  params: { storeId: string; tableId: number };
 }) {
   return (
     <div className="relative h-full">
