@@ -5,11 +5,17 @@ import { useState } from "react";
 import callStaff from "../api/callStaff";
 import ToastNotification from "./ToastNotification";
 
-export default function CallStaff() {
+export default function CallStaff({
+  storeId,
+  tableId,
+}: {
+  storeId: string;
+  tableId: number;
+}) {
   const [showToast, setShowToast] = useState<boolean>(false);
 
   const handleClick = async () => {
-    callStaff();
+    callStaff(storeId, tableId);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
   };

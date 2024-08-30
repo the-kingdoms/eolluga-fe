@@ -56,7 +56,7 @@ export default function Cart({
         <OrderTotalAmount />
       </div>
       <div className="fixed bottom-[96px] right-[16px]">
-        <CallStaff />
+        <CallStaff storeId={storeId} tableId={tableId} />
       </div>
       <div className="fixed bottom-0 left-0 h-[80px] w-full border-t border-[#C6C6C6] bg-white px-[16px] pt-[12px]">
         <Order storeId={storeId} tableId={tableId} />

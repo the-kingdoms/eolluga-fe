@@ -17,9 +17,13 @@ import CountBtn from "./CountBtn";
 import Options from "./Options";
 
 export default function MenuInfo({
+  storeId,
+  tableId,
   menu,
   menuOptions,
 }: {
+  storeId: string;
+  tableId: number;
   menu: MenuT;
   menuOptions: MenuOptionT[];
 }) {
@@ -93,7 +97,7 @@ export default function MenuInfo({
         </div>
       </div>
       <div className="fixed bottom-[112px] right-2 max-w-[360px]">
-        <CallStaff />
+        <CallStaff storeId={storeId} tableId={tableId} />
       </div>
       <ButtonBar
         isEnabled={allRequiredOptionsSelected}

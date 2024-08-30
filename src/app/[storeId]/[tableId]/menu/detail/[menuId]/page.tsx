@@ -22,7 +22,12 @@ export default async function Page({
         showCartLink
         storeName="store"
       />
-      <MenuInfo menu={menuById} menuOptions={menuOptions} />
+      <MenuInfo
+        storeId={params.storeId}
+        tableId={params.tableId}
+        menu={menuById}
+        menuOptions={menuOptions}
+      />
     </>
   );
 }
