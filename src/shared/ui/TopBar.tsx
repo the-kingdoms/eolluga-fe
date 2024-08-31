@@ -66,7 +66,7 @@ export default function TopBar({
 
   return (
     <nav
-      className={`fixed top-0 z-50 flex h-[48px] w-full items-center justify-between justify-items-end px-[16px] py-[16px] ${!storeName && "bg-white"}`}
+      className={`fixed top-0 z-10 flex h-[48px] w-full items-center justify-between justify-items-end bg-black px-[16px] py-[16px] ${!storeName && "bg-white"}`}
       ref={navRef}
     >
       <div className="">
