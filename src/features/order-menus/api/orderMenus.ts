@@ -1,5 +1,3 @@
-"use server";
-
 import { CartItemsT, SERVICE_URL } from "@/shared";
 
 const orderMenus = async (
