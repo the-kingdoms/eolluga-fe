@@ -24,17 +24,18 @@ export default function Order({
   const placeOrder = async () => {
     setIsError(false);
     setIsLoading(true);
-    const result = await orderMenus(getCartData(), storeId, tableId);
-
-    if (result === "success") {
+    try {
+      await orderMenus(getCartData(), storeId, tableId);
       removeAllItemsFromCart();
       router.push(`/${storeId}/${tableId}/order/order-status`);
-    } else if (result === "network-error") {
-      setIsNetworkError(true);
-    } else {
-      setIsError(true);
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message === "network-error") setIsNetworkError(true);
+        else setIsError(true);
+      }
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -47,7 +48,11 @@ export default function Order({
       >
         {isLoading ? "주문 중..." : "주문하기"}
       </button>
-      <RetryOrderDialog isError={isError} placeOrder={placeOrder} />
+      <RetryOrderDialog
+        isError={isError}
+        placeOrder={placeOrder}
+        onClose={() => setIsError(false)}
+      />
       <NetworkErrorToast
         isNetworkError={isNetworkError}
         onClose={() => setIsNetworkError(false)}

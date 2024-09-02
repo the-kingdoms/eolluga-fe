@@ -5,11 +5,12 @@ import ReactDOM from "react-dom";
 
 export default function RetryOrderDialog({
   isError,
-
   placeOrder,
+  onClose,
 }: {
   isError: boolean;
   placeOrder: () => void;
+  onClose: () => void;
 }) {
   useEffect(() => {
     if (isError) {
@@ -33,13 +34,22 @@ export default function RetryOrderDialog({
         <p className="mb-[24px] text-sm">
           시스템 오류로 주문 요청에 문제가 생겼어요.
         </p>
-        <button
-          type="button"
-          className="w-full rounded-md bg-[#131313] py-[12px] text-sm text-white"
-          onClick={placeOrder}
-        >
-          다시 시도하기
-        </button>
+        <div className="flex space-x-2">
+          <button
+            type="button"
+            className="w-2/5 rounded-md bg-[#D3D3D3] py-[12px] text-sm text-black"
+            onClick={onClose}
+          >
+            닫기
+          </button>
+          <button
+            type="button"
+            className="w-3/5 rounded-md bg-[#131313] py-[12px] text-sm text-white"
+            onClick={placeOrder}
+          >
+            다시 시도하기
+          </button>
+        </div>
       </div>
     </div>,
     document.body,
