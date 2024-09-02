@@ -7,14 +7,13 @@ export default function Page({
   params: { storeId: string; tableId: string };
 }) {
   return (
-    <>
+    <div className="relative">
       <TopBar title="장바구니" showCartLink={false} />
-
-      <div className="relative mt-[48px] h-svh space-y-[24px]">
+      <div className="h-svh space-y-[24px] pt-[48px]">
         <div className="mx-[16px] h-full">
           <Cart storeId={params.storeId} tableId={params.tableId} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

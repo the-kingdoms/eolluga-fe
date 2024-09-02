@@ -1,5 +1,3 @@
-"use server";
-
 import { CartItemsT, SERVICE_URL } from "@/shared";
 
 const orderMenus = async (
@@ -42,16 +40,20 @@ const orderMenus = async (
         `주문 요청에 실패했습니다. Status: ${response.status} - ${response.statusText}. Message: ${errorMessage}`,
       );
     }
-    return true;
   } catch (error) {
+    if (error instanceof TypeError) {
+      // eslint-disable-next-line no-console
+      console.error("네트워크 오류가 발생했습니다:", error.message);
+      throw new Error("network-error");
+    }
     if (error instanceof Error) {
       // eslint-disable-next-line no-console
-      console.error("orderMenus 에러:", error.message);
-    } else {
-      // eslint-disable-next-line no-console
-      console.error("orderMenus 에러:", error);
+      console.error("서비스 오류가 발생했습니다:", error.message);
+      throw new Error("service-error");
     }
-    return false;
+    // eslint-disable-next-line no-console
+    console.error("알 수 없는 오류가 발생했습니다:", error);
+    throw new Error("unknown-error");
   }
 };
 
