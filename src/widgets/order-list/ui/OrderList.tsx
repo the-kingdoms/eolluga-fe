@@ -21,7 +21,16 @@ export default function OrderList({
   const router = useRouter();
   const [orderData, setOrderData] = useState<OrderHistoryT>([]);
   useEffect(() => {
-    getOrder(storeId, tableId).then(setOrderData);
+    getOrder(storeId, tableId).then((data: OrderHistoryT) => {
+      const newOrderData = data
+        .filter(order => order.status !== "DISAPPROVED")
+        .sort((a, b) => {
+          return (
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          );
+        });
+      setOrderData(newOrderData);
+    });
   }, [storeId, tableId]);
 
   return (
