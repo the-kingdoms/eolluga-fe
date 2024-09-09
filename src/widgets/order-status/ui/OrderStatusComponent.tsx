@@ -13,6 +13,7 @@ export default function OrderStatusComponent({
   imageWidth,
   imageHeight,
   buttonText,
+  buttonOnClick,
 }: OrderStatusProps) {
   return (
     <>
@@ -36,7 +37,11 @@ export default function OrderStatusComponent({
         />
       </div>
       {buttonText && (
-        <div className="absolute bottom-5 w-full">
+        <button
+          className="absolute bottom-5 w-full"
+          onClick={buttonOnClick}
+          type="button"
+        >
           <div className="mx-[16px] flex h-[64px] flex-col items-center justify-center rounded-[8px] bg-[#131313]">
             <div className="flex h-[64px] items-center justify-center gap-4 px-[28px] py-[20px]">
               <div className="text-[16px] font-bold text-white">
@@ -44,7 +49,7 @@ export default function OrderStatusComponent({
               </div>
             </div>
           </div>
-        </div>
+        </button>
       )}
     </>
   );

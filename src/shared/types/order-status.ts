@@ -5,4 +5,5 @@ export interface OrderStatusProps {
   imageWidth: number;
   imageHeight: number;
   buttonText?: string;
+  buttonOnClick?: () => void;
 }

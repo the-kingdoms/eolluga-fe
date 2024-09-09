@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { OrderStatusProps } from "@/shared/types/order-status";
 
 import { getOrderStatusByFiveSeconds } from "../utils/getOrderStatusByFiveSeconds";
@@ -16,6 +18,7 @@ export default function OrderStatus({
   storeId: string;
   tableId: number;
 }) {
+  const { push } = useRouter();
   const [orderStatus, setOrderStatus] = useState<Status>("pending");
 
   useEffect(() => {
@@ -46,6 +49,7 @@ export default function OrderStatus({
           imageWidth: 328,
           imageHeight: 286,
           buttonText: "주문 내역 보기",
+          buttonOnClick: () => push(`./`),
         };
       case "rejected":
         return {
@@ -56,6 +60,7 @@ export default function OrderStatus({
           imageWidth: 254,
           imageHeight: 254,
           buttonText: "다른 메뉴 보기",
+          buttonOnClick: () => push(`../menu`),
         };
       default:
         return {
