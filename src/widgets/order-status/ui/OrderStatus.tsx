@@ -9,7 +9,7 @@ import { OrderStatusProps } from "@/shared/types/order-status";
 import { getOrderStatusByFiveSeconds } from "../utils/getOrderStatusByFiveSeconds";
 import OrderStatusComponent from "./OrderStatusComponent";
 
-type Status = "pending" | "approved" | "rejected";
+type Status = "pending" | "approved" | "rejected" | "no-data";
 
 export default function OrderStatus({
   storeId,
@@ -56,6 +56,16 @@ export default function OrderStatus({
           title: "주문이 거절되었어요",
           description:
             "가게 사정으로 주문이 거절되었습니다\n다른 메뉴를 주문해주세요",
+          imagePath: "/image/sad-emoji.png",
+          imageWidth: 254,
+          imageHeight: 254,
+          buttonText: "다른 메뉴 보기",
+          buttonOnClick: () => push(`../menu`),
+        };
+      case "no-data":
+        return {
+          title: "주문이 존재하지 않아요",
+          description: "주문 내역이 존재하지 않습니다",
           imagePath: "/image/sad-emoji.png",
           imageWidth: 254,
           imageHeight: 254,

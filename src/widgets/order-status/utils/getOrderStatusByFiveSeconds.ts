@@ -4,15 +4,20 @@ export const getOrderStatusByFiveSeconds = (
   storeId: string,
   tableId: number,
   setState: React.Dispatch<
-    React.SetStateAction<"pending" | "approved" | "rejected">
+    React.SetStateAction<"pending" | "approved" | "rejected" | "no-data">
   >,
 ) => {
   const intervalInstance = setInterval(() => {
     getOrder(storeId, tableId).then(data => {
       if (data.length === 0) {
-        setState("rejected");
+        setState("no-data");
       } else {
-        const lastData = data.at(-1);
+        const lastData = data
+          .sort(
+            (a, b) =>
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+          )
+          .at(-1);
         switch (lastData?.status) {
           case "PENDING":
             setState("pending");
