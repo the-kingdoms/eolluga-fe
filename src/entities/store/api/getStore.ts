@@ -1,10 +1,10 @@
 import { BASE_URL } from "@/shared";
 
-import { MenuItemT, StoreDataT, StoreInfoT } from "./store";
+import { CategoryItemT, MenuItemT, StoreDataT, StoreInfoT } from "./store";
 
 interface GetStoreResultT {
   storeInfo: StoreInfoT | null;
-  categories: string[] | null;
+  categories: CategoryItemT[] | null;
   menus: MenuItemT[] | null;
 }
 

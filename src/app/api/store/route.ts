@@ -1,10 +1,6 @@
 import { MenuItemT, StoreInfoT } from "@/entities";
-import {
-  MOCK_SERVER_URL,
-  SERVICE_URL,
-  fetchWithThrottle,
-  parseJSON,
-} from "@/shared";
+import { CategoryItemT } from "@/entities/store/api/store";
+import { SERVICE_URL, fetchWithThrottle, parseJSON } from "@/shared";
 
 const fetchStoreInfo = async (
   storeId: string,
@@ -12,7 +8,7 @@ const fetchStoreInfo = async (
   try {
     const storeRes = await fetchWithThrottle(
       `${SERVICE_URL}/stores/${storeId}`,
-      "no-store",
+      "no-cache",
     );
     const storeData = await parseJSON(storeRes);
     return storeData;
@@ -29,7 +25,7 @@ const fetchMenus = async (storeId: string): Promise<MenuItemT[] | []> => {
   try {
     const menuRes = await fetchWithThrottle(
       `${SERVICE_URL}/stores/${storeId}/menus`,
-      "force-cache",
+      "no-cache",
     );
     const menuData = await parseJSON(menuRes);
     if (!menuRes.ok) {
@@ -45,14 +41,11 @@ const fetchMenus = async (storeId: string): Promise<MenuItemT[] | []> => {
   }
 };
 
-const fetchCategories = async (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  storeId: string,
-): Promise<string[]> => {
+const fetchCategories = async (storeId: string): Promise<CategoryItemT[]> => {
   try {
     const categoriesRes = await fetchWithThrottle(
-      `${MOCK_SERVER_URL}/categories/1`,
-      "force-cache",
+      `${SERVICE_URL}/stores/${storeId}/menu-categories`,
+      "no-cache",
     );
     const categoriesData = await parseJSON(categoriesRes);
     return categoriesData;
