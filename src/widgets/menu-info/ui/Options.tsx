@@ -51,7 +51,7 @@ export default function Options({
               <div className="font-Pretendard text-base font-bold">
                 {option.title}
               </div>
-              {option.required ? (
+              {option.required === "REQUIRED" ? (
                 <div className="font-Pretendard text-sm font-bold text-[#0043CE]">
                   필수
                 </div>

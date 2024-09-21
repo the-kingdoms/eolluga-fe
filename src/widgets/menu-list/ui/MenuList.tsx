@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { MenuItemT } from "@/entities";
+import { CategoryItemT } from "@/entities/store/api/store";
 
 import getMenuListByCategory from "../utils/getMenuListByCategory";
 import Categories from "./Categories";
@@ -16,12 +17,12 @@ export default function MenuList({
 }: {
   tableId: number;
   storeId: string;
-  categories: string[];
+  categories: CategoryItemT[];
   menus: MenuItemT[];
 }) {
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const [activatedCategory, setActivatedCategory] = useState<string>(
-    categories[0],
+    categories[0]?.name || "",
   );
   const isScrolling = useRef(false);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -31,16 +32,16 @@ export default function MenuList({
       if (isScrolling.current) return;
 
       const scrollPosition = window.scrollY + window.innerHeight / 2;
-      let currentCategory = categories[0];
+      let currentCategory = categories[0].name;
 
       categories.forEach(category => {
-        const sectionElement = sectionRefs.current[category];
+        const sectionElement = sectionRefs.current[category.name];
         if (
           sectionElement &&
           sectionElement.offsetTop + sectionElement.offsetHeight / 6 <=
             scrollPosition
         ) {
-          currentCategory = category;
+          currentCategory = category.name;
         }
       });
 
@@ -83,7 +84,7 @@ export default function MenuList({
     <div>
       <div className="sticky top-[48px] z-30 h-[74px] bg-white pt-[16px]">
         <Categories
-          categories={categories}
+          categories={categories.map(category => category.name)}
           activatedCategory={activatedCategory}
           setActivatedCategory={handleCategorySelect}
         />
@@ -91,14 +92,14 @@ export default function MenuList({
       </div>
       {categories.map((category, idx) => (
         <div
-          key={category}
+          key={category.name}
           ref={el => {
-            sectionRefs.current[category] = el;
+            sectionRefs.current[category.name] = el;
           }}
         >
           <MenuItems
-            category={category}
-            menus={getMenuListByCategory(category, menus)}
+            category={category.name}
+            menus={getMenuListByCategory(category.name, menus)}
             storeId={storeId}
             tableId={tableId}
           />

@@ -36,7 +36,9 @@ export default function MenuInfo({
 
   useEffect(() => {
     if (menu) {
-      const requiredOptions = menuOptions.filter(c => c.required);
+      const requiredOptions = menuOptions.filter(
+        c => c.required === "REQUIRED",
+      );
       const allRequiredSelected = requiredOptions.every(
         c => selectedOptions[c.title]?.length > 0,
       );
