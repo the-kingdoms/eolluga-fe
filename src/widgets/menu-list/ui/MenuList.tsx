@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { MenuItemT } from "@/entities";
 import { CategoryItemT } from "@/entities/store/api/store";
+import { calculateCartTotalPrice } from "@/shared";
 
 import getMenuListByCategory from "../utils/getMenuListByCategory";
 import Categories from "./Categories";
@@ -26,6 +27,7 @@ export default function MenuList({
   );
   const isScrolling = useRef(false);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [isCartVisible, setIsCartVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,9 +81,16 @@ export default function MenuList({
       }, 500);
     }
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsCartVisible(calculateCartTotalPrice() > 0);
+    }
+  }, []);
+
   if (!menus || !categories) return null;
   return (
-    <div>
+    <div className={isCartVisible ? "pb-[100px]" : ""}>
       <div className="sticky top-[48px] z-30 h-[74px] bg-white pt-[16px]">
         <Categories
           categories={categories.map(category => category.name)}
