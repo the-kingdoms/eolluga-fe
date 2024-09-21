@@ -1,19 +1,22 @@
-import getOrder from "@/entities/order/api/getOrder";
 import { TopBar } from "@/shared";
 import { OrderList } from "@/widgets";
 
-export default async function Page({
+export default function Page({
   params,
 }: {
-  params: { storeId: number; tableId: number };
+  params: { storeId: string; tableId: number };
 }) {
-  const data = await getOrder(params.storeId, params.tableId);
   return (
     <div className="relative">
-      <TopBar title="주문내역" showOrderLink={false} />
-      <div className="mt-[70px] h-svh space-y-[24px]">
+      <TopBar
+        title="주문내역"
+        showOrderLink={false}
+        storeId={params.storeId}
+        tableId={params.tableId}
+      />
+      <div className="relative h-svh space-y-[24px] pt-[70px]">
         <div className="mx-[16px] h-full">
-          {!data ? null : <OrderList data={data} />}
+          <OrderList storeId={params.storeId} tableId={params.tableId} />
         </div>
       </div>
     </div>

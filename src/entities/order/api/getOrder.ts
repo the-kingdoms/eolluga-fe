@@ -5,7 +5,7 @@ import { BASE_URL, OrderHistoryT } from "@/shared";
 type ResponseData = OrderHistoryT | [];
 
 const getOrder = async (
-  storeId: number,
+  storeId: string,
   tableId: number,
 ): Promise<ResponseData> => {
   try {

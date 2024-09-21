@@ -15,7 +15,7 @@
 } */
 
 export interface StoreInfoT {
-  store_id: string;
+  storeId: string;
   name: string;
   introduction: string;
   image: string;
@@ -37,8 +37,14 @@ export interface MenuItemT {
   image: string;
 }
 
+export interface CategoryItemT {
+  id: string;
+  storeId: string;
+  name: string;
+}
+
 export interface StoreDataT {
   storeInfo: StoreInfoT;
   menus: MenuItemT[];
-  categories: string[];
+  categories: CategoryItemT[];
 }

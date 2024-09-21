@@ -19,6 +19,8 @@ interface OrderHistoryItemT {
   totalPrice: number;
   status: "PENDING" | "APPROVED" | "DISAPPROVED";
   orderDetail: CartItemsT;
+  createdAt: string;
+  updatedAt: string;
 }
 
 type OrderHistoryT = OrderHistoryItemT[];

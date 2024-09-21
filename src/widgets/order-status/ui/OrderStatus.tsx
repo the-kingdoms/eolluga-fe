@@ -1,15 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useRouter } from "next/navigation";
 
 import { OrderStatusProps } from "@/shared/types/order-status";
 
+import { getOrderStatusByFiveSeconds } from "../utils/getOrderStatusByFiveSeconds";
 import OrderStatusComponent from "./OrderStatusComponent";
 
-type Status = "pending" | "approved" | "rejected";
+type Status = "pending" | "approved" | "rejected" | "no-data";
 
-export default function OrderStatus() {
+export default function OrderStatus({
+  storeId,
+  tableId,
+}: {
+  storeId: string;
+  tableId: number;
+}) {
+  const { push } = useRouter();
   const [orderStatus, setOrderStatus] = useState<Status>("pending");
+
+  useEffect(() => {
+    const intervalInstance = getOrderStatusByFiveSeconds(
+      storeId,
+      tableId,
+      setOrderStatus,
+    );
+    return () => clearInterval(intervalInstance);
+  }, []);
 
   const getOrderStatusProps = (): OrderStatusProps => {
     switch (orderStatus) {
@@ -30,6 +49,7 @@ export default function OrderStatus() {
           imageWidth: 328,
           imageHeight: 286,
           buttonText: "주문 내역 보기",
+          buttonOnClick: () => push(`./`),
         };
       case "rejected":
         return {
@@ -40,6 +60,17 @@ export default function OrderStatus() {
           imageWidth: 254,
           imageHeight: 254,
           buttonText: "다른 메뉴 보기",
+          buttonOnClick: () => push(`../menu`),
+        };
+      case "no-data":
+        return {
+          title: "주문이 존재하지 않아요",
+          description: "주문 내역이 존재하지 않습니다",
+          imagePath: "/image/sad-emoji.png",
+          imageWidth: 254,
+          imageHeight: 254,
+          buttonText: "다른 메뉴 보기",
+          buttonOnClick: () => push(`../menu`),
         };
       default:
         return {
@@ -52,21 +83,5 @@ export default function OrderStatus() {
     }
   };
 
-  return (
-    <>
-      {/* 추후 삭제 */}
-      <nav>
-        <button type="button" onClick={() => setOrderStatus("pending")}>
-          주문할 경우
-        </button>
-        <button type="button" onClick={() => setOrderStatus("approved")}>
-          주문 승인할 경우
-        </button>
-        <button type="button" onClick={() => setOrderStatus("rejected")}>
-          주문 거절할 경우
-        </button>
-      </nav>
-      <OrderStatusComponent {...getOrderStatusProps()} />
-    </>
-  );
+  return <OrderStatusComponent {...getOrderStatusProps()} />;
 }

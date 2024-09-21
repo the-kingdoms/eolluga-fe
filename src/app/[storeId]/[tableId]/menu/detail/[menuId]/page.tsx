@@ -6,7 +6,7 @@ import { MenuInfo } from "@/widgets";
 export default async function Page({
   params,
 }: {
-  params: { menuId: string; storeId: string };
+  params: { menuId: string; storeId: string; tableId: number };
 }) {
   const menu = await getMenu(params.storeId, params.menuId);
   const menuOptions = await getMenuOptions(params.storeId, params.menuId);
@@ -16,13 +16,18 @@ export default async function Page({
   return (
     <>
       <TopBar
-        storeId={1}
-        tableId={1}
+        storeId={params.storeId}
+        tableId={params.tableId}
         showBackButton
         showCartLink
         storeName="store"
       />
-      <MenuInfo menu={menuById} menuOptions={menuOptions} />
+      <MenuInfo
+        storeId={params.storeId}
+        tableId={params.tableId}
+        menu={menuById}
+        menuOptions={menuOptions}
+      />
     </>
   );
 }

@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
     const res = await fetchWithFallback(
       `${SERVICE_URL}/stores/${storeId}/menus/${menuId}/menu-options`,
-      "force-cache",
+      "no-cache",
     );
 
     const data = await res.json();

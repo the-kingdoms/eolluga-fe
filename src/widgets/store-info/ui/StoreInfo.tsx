@@ -9,7 +9,7 @@ import ViewOriginInfoButton from "./ViewOriginInfoButton";
 
 type StoreInfoProps = {
   storeInfo: StoreInfoT | Record<string, never>;
-  storeId: number;
+  storeId: string;
   tableId: number;
 };
 

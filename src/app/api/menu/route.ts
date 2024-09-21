@@ -15,11 +15,10 @@ export async function GET(request: Request) {
 
     const res = await fetchWithFallback(
       `${SERVICE_URL}/stores/${storeId}/menus`,
-      "force-cache",
+      "no-cache",
     );
 
     const data = await res.json();
-    console.log(data);
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },

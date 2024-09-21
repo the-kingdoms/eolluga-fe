@@ -1,14 +1,14 @@
 import { BASE_URL } from "@/shared";
 
-import { MenuItemT, StoreDataT, StoreInfoT } from "./store";
+import { CategoryItemT, MenuItemT, StoreDataT, StoreInfoT } from "./store";
 
 interface GetStoreResultT {
   storeInfo: StoreInfoT | null;
-  categories: string[] | null;
+  categories: CategoryItemT[] | null;
   menus: MenuItemT[] | null;
 }
 
-const getStore = async (storeId: number): Promise<GetStoreResultT> => {
+const getStore = async (storeId: string): Promise<GetStoreResultT> => {
   const res = await fetch(`${BASE_URL}/api/store?storeId=${storeId}`);
   if (res.ok) {
     const data: StoreDataT = await res.json();

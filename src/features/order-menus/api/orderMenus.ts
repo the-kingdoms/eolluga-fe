@@ -3,7 +3,7 @@ import { CartItemsT, SERVICE_URL } from "@/shared";
 const orderMenus = async (
   cartItems: CartItemsT,
   storeId: string,
-  tableId: string,
+  tableId: number,
 ) => {
   try {
     const filteredCartItems = cartItems.map(

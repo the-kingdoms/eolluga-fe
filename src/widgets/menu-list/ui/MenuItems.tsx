@@ -11,7 +11,7 @@ export default function MenuItems({
 }: {
   category: string;
   menus: MenuItemT[];
-  storeId: number;
+  storeId: string;
   tableId: number;
 }) {
   return (
@@ -21,7 +21,7 @@ export default function MenuItems({
         {menus.map((data, idx) => (
           <li key={category.concat(data.name)}>
             <Link
-              href={`/${storeId}/${tableId}/menus/detail/${data.menuId}`}
+              href={`/${storeId}/${tableId}/menu/detail/${data.menuId}`}
               className="flex items-center justify-between space-x-[24px]"
             >
               <div className="space-y-[12px]">

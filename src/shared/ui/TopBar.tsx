@@ -17,7 +17,7 @@ export default function TopBar({
   showBackButton?: boolean;
   showOrderLink?: boolean;
   showCartLink?: boolean;
-  storeId?: number;
+  storeId?: string;
   tableId?: number;
   storeName?: string;
   title?: string;
@@ -66,16 +66,16 @@ export default function TopBar({
 
   return (
     <nav
-      className={`fixed top-0 z-10 flex h-[48px] w-full items-center justify-between justify-items-end px-[16px] py-[16px] ${!storeName && "bg-white"}`}
+      className={`fixed top-0 z-50 flex min-h-[48px] w-full items-center justify-between justify-items-end px-[16px] py-[16px] ${!storeName && "bg-white"}`}
       ref={navRef}
     >
-      <div className="">
+      <div className="flex items-center gap-4">
         {showBackButton && (
           <button
             aria-label="뒤로가기"
             type="button"
             onClick={router.back}
-            className="flex items-center"
+            className="shirnk-0 flex items-center"
           >
             <svg
               width="20"
@@ -94,7 +94,7 @@ export default function TopBar({
           </button>
         )}
         {storeName && isStoreNameVisible && (
-          <div className="text-xl font-bold">{storeName}</div>
+          <div className="text-sm font-medium">{storeName}</div>
         )}
       </div>
       {title && (

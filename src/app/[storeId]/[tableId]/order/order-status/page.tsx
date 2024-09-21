@@ -1,11 +1,15 @@
 import BackButtonWithTitle from "@/shared/ui/BackButtonWithTitle";
-import OrderStatus from "@/widgets/order-status/OrderStatus";
+import OrderStatus from "@/widgets/order-status/ui/OrderStatus";
 
-export default function Page() {
+export default function Page({
+  params,
+}: {
+  params: { storeId: string; tableId: number };
+}) {
   return (
     <div className="relative h-full">
       <BackButtonWithTitle title="주문 완료" />
-      <OrderStatus />
+      <OrderStatus storeId={params.storeId} tableId={params.tableId} />
     </div>
   );
 }
