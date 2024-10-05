@@ -15,7 +15,7 @@ export default function ButtonBar({
 }: ButtonBarProps) {
   const { push } = useRouter();
   return (
-    <div className="border-t-solid sticky bottom-0 flex flex-col items-start gap-2 border-t-[1px] border-t-[#C6C6C6] bg-white px-4 pb-5 pt-3">
+    <div className="border-t-solid fixed bottom-0 flex w-full flex-col items-start gap-2 border-t-[1px] border-t-[#C6C6C6] bg-white px-4 pb-5 pt-3">
       <button
         type="button"
         onClick={

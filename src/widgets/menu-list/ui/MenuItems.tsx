@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { MenuItemT } from "@/entities";
 
+import isImageExists from "../../../shared/utils/isImageExists";
+
 export default function MenuItems({
   category,
   menus,
@@ -37,14 +39,17 @@ export default function MenuItems({
                   </p>
                 </div>
               </div>
-              <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg">
-                <Image
-                  src={data.image}
-                  alt={data.name}
-                  style={{ objectFit: "cover" }}
-                  fill
-                />
-              </div>
+              {isImageExists(data.image) && (
+                <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg">
+                  <Image
+                    src={data.image}
+                    alt={data.name}
+                    style={{ objectFit: "cover" }}
+                    sizes="(min-width: 640px) 100px, 100px"
+                    fill
+                  />
+                </div>
+              )}
             </Link>
             {idx !== menus.length - 1 && (
               <div className="my-[16px] h-[1px] w-full bg-[#c6c6c6]" />
