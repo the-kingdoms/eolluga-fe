@@ -9,6 +9,7 @@ import { CallStaff } from "@/features";
 import { MenuOptionT, MenuT } from "@/shared";
 import { addItemToCart } from "@/shared/utils/cart";
 import formatNumber from "@/shared/utils/formatNumber";
+import isImageExists from "@/shared/utils/isImageExists";
 
 import { calculateTotalPrice } from "../utils/calculateTotalPrice";
 import { getCartOptionsByMenuOptions } from "../utils/getCartOptionsByMenuOptions";
@@ -62,11 +63,17 @@ export default function MenuInfo({
   };
 
   return (
-    <>
-      <div className="relative h-[240px] w-full">
-        <Image src={menu.image} alt="image" layout="fill" objectFit="cover" />
-      </div>
-      <div className="flex min-h-[calc(100%-340px)] flex-col items-center gap-4 bg-[#F4F4F4]">
+    <div className="h-full">
+      {isImageExists(menu.image) ? (
+        <div className="relative h-[240px] w-full">
+          <Image src={menu.image} alt="image" layout="fill" objectFit="cover" />
+        </div>
+      ) : (
+        <div className="h-[52px] w-full" />
+      )}
+      <div
+        className={`flex flex-col items-center gap-4 bg-[#F4F4F4] ${isImageExists(menu.image) ? "min-h-[calc(100%-240px)]" : "min-h-[calc(100%-52px)]"}`}
+      >
         <div className="inline-flex w-full flex-col items-start gap-10 bg-white py-6">
           <div className="flex flex-col gap-2 px-4">
             <div className="font-Pretendard text-xl font-bold">{menu.name}</div>
@@ -92,7 +99,7 @@ export default function MenuInfo({
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
         />
-        <div className="mb-[60px] flex w-full flex-col items-center pb-4">
+        <div className="mb-[112px] flex w-full flex-col items-center pb-4">
           <span className="font-Pretendard text-xs text-[#6F6F6F]">
             모든 메뉴의 이미지는 실물과 상이할 수 있습니다.
           </span>
@@ -106,6 +113,6 @@ export default function MenuInfo({
         totalPrice={totalPrice}
         onClick={handleClickAddCart}
       />
-    </>
+    </div>
   );
 }
