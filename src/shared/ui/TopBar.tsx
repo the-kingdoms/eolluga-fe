@@ -94,7 +94,7 @@ export default function TopBar({
           </button>
         )}
         {storeName && isStoreNameVisible && (
-          <div className="text-sm font-medium">{storeName}</div>
+          <div className="text-base font-semibold">{storeName}</div>
         )}
       </div>
       {title && (
