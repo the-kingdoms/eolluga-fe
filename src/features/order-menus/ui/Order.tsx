@@ -4,7 +4,11 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { getCartData, removeAllItemsFromCart } from "@/shared";
+import {
+  calculateCartTotalPrice,
+  getCartData,
+  removeAllItemsFromCart,
+} from "@/shared";
 import NetworkErrorToast from "@/shared/ui/NetworkErrorToast";
 
 import orderMenus from "../api/orderMenus";
@@ -48,7 +52,15 @@ export default function Order({
         onClick={placeOrder}
         disabled={isLoading}
       >
-        {isLoading ? "주문 중..." : "주문하기"}
+        {isLoading ? (
+          "주문 중..."
+        ) : (
+          <div className="flex items-center justify-center space-x-4">
+            <p>{`${calculateCartTotalPrice().toLocaleString("ko-kr")}원`}</p>
+            <div className="h-[16px] w-[1px] bg-white" />
+            <p>주문하기</p>
+          </div>
+        )}
       </button>
       <RetryOrderDialog
         isError={isError}
