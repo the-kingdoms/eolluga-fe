@@ -1,7 +1,5 @@
 import React from "react";
 
-import { useRouter } from "next/navigation";
-
 interface ButtonBarProps {
   isEnabled: boolean;
   totalPrice: number;
