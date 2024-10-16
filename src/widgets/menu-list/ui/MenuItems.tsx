@@ -41,8 +41,8 @@ export default function MenuItems({
                   </p>
                 </div>
               </div>
-              {isImageExists && (
-                <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg">
+              <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg">
+                {data.image && isImageExists && (
                   <Image
                     src={data.image}
                     alt={data.name}
@@ -53,8 +53,8 @@ export default function MenuItems({
                       setIsImageExists(false);
                     }}
                   />
-                </div>
-              )}
+                )}
+              </div>
             </Link>
             {idx !== menus.length - 1 && (
               <div className="my-[16px] h-[1px] w-full bg-[#c6c6c6]" />

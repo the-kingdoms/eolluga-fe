@@ -64,7 +64,7 @@ export default function MenuInfo({
 
   return (
     <div className="h-full">
-      {isImageExists ? (
+      {menu.image && isImageExists ? (
         <div className="relative h-[240px] w-full">
           <Image
             src={menu.image}
