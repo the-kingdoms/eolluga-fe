@@ -1,6 +1,6 @@
 "use server";
 
-const isImageExists = async (url?: string): Promise<boolean> | boolean => {
+const isImageExists = async (url?: string): Promise<boolean> => {
   if (!url) return false;
   try {
     const res = fetch(url, { method: "GET", cache: "no-store" });

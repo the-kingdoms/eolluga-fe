@@ -53,11 +53,11 @@ export default function MenuInfo({
     count,
   );
   const handleClickAddCart = () => {
-    console.log(selectedOptions);
     addItemToCart({
       name: menu.name,
       price: menu.price,
       count,
+      image: menu.image,
       options: getCartOptionsByMenuOptions(menuOptions, selectedOptions),
     });
   };

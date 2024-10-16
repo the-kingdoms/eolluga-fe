@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 
-// import Image from "next/image";
+import Image from "next/image";
+
 import { CartItemT, CartItemsT } from "../types/order-cart-types";
 import { removeItemFromCart, updateItemCount } from "../utils/cart";
 import compareCartItemsKey from "../utils/compareCartItemsKey";
@@ -19,6 +20,7 @@ export default function OrderCartItem({
   orderedAt?: string;
 }) {
   const [itemCount, setItemCount] = useState(data.count);
+  const [isImageExists, setIsImageExists] = useState<boolean>(true);
 
   const handleDecrease = () => {
     const newCount = itemCount - 1;
@@ -83,13 +85,18 @@ export default function OrderCartItem({
         </div>
 
         <div className="relative h-[64px] w-[64px] overflow-hidden rounded-lg">
-          {/* <Image
-            src={data.image}
-            alt={data.name}
-            fill
-            style={{ objectFit: "fill" }}
-            priority
-          /> */}
+          {data.image && isImageExists ? (
+            <Image
+              src={data.image as string}
+              alt={data.name}
+              fill
+              style={{ objectFit: "fill" }}
+              onError={() => {
+                setIsImageExists(false);
+              }}
+              priority
+            />
+          ) : null}
         </div>
       </div>
 
