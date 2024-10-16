@@ -44,7 +44,7 @@ export default function Order({
     <>
       <button
         type="button"
-        className="text-large h-[48px] w-full rounded-lg bg-[#131313] text-white"
+        className="h-[64px] w-full rounded-lg bg-[#131313] text-base font-bold text-white"
         onClick={placeOrder}
         disabled={isLoading}
       >

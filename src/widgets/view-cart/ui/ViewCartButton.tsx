@@ -26,9 +26,9 @@ export default function ViewCartButton() {
           push("./cart");
         }}
       >
-        <span className="font-bold">{total.toLocaleString()}원</span>{" "}
-        <span className="text-[#8D8D8D]">|</span>
-        <span className="font-bold">장바구니 보기</span>
+        <span className="text-base font-bold">{total.toLocaleString()}원</span>{" "}
+        <div className="h-[16px] w-[1px] bg-white" />
+        <span className="text-base font-bold">장바구니 보기</span>
       </button>
     </div>
   );

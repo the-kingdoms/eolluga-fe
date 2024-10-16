@@ -8,7 +8,7 @@ export default function QuantityController({
   onIncrease: () => void;
 }) {
   return (
-    <div className="flex h-[32px] w-[92px] items-center justify-center space-x-[8px] rounded-lg border border-[#C6C6C6]">
+    <div className="flex h-[38px] w-[95px] items-center gap-2 rounded-md border-[1px] border-solid border-[#C6C6C6] p-2">
       <button
         type="button"
         className="h-[20px] w-[20px]"
