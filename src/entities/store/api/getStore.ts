@@ -10,6 +10,7 @@ interface GetStoreResultT {
 
 const getStore = async (storeId: string): Promise<GetStoreResultT> => {
   const res = await fetch(`${BASE_URL}/api/store?storeId=${storeId}`);
+
   if (res.ok) {
     const data: StoreDataT = await res.json();
     return {

@@ -77,6 +77,7 @@ export async function GET(request: Request) {
       fetchMenus(storeId),
       fetchCategories(storeId),
     ]);
+
     return new Response(JSON.stringify({ storeInfo, menus, categories }), {
       status: 200,
       headers: { "Content-Type": "application/json" },

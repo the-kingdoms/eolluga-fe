@@ -1,9 +1,9 @@
+import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import { MenuItemT } from "@/entities";
-
-import isImageExists from "../../../shared/utils/isImageExists";
 
 export default function MenuItems({
   category,
@@ -16,6 +16,8 @@ export default function MenuItems({
   storeId: string;
   tableId: number;
 }) {
+  const [isImageExists, setIsImageExists] = useState<boolean>(true);
+
   return (
     <div className="px-[16px]" id="category">
       <h2 className="my-[24px] text-[28px] font-bold">{category}</h2>
@@ -39,7 +41,7 @@ export default function MenuItems({
                   </p>
                 </div>
               </div>
-              {isImageExists(data.image) && (
+              {isImageExists && (
                 <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg">
                   <Image
                     src={data.image}
@@ -47,6 +49,9 @@ export default function MenuItems({
                     style={{ objectFit: "cover" }}
                     sizes="(min-width: 640px) 100px, 100px"
                     fill
+                    onError={() => {
+                      setIsImageExists(false);
+                    }}
                   />
                 </div>
               )}
