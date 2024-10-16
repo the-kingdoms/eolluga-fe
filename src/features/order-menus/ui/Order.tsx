@@ -8,6 +8,7 @@ import { getCartData, removeAllItemsFromCart } from "@/shared";
 import NetworkErrorToast from "@/shared/ui/NetworkErrorToast";
 
 import orderMenus from "../api/orderMenus";
+import orderMenusNotification from "../api/orderMenusNotification";
 import RetryOrderDialog from "./RetryOrderDialog";
 
 export default function Order({
@@ -26,6 +27,7 @@ export default function Order({
     setIsLoading(true);
     try {
       await orderMenus(getCartData(), storeId, tableId);
+      await orderMenusNotification(storeId, tableId);
       removeAllItemsFromCart();
       router.push(`/${storeId}/${tableId}/order/order-status`);
     } catch (error) {
