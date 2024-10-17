@@ -1,7 +1,5 @@
 import React from "react";
 
-import { useRouter } from "next/navigation";
-
 interface ButtonBarProps {
   isEnabled: boolean;
   totalPrice: number;
@@ -13,7 +11,6 @@ export default function ButtonBar({
   totalPrice,
   onClick,
 }: ButtonBarProps) {
-  const { push } = useRouter();
   return (
     <div className="border-t-solid fixed bottom-0 flex w-full flex-col items-start gap-2 border-t-[1px] border-t-[#C6C6C6] bg-white px-4 pb-5 pt-3">
       <button
@@ -22,7 +19,6 @@ export default function ButtonBar({
           isEnabled
             ? () => {
                 onClick();
-                push(`../../cart`);
               }
             : undefined
         }

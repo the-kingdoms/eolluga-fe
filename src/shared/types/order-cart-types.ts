@@ -8,6 +8,7 @@ interface CartItemT {
   name: string;
   price: number;
   count: number;
+  image: string | null | undefined;
   options: CartMenuOptionT[];
 }
 

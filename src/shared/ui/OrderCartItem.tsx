@@ -1,13 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
-// import Image from "next/image";
+import Image from "next/image";
+
 import { CartItemT, CartItemsT } from "../types/order-cart-types";
 import { removeItemFromCart, updateItemCount } from "../utils/cart";
 import compareCartItemsKey from "../utils/compareCartItemsKey";
 import generateUniqueCartItemKey from "../utils/generateUniqueCartKey";
 import QuantityController from "./QuantityController";
+
+const CartItemImage = memo(
+  function CartItemImage({
+    imageUrl,
+    altText,
+    onError,
+  }: {
+    imageUrl: string;
+    altText: string;
+    onError: () => void;
+  }) {
+    return (
+      <Image
+        src={imageUrl}
+        alt={altText}
+        fill
+        style={{ objectFit: "fill" }}
+        onError={onError}
+        priority
+      />
+    );
+  },
+  (prevProps, nextProps) => prevProps.imageUrl === nextProps.imageUrl,
+);
 
 export default function OrderCartItem({
   data,
@@ -19,6 +44,7 @@ export default function OrderCartItem({
   orderedAt?: string;
 }) {
   const [itemCount, setItemCount] = useState(data.count);
+  const [isImageExists, setIsImageExists] = useState<boolean>(true);
 
   const handleDecrease = () => {
     const newCount = itemCount - 1;
@@ -83,13 +109,15 @@ export default function OrderCartItem({
         </div>
 
         <div className="relative h-[64px] w-[64px] overflow-hidden rounded-lg">
-          {/* <Image
-            src={data.image}
-            alt={data.name}
-            fill
-            style={{ objectFit: "fill" }}
-            priority
-          /> */}
+          {data.image && isImageExists ? (
+            <CartItemImage
+              imageUrl={data.image as string}
+              altText={data.name}
+              onError={() => {
+                setIsImageExists(false);
+              }}
+            />
+          ) : null}
         </div>
       </div>
 

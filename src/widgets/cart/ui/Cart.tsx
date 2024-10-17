@@ -58,7 +58,7 @@ export default function Cart({
       <div className="fixed bottom-[96px] right-[16px]">
         <CallStaff storeId={storeId} tableId={tableId} />
       </div>
-      <div className="fixed bottom-0 left-0 h-[80px] w-full border-t border-[#C6C6C6] bg-white px-[16px] pt-[12px]">
+      <div className="fixed bottom-0 left-0 h-[97px] w-full border-t border-[#C6C6C6] bg-white px-4 pb-5 pt-3">
         <Order storeId={storeId} tableId={tableId} />
       </div>
     </div>
