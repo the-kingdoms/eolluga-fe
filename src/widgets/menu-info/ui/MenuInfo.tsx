@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { CallStaff } from "@/features";
 import { MenuOptionT, MenuT } from "@/shared";
@@ -27,6 +28,7 @@ export default function MenuInfo({
   menu: MenuT;
   menuOptions: MenuOptionT[];
 }) {
+  const { push } = useRouter();
   const [count, setCount] = useState(1);
   const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
     useState(false);
@@ -60,6 +62,7 @@ export default function MenuInfo({
       image: menu.image,
       options: getCartOptionsByMenuOptions(menuOptions, selectedOptions),
     });
+    push(`/${storeId}/${tableId}/menu`);
   };
 
   return (
