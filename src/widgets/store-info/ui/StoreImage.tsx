@@ -11,6 +11,13 @@ export default function StoreImage({ imageSrc }: { imageSrc: string }) {
         fill
         priority
       />
+      <div
+        className="absolute inset-0 h-[84px]"
+        style={{
+          background:
+            "linear-gradient(0deg, rgba(08, 08, 08, 0) 0%, rgba(08, 08, 08, 0.5) 100%)",
+        }}
+      />
     </div>
   );
 }

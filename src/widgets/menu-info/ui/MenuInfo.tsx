@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { CallStaff } from "@/features";
 import { MenuOptionT, MenuT } from "@/shared";
@@ -27,6 +28,7 @@ export default function MenuInfo({
   menu: MenuT;
   menuOptions: MenuOptionT[];
 }) {
+  const { push } = useRouter();
   const [count, setCount] = useState(1);
   const [allRequiredOptionsSelected, setAllRequiredOptionsSelected] =
     useState(false);
@@ -60,6 +62,7 @@ export default function MenuInfo({
       image: menu.image,
       options: getCartOptionsByMenuOptions(menuOptions, selectedOptions),
     });
+    push(`/${storeId}/${tableId}/menu`);
   };
 
   return (
@@ -75,9 +78,22 @@ export default function MenuInfo({
               setIsImageExists(false);
             }}
           />
+          <div
+            className="absolute inset-0 h-[84px]"
+            style={{
+              background:
+                "linear-gradient(0deg, rgba(08, 08, 08, 0) 0%, rgba(00, 00, 00, 0.8) 100%)",
+            }}
+          />
         </div>
       ) : (
-        <div className="h-[52px] w-full" />
+        <div
+          className="inset-0 h-[84px]"
+          style={{
+            background:
+              "linear-gradient(0deg, rgba(08, 08, 08, 0) 0%, rgba(08, 08, 08, 0.5) 100%)",
+          }}
+        />
       )}
       <div
         className={`flex flex-col items-center gap-4 bg-[#F4F4F4] ${isImageExists ? "min-h-[calc(100%-240px)]" : "min-h-[calc(100%-52px)]"}`}
