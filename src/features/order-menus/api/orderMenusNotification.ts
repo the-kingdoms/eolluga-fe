@@ -4,7 +4,7 @@ const orderMenusNotification = async (storeId: string, tableId: number) => {
   try {
     const notificationBody = {
       title: "주문 접수",
-      content: `${tableId}번 테이블에서 주문이 접수되었어요.`,
+      content: `${tableId}번 테이블에서 주문이 접수되었어요.\nPC 포스에서 주문을 접수해주세요.`,
       type: "ALL",
       secretKey: process.env.NEXT_PUBLIC_NOTIFICATION_SECRET,
     };
