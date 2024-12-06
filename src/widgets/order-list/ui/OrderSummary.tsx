@@ -15,6 +15,8 @@ export default function OrderSummary({
   const parsedOrderDetail = JSON.parse(
     data.orderDetail as unknown as string,
   ) as CartItemsT;
+  if (!parsedOrderDetail) return null;
+  if (parsedOrderDetail.length === 0) return null;
   return (
     <div>
       {/* <p className="mb-[16px] block text-sm text-[#6F6F6F]">{data.orderedAt}</p> */}
