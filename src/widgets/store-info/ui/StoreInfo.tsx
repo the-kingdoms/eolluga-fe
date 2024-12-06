@@ -28,7 +28,7 @@ export default function StoreInfo({
     <div>
       <StoreImage imageSrc={image} />
       <div className="mx-[16px]">
-        <div className="my-[24px] flex justify-between">
+        <div className="my-[24px] flex flex-col gap-4">
           <h1 className="text-[32px] font-bold">{name || "매장 이름"}</h1>
           <ViewOriginInfoButton storeId={storeId} tableId={tableId} />
         </div>

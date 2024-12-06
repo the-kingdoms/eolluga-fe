@@ -1,8 +1,8 @@
-import { CartItemsT, SERVICE_URL } from "@/shared";
+import { SERVICE_URL } from "@/shared";
 
 const sendSMS = async (phone: string, storeId: string, paymentId: string) => {
   try {
-    const response = await fetch(
+    await fetch(
       `${SERVICE_URL}/stores/${storeId}/payment-histories/${paymentId}/update-phones`,
       {
         method: "PATCH",
