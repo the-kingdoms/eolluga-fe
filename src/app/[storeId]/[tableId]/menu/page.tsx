@@ -1,8 +1,12 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 import { getStore } from "@/entities";
 import { TopBar } from "@/shared";
 import { MenuList, StoreInfo, ViewCartButton } from "@/widgets";
 
-export default async function Page({
+async function StorePage({
   params,
 }: {
   params: { storeId: string; tableId: number };
@@ -30,4 +34,18 @@ export default async function Page({
       <ViewCartButton />
     </div>
   );
+}
+
+export default function Page({
+  params,
+}: {
+  params: { storeId: string; tableId: number };
+}) {
+  const router = useRouter();
+  if ((params.tableId as unknown as string) === "random") {
+    const randomTableId = (Math.floor(Math.random() * 10000) + 1) % 10000;
+    router.push(`/${params.storeId}/${randomTableId}/menu`);
+    return <>Redirecting...</>;
+  }
+  return <StorePage params={params} />;
 }
