@@ -1,4 +1,4 @@
-import { CartItemsT, SERVICE_URL } from "@/shared";
+import { CartItemsT, SERVICE_URL, parseJSON } from "@/shared";
 
 const orderMenus = async (
   cartItems: CartItemsT,
@@ -30,6 +30,9 @@ const orderMenus = async (
         body: JSON.stringify(filteredCartItems),
       },
     );
+
+    const data = await parseJSON(response);
+    return data.paymentHistoryId;
 
     if (!response.ok) {
       let errorMessage = await response.text();

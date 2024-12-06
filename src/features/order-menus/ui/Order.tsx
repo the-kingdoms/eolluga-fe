@@ -49,7 +49,7 @@ export default function Order({
       <button
         type="button"
         className="h-[64px] w-full rounded-lg bg-[#131313] text-base font-bold text-white"
-        onClick={placeOrder}
+        onClick={() => router.push(`/${storeId}/${tableId}/order/pay`)}
         disabled={isLoading}
       >
         {isLoading ? (
