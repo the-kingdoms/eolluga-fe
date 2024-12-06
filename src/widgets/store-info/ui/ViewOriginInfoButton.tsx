@@ -10,7 +10,7 @@ export default function ViewOriginInfoButton({
   return (
     <button
       type="button"
-      className="rounded-full border border-[#A8A8A8] px-[16px] py-[9px] text-sm font-bold text-[#6f6f6f]"
+      className="ml-auto w-fit rounded-full border border-[#A8A8A8] px-[16px] py-[9px] text-sm font-bold text-[#6f6f6f]"
     >
       <Link
         href={`/${storeId}/${tableId}/menu/origin-info`}
