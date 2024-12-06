@@ -33,7 +33,7 @@ export default function Order({
       await orderMenus(getCartData(), storeId, tableId);
       await orderMenusNotification(storeId, tableId);
       removeAllItemsFromCart();
-      router.push(`/${storeId}/${tableId}/order/order-status`);
+      router.push(`/${storeId}/${tableId}/order/update-phone`);
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === "network-error") setIsNetworkError(true);
@@ -49,7 +49,7 @@ export default function Order({
       <button
         type="button"
         className="h-[64px] w-full rounded-lg bg-[#131313] text-base font-bold text-white"
-        onClick={() => router.push(`/${storeId}/${tableId}/order/pay`)}
+        onClick={placeOrder}
         disabled={isLoading}
       >
         {isLoading ? (
