@@ -20,11 +20,7 @@ async function StorePage({
         tableId={params.tableId}
         storeName={storeInfo?.name || "매장 이름"}
       />
-      <StoreInfo
-        storeInfo={storeInfo || {}}
-        storeId={params.storeId}
-        tableId={params.tableId}
-      />
+      <StoreInfo storeInfo={storeInfo || {}} />
       <MenuList
         tableId={params.tableId}
         storeId={params.storeId}
