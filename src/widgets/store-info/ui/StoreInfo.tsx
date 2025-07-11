@@ -5,19 +5,12 @@ import { StoreInfoT } from "@/entities";
 
 import Notice from "./Notice";
 import StoreImage from "./StoreImage";
-import ViewOriginInfoButton from "./ViewOriginInfoButton";
 
 type StoreInfoProps = {
   storeInfo: StoreInfoT | Record<string, never>;
-  storeId: string;
-  tableId: number;
 };
 
-export default function StoreInfo({
-  storeInfo = {},
-  storeId,
-  tableId,
-}: StoreInfoProps) {
+export default function StoreInfo({ storeInfo = {} }: StoreInfoProps) {
   const {
     image = "",
     name = "",
@@ -30,7 +23,6 @@ export default function StoreInfo({
       <div className="mx-[16px]">
         <div className="my-[24px] flex flex-col gap-4">
           <h1 className="text-[32px] font-bold">{name || "매장 이름"}</h1>
-          <ViewOriginInfoButton storeId={storeId} tableId={tableId} />
         </div>
         <Notice notice={externalNotice || ""} />
       </div>
