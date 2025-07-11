@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -15,6 +16,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "s3-eolluga-public.s3.ap-northeast-2.amazonaws.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "s3-eolluga-public.s3.amazonaws.com",
         pathname: "/**",
       },
     ],

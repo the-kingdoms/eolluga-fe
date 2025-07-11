@@ -8,6 +8,7 @@
   "env": {
     "node": true
   },
+  "ignorePatterns": ["next.config.mjs"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "airbnb",
