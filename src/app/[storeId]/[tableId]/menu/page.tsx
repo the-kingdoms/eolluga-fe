@@ -1,28 +1,33 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import { getStore } from "@/entities";
 import { TopBar } from "@/shared";
 import { MenuList, StoreInfo, ViewCartButton } from "@/widgets";
 
-async function StorePage({
+export default async function Page({
   params,
 }: {
-  params: { storeId: string; tableId: number };
+  params: { storeId: string; tableId: string };
 }) {
+  if (params.tableId === "random") {
+    const randomTableId = Math.floor(Math.random() * 9000) + 1000; // randomTableId is between 1000 and 9999
+    redirect(`/${params.storeId}/${randomTableId}/menu`);
+  }
+
   const { storeInfo, categories, menus } = await getStore(params.storeId);
+  const tableId = Number(params.tableId);
+
   return (
     <div>
       <TopBar
         showBackButton={false}
         storeId={params.storeId}
-        tableId={params.tableId}
+        tableId={tableId}
         storeName={storeInfo?.name || "매장 이름"}
       />
       <StoreInfo storeInfo={storeInfo || {}} />
       <MenuList
-        tableId={params.tableId}
+        tableId={tableId}
         storeId={params.storeId}
         categories={categories || []}
         menus={menus || []}
@@ -30,18 +35,4 @@ async function StorePage({
       <ViewCartButton />
     </div>
   );
-}
-
-export default function Page({
-  params,
-}: {
-  params: { storeId: string; tableId: number };
-}) {
-  const router = useRouter();
-  if ((params.tableId as unknown as string) === "random") {
-    const randomTableId = Math.floor(Math.random() * 9000) + 1000; // randomTableId is between 1000 and 9999
-    router.push(`/${params.storeId}/${randomTableId}/menu`);
-    return <>Redirecting...</>;
-  }
-  return <StorePage params={params} />;
 }
