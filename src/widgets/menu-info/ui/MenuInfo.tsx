@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import { CallStaff } from "@/features";
 import { MenuOptionT, MenuT } from "@/shared";
 import { addItemToCart } from "@/shared/utils/cart";
 import formatNumber from "@/shared/utils/formatNumber";
@@ -128,9 +127,6 @@ export default function MenuInfo({
             모든 메뉴의 이미지는 실물과 상이할 수 있습니다.
           </span>
         </div>
-      </div>
-      <div className="fixed bottom-[112px] right-2 max-w-[360px]">
-        <CallStaff storeId={storeId} tableId={tableId} />
       </div>
       <ButtonBar
         isEnabled={allRequiredOptionsSelected}
