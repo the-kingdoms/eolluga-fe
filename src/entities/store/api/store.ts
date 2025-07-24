@@ -35,6 +35,7 @@ export interface MenuItemT {
   content: string;
   price: number;
   image: string;
+  stockStatus: string;
 }
 
 export interface CategoryItemT {

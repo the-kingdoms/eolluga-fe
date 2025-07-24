@@ -26,12 +26,18 @@ export default function MenuItems({
           <li key={category.concat(data.name)}>
             <Link
               href={`/${storeId}/${tableId}/menu/detail/${data.menuId}`}
-              className="flex items-center justify-between space-x-[24px]"
+              className={`flex items-center justify-between space-x-[24px] ${
+                data.stockStatus === "IS_SOLD_OUT" ? "pointer-events-none" : ""
+              }`}
             >
-              <div className="space-y-[12px]">
+              <div
+                className={`space-y-[12px] ${
+                  data.stockStatus === "IS_SOLD_OUT" ? "text-gray-400" : ""
+                }`}
+              >
                 <div className="space-y-[4px]">
                   <h3 className="text-[20px] font-bold">{data.name}</h3>
-                  <p className="line-clamp-2 h-[40px] text-sm text-[#6F6F6F]">
+                  <p className="line-clamp-2 h-[40px] text-sm">
                     {data.content}
                   </p>
                 </div>
@@ -49,10 +55,16 @@ export default function MenuItems({
                     style={{ objectFit: "cover" }}
                     sizes="(min-width: 640px) 100px, 100px"
                     fill
+                    priority={idx < 4}
                     onError={() => {
                       setIsImageExists(false);
                     }}
                   />
+                )}
+                {data.stockStatus === "IS_SOLD_OUT" && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <span className="text-xl font-bold text-white">품절</span>
+                  </div>
                 )}
               </div>
             </Link>
