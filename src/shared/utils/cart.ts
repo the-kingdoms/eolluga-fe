@@ -58,12 +58,12 @@ export const calculateCartTotalPrice = (): number => {
   const cartData = getCartData();
   if (cartData) {
     return cartData.reduce((total: number, menu: CartItemT) => {
-      const menuTotal = menu.price * menu.count;
-      const optionsTotal = menu.options.reduce(
-        (optionTotal, option) => optionTotal + option.price,
+      const optionsPrice = menu.options.reduce(
+        (acc, option) => acc + option.price,
         0,
       );
-      return total + menuTotal + optionsTotal;
+      const itemPrice = menu.price + optionsPrice;
+      return total + itemPrice * menu.count;
     }, 0);
   }
   return 0;

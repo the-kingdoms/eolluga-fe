@@ -103,7 +103,12 @@ export default function OrderCartItem({
               </ul>
             )}
             <p className="block text-sm font-bold">
-              {data.price.toLocaleString()}원
+              {/* 메뉴 기본금액 + 옵션 금액 */}
+              {(
+                data.price +
+                data.options.reduce((acc, option) => acc + option.price, 0)
+              ).toLocaleString()}
+              원
             </p>
           </div>
         </div>
